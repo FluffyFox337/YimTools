@@ -14,13 +14,13 @@ if errorlevel 1 (
     echo Update found! Updating your YimTools_TEST.bat to the latest version...
     move /y "%scriptFolder%YimTools_TEST.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
     echo Script updated successfully!
-	echo "Returning to the main menu in 3 seconds."
-	timeout /t 3 /nobreak >nul
+	echo "Returning to the main menu in 2 seconds."
+	timeout /t 2 /nobreak >nul
 ) else (
     echo No updates found.
     del "%scriptFolder%YimTools_TEST.bat.new" >nul
-	echo "Returning to the main menu in 2 seconds."
-	timeout /t 2 /nobreak >nul
+	echo "Returning to the main menu in 1 second."
+	timeout /t 1 /nobreak >nul
 )
 :: Continue with the main script
 goto menu
@@ -272,13 +272,12 @@ echo ------------------------------------------------------------------
 echo Choose addon:
 echo 1. Extras-Addon
 echo 2. Ultimate-Menu
-echo 4. Back to Main Menu
+echo 3. Back to Main Menu
 echo ------------------------------------------------------------------
 echo More injectors may be added in the future!
 
-choice /c 12345 /n
-if errorlevel 4 goto menu
-if errorlevel 3 goto check_yimmenu_S
+choice /c 1234 /n
+if errorlevel 3 goto menu
 if errorlevel 2 goto check_yimmenu_U
 if errorlevel 1 goto check_yimmenu_E
 
