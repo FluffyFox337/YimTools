@@ -54,7 +54,7 @@ if not exist "%destinationFolder3%" (
     set "destinationFolder3=%USERPROFILE%\Desktop"
 )
 echo ------------------------------------------------------------------
-echo   This app is for easily Downloading/Updating Yim/Extras Addon
+echo   This app is for easily Downloading/Updating YimMenu/Addons
 echo 	  and tools you may want/need for YimMenu itself.
 echo ------------------------------------------------------------------
 echo ------------------------------------------------------------------
@@ -68,6 +68,7 @@ echo 4. Delete YimMenu Cache Folder (Quick fix when GTA updates)
 echo 5. Optional Downloads
 echo 6. How to install/use YimMenu
 echo 7. Exit the application
+echo 9. Download settings4Yim (personal test)
 echo ------------------------------------------------------------------
 echo If your downloads folder is not in the proper location on your
 echo harddrive, the downloads will default to your desktop, instead.
@@ -148,13 +149,13 @@ echo "Checking to see if there is an existing version of YimMenu"
 del "%destinationFolder2%\YimMenu.dll" >nul 2>&1
 
 echo "Downloading new version of YimMenu.dll from the repository..."
-set "url2=https://github.com/YimMenu/YimMenu/releases/download/nightly/YimMenu.dll"
-powershell -command "& { Invoke-WebRequest -Uri '%url2%' -OutFile '%destinationFolder2%\YimMenu.dll' }"
+set "url2=https://github.com/FluffyFox337/YimMenu_Actual/raw/master/RELEASE/YimMenu.dll"
+powershell -command "& { Invoke-WebRequest -Uri '%url2%' -OutFile '%destinationFolder2%\YimMenu_3179.dll' }"
 
-if not exist "%destinationFolder2%\YimMenu.dll" (
+if not exist "%destinationFolder2%\YimMenu_3179.dll" (
     echo "Error: Failed to download YimMenu. Check the internet connection or the source URL."
 ) else (
-    echo "YimMenu downloaded successfully. File Location: %destinationFolder2%\YimMenu.dll"
+    echo "YimMenu downloaded successfully. File Location: %destinationFolder2%\YimMenu_3179.dll"
     echo "Returning to the main menu in 5 seconds."
 )
 timeout /t 5 /nobreak >nul
