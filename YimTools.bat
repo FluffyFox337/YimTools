@@ -6,19 +6,19 @@ set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/ma
 
 :: Check for updates
 echo Checking Repository for updates to YimTools.bat...
-powershell -command "& { Invoke-WebRequest -Uri '%updateScriptUrl%' -OutFile '%scriptFolder%YimTools_v3179.bat.new' }"
+powershell -command "& { Invoke-WebRequest -Uri '%updateScriptUrl%' -OutFile '%scriptFolder%YimTools.bat.new' }"
 
 :: Compare the current script with the updated version
-fc "%scriptFolder%update.bat.new" "%scriptFolder%YimTools_v3179.bat" >nul
+fc "%scriptFolder%YimTools.bat.new" "%scriptFolder%YimTools_v3179.bat" >nul
 if errorlevel 1 (
     echo Update found! Updating your YimTools_v3179.bat to the latest version...
-    move /y "%scriptFolder%update.bat.new" "%scriptFolder%update.bat" >nul
+    move /y "%scriptFolder%YimTools.bat.new" "%scriptFolder%YimTools_v3179.bat" >nul
     echo Script updated successfully!
 	echo "Returning to the main menu in 5 seconds."
 	timeout /t 5 /nobreak >nul
 ) else (
     echo No updates found.
-    del "%scriptFolder%YimTools_v3179.bat.new" >nul
+    del "%scriptFolder%YimTools.bat.new" >nul
 	echo "Returning to the main menu in 5 seconds."
 	timeout /t 5 /nobreak >nul
 )
