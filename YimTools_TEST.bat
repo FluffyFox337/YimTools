@@ -1,5 +1,9 @@
 @ECHO OFF
 
+:: Paste something for trig update 
+echo 111
+cls
+
 :: Set environment variables
 set "scriptFolder=%~dp0"
 set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_TEST.bat"
@@ -16,6 +20,7 @@ if errorlevel 1 (
     echo Script updated successfully!
 	echo "restarting new bat file. Exit..."
 	timeout /t 3 /nobreak >nul
+
         start YimTools_TEST.bat
 	exit
 ) else (
