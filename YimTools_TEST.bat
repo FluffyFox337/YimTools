@@ -15,12 +15,12 @@ if errorlevel 1 (
     move /y "%scriptFolder%YimTools_TEST.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
     echo Script updated successfully!
 	echo "Returning to the main menu in 3 seconds."
-	timeout /t 5 /nobreak >nul
+	timeout /t 3 /nobreak >nul
 ) else (
     echo No updates found.
     del "%scriptFolder%YimTools_TEST.bat.new" >nul
 	echo "Returning to the main menu in 2 seconds."
-	timeout /t 5 /nobreak >nul
+	timeout /t 2 /nobreak >nul
 )
 :: Continue with the main script
 goto menu
@@ -32,7 +32,7 @@ echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
 echo "                                                               "
 echo "                    YimTools bat edition                       "
 echo "                                                               "
-echo "                  Script Version: TEST 2                       "
+echo "                  Script Version: TEST                         "
 echo "  ______   ______   ______   ______   ______   ______   ______ "
 echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
 
