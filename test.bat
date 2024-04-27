@@ -9,9 +9,9 @@ echo Checking Repository for updates to YimTools.bat...
 powershell -command "& { Invoke-WebRequest -Uri '%updateScriptUrl%' -OutFile '%scriptFolder%YimTools.bat.new' }"
 
 :: Compare the current script with the updated version
-fc "%scriptFolder%YimTools.bat.new" "%scriptFolder%YimTools_v3179.bat" >nul
+fc "%scriptFolder%YimTools.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
 if errorlevel 1 (
-    echo Update found! Updating your YimTools_v3179.bat to the latest version...
+    echo Update found! Updating your YimTools_TEST.bat to the latest version...
     move /y "%scriptFolder%YimTools.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
     echo Script updated successfully!
 	echo "Returning to the main menu in 5 seconds."
@@ -31,7 +31,7 @@ echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
 echo "                                                               "
 echo "                    YimTools bat edition                       "
 echo "                                                               "
-echo "                  Script Version: TEST                        "
+echo "                  Script Version: 1.0.0                        "
 echo "  ______   ______   ______   ______   ______   ______   ______ "
 echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
 
