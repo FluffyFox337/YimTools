@@ -15,7 +15,8 @@ if errorlevel 1 (
     move /y "%scriptFolder%YimTools_TEST.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
     echo Script updated successfully!
 	echo "Returning to the main menu in 2 seconds."
-	timeout /t 2 /nobreak >nul
+	timeout /t 3 /nobreak >nul
+	exit
 ) else (
     echo No updates found.
     del "%scriptFolder%YimTools_TEST.bat.new" >nul
