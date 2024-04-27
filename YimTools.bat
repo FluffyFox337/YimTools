@@ -2,7 +2,7 @@
 
 :: Set environment variables
 set "scriptFolder=%~dp0"
-set "updateScriptUrl=https://github.com/FluffyFox337/UpdateBAT/raw/main/YimTools.bat"
+set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools.bat"
 
 :: Check for updates
 echo Checking Repository for updates to YimTools.bat...
