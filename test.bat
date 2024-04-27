@@ -217,21 +217,13 @@ goto menu
 	del "%destinationFolder%\Extras-Addon.lua" >nul 2>&1
 
 	echo "Downloading new version of Extras-Addon.lua from the repository..."
-	set "url=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-Addon.lua"
-	set "url2=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/json.lua"
-	set "url3=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-data.lua"
-	powershell -command "& { Invoke-WebRequest -Uri '%url%' -OutFile '%destinationFolder%\Extras-Addon.lua' }"
-	powershell -command "& { Invoke-WebRequest -Uri '%url2%' -OutFile '%destinationFolder%\json.lua' }"
-	powershell -command "& { Invoke-WebRequest -Uri '%url3%' -OutFile '%destinationFolder%\Extras-data.lua' }"
+	set "url=https://raw.githubusercontent.com/SilentSal0/Silent-Night/main/Silent%20Night%20v1.68.lua"
+	powershell -command "& { Invoke-WebRequest -Uri '%url%' -OutFile '%destinationFolder%\Silent-Night-v1.68.lua' }"
 
-	if not exist "%destinationFolder%\Extras-Addon.lua" (
+	if not exist "%destinationFolder%\Silent-Night-v1.68.lua" (
 		echo "Error: Failed to download Addon. Check the internet connection or the source URL."
-	) else if not exist "%destinationFolder%\json.lua" (
-		echo "Error: Failed to download Json. Check the internet connection or the source URL."
 	) else (
-		echo "Extras Addon downloaded successfully. File Location: %destinationFolder%\Extras-Addon.lua"
-		echo "Json downloaded successfully. (Required json config file) File Location: %destinationFolder%\json.lua"
-		echo "Extras-data downloaded successfully. (Required, stores objects, vehicles, etc.) File Location: %destinationFolder%\json.lua"
+		echo "Silent-Night-v1.68 downloaded successfully. File Location: %destinationFolder%\Silent-Night-v1.68.lua"
 		echo "Returning to the main menu in 10 seconds."
 	)
 	timeout /t 10 /nobreak >nul
