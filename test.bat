@@ -31,7 +31,7 @@ echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
 echo "                                                               "
 echo "                    YimTools bat edition                       "
 echo "                                                               "
-echo "                  Script Version: 1.0.0                        "
+echo "                  Script Version: TEST                        "
 echo "  ______   ______   ______   ______   ______   ______   ______ "
 echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
 
