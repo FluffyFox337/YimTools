@@ -107,8 +107,8 @@ if errorlevel 1 goto download_injectors
         goto download_ultimate_menu
     ) else (
 		cls
-        echo "Please download and use YimMenu first before installing the Extras Addon."
-        echo "After using YimMenu, you can come back and install the Extras Addon."
+        echo "Please download and use YimMenu first before installing the UltimateMenu."
+        echo "After using YimMenu, you can come back and install the UltimateMenu."
         echo "to use YimMenu, download an injector like FateInjector, Xenos or ProcessHacker2."
 		echo ------------------------------------------------------------------
 		echo "When running YimMenu for the first time, click Update Cache and load into story mode or online."
@@ -126,8 +126,8 @@ if errorlevel 1 goto download_injectors
         goto download_silent_night
     ) else (
 		cls
-        echo "Please download and use YimMenu first before installing the Extras Addon."
-        echo "After using YimMenu, you can come back and install the Extras Addon."
+        echo "Please download and use YimMenu first be fore installing the SilentNight."
+        echo "After using YimMenu, you can come back and install the SilentNight."
         echo "to use YimMenu, download an injector like FateInjector, Xenos or ProcessHacker2."
 		echo ------------------------------------------------------------------
 		echo "When running YimMenu for the first time, click Update Cache and load into story mode or online."
@@ -149,6 +149,66 @@ timeout /t 10 /nobreak >nul
 goto menu
 
 :download_extras_addon
+	cls
+	echo ------------------------------------------------------------------
+	echo 	Downloading Extras Addon from the repository
+	echo ------------------------------------------------------------------
+	echo "Checking to see if there is an existing version of Extras Addon"
+	del "%destinationFolder%\Extras-Addon.lua" >nul 2>&1
+
+	echo "Downloading new version of Extras-Addon.lua from the repository..."
+	set "url=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-Addon.lua"
+	set "url2=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/json.lua"
+	set "url3=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-data.lua"
+	powershell -command "& { Invoke-WebRequest -Uri '%url%' -OutFile '%destinationFolder%\Extras-Addon.lua' }"
+	powershell -command "& { Invoke-WebRequest -Uri '%url2%' -OutFile '%destinationFolder%\json.lua' }"
+	powershell -command "& { Invoke-WebRequest -Uri '%url3%' -OutFile '%destinationFolder%\Extras-data.lua' }"
+
+	if not exist "%destinationFolder%\Extras-Addon.lua" (
+		echo "Error: Failed to download Addon. Check the internet connection or the source URL."
+	) else if not exist "%destinationFolder%\json.lua" (
+		echo "Error: Failed to download Json. Check the internet connection or the source URL."
+	) else (
+		echo "Extras Addon downloaded successfully. File Location: %destinationFolder%\Extras-Addon.lua"
+		echo "Json downloaded successfully. (Required json config file) File Location: %destinationFolder%\json.lua"
+		echo "Extras-data downloaded successfully. (Required, stores objects, vehicles, etc.) File Location: %destinationFolder%\json.lua"
+		echo "Returning to the main menu in 10 seconds."
+	)
+	timeout /t 10 /nobreak >nul
+	cls
+	goto menu
+	
+:download_ultimate_menu
+	cls
+	echo ------------------------------------------------------------------
+	echo 	Downloading Extras Addon from the repository
+	echo ------------------------------------------------------------------
+	echo "Checking to see if there is an existing version of Extras Addon"
+	del "%destinationFolder%\Extras-Addon.lua" >nul 2>&1
+
+	echo "Downloading new version of Extras-Addon.lua from the repository..."
+	set "url=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-Addon.lua"
+	set "url2=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/json.lua"
+	set "url3=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-data.lua"
+	powershell -command "& { Invoke-WebRequest -Uri '%url%' -OutFile '%destinationFolder%\Extras-Addon.lua' }"
+	powershell -command "& { Invoke-WebRequest -Uri '%url2%' -OutFile '%destinationFolder%\json.lua' }"
+	powershell -command "& { Invoke-WebRequest -Uri '%url3%' -OutFile '%destinationFolder%\Extras-data.lua' }"
+
+	if not exist "%destinationFolder%\Extras-Addon.lua" (
+		echo "Error: Failed to download Addon. Check the internet connection or the source URL."
+	) else if not exist "%destinationFolder%\json.lua" (
+		echo "Error: Failed to download Json. Check the internet connection or the source URL."
+	) else (
+		echo "Extras Addon downloaded successfully. File Location: %destinationFolder%\Extras-Addon.lua"
+		echo "Json downloaded successfully. (Required json config file) File Location: %destinationFolder%\json.lua"
+		echo "Extras-data downloaded successfully. (Required, stores objects, vehicles, etc.) File Location: %destinationFolder%\json.lua"
+		echo "Returning to the main menu in 10 seconds."
+	)
+	timeout /t 10 /nobreak >nul
+	cls
+	goto menu	
+	
+:download_silent_night
 	cls
 	echo ------------------------------------------------------------------
 	echo 	Downloading Extras Addon from the repository
@@ -224,6 +284,32 @@ if not exist "%destinationFolder3%\FateInjector.exe" (
     echo "Error: Failed to download FateInjector. Check the internet connection or the source URL."
 ) else (
     echo "FateInjector downloaded successfully. File Location: %destinationFolder3%\FateInjector.exe"
+    echo "Returning to the main menu in 5 seconds."
+)
+timeout /t 5 /nobreak >nul
+cls
+goto menu
+
+:download_xenos
+cls
+echo ------------------------------------------------------------------
+echo 	Downloading Xenos64 from the repository
+echo ------------------------------------------------------------------
+echo "Checking to see if there is an existing version of Xenos"
+if exist "%destinationFolder3%\Xenos64.exe" (
+    echo "Found Xenos64, You do not need to download this again."
+) else (
+    echo "No existing application was found."
+)
+
+echo "Downloading FateInjector from the repository..." 
+set "url3=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/Xenos64.exe"
+powershell -command "& { Invoke-WebRequest -Uri '%url3%' -OutFile '%destinationFolder3%\Xenos64.exe' }"
+
+if not exist "%destinationFolder3%\enos64.exe" (
+    echo "Error: Failed to download Xenox injector. Check the internet connection or the source URL."
+) else (
+    echo "Xenos Injector downloaded successfully. File Location: %destinationFolder3%\Xenos64.exe"
     echo "Returning to the main menu in 5 seconds."
 )
 timeout /t 5 /nobreak >nul
