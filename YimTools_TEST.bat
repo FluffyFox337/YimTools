@@ -14,8 +14,8 @@ if errorlevel 1 (
     echo Update found! Updating your YimTools_TEST.bat to the latest version...
     move /y "%scriptFolder%YimTools_TEST.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
     echo Script updated successfully!
-	echo "Returning to the main menu in 2 seconds."
-	timeout /t 3 /nobreak >nul
+	echo "Please restart new bat file. Exit..."
+	timeout /t 4 /nobreak >nul
 	exit
 ) else (
     echo No updates found.
