@@ -2,23 +2,23 @@
 
 :: Set environment variables
 set "scriptFolder=%~dp0"
-set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/test.bat"
+set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_TEST.bat"
 
 :: Check for updates
-echo Checking Repository for updates to YimTools.bat...
-powershell -command "& { Invoke-WebRequest -Uri '%updateScriptUrl%' -OutFile '%scriptFolder%YimTools.bat.new' }"
+echo Checking Repository for updates to YimTools_TEST.bat...
+powershell -command "& { Invoke-WebRequest -Uri '%updateScriptUrl%' -OutFile '%scriptFolder%YimTools_TEST.bat.new' }"
 
 :: Compare the current script with the updated version
-fc "%scriptFolder%YimTools.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
+fc "%scriptFolder%YimTools_TEST.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
 if errorlevel 1 (
     echo Update found! Updating your YimTools_TEST.bat to the latest version...
-    move /y "%scriptFolder%YimTools.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
+    move /y "%scriptFolder%YimTools_TEST.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
     echo Script updated successfully!
 	echo "Returning to the main menu in 5 seconds."
 	timeout /t 5 /nobreak >nul
 ) else (
     echo No updates found.
-    del "%scriptFolder%YimTools.bat.new" >nul
+    del "%scriptFolder%YimTools_TEST.bat.new" >nul
 	echo "Returning to the main menu in 5 seconds."
 	timeout /t 5 /nobreak >nul
 )
@@ -31,7 +31,7 @@ echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
 echo "                                                               "
 echo "                    YimTools bat edition                       "
 echo "                                                               "
-echo "                  Script Version: 1.0.0                        "
+echo "                  Script Version: TEST                         "
 echo "  ______   ______   ______   ______   ______   ______   ______ "
 echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
 
