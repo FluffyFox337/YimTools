@@ -12,7 +12,7 @@ powershell -command "& { Invoke-WebRequest -Uri '%updateScriptUrl%' -OutFile '%s
 fc "%scriptFolder%YimTools.bat.new" "%scriptFolder%YimTools_v3179.bat" >nul
 if errorlevel 1 (
     echo Update found! Updating your YimTools_v3179.bat to the latest version...
-    move /y "%scriptFolder%YimTools.bat.new" "%scriptFolder%test.bat" >nul
+    move /y "%scriptFolder%YimTools.bat.new" "%scriptFolder%YimTools_v3179.bat" >nul
     echo Script updated successfully!
 	echo "Returning to the main menu in 5 seconds."
 	timeout /t 5 /nobreak >nul
@@ -82,10 +82,48 @@ if errorlevel 3 goto download_addons
 if errorlevel 2 goto download_yimmenu
 if errorlevel 1 goto download_injectors
 
-:check_yimmenu
+:check_yimmenu_E
     set /p yn=Have you downloaded/used YimMenu before? (Y/N): 
     if /i "%yn%"=="Y" (
         goto download_extras_addon
+    ) else (
+		cls
+        echo "Please download and use YimMenu first before installing the Extras Addon."
+        echo "After using YimMenu, you can come back and install the Extras Addon."
+        echo "to use YimMenu, download an injector like FateInjector, Xenos or ProcessHacker2."
+		echo ------------------------------------------------------------------
+		echo "When running YimMenu for the first time, click Update Cache and load into story mode or online."
+		echo "If you don't know how to use YimMenu, press 6 on the main menu for instructions"
+		echo ------------------------------------------------------------------
+		echo "Returning to the main menu in 15 seconds."
+		timeout /t 15 /nobreak >nul
+		cls
+		goto menu
+    )
+	
+:check_yimmenu_U
+    set /p yn=Have you downloaded/used YimMenu before? (Y/N): 
+    if /i "%yn%"=="Y" (
+        goto download_ultimate_menu
+    ) else (
+		cls
+        echo "Please download and use YimMenu first before installing the Extras Addon."
+        echo "After using YimMenu, you can come back and install the Extras Addon."
+        echo "to use YimMenu, download an injector like FateInjector, Xenos or ProcessHacker2."
+		echo ------------------------------------------------------------------
+		echo "When running YimMenu for the first time, click Update Cache and load into story mode or online."
+		echo "If you don't know how to use YimMenu, press 6 on the main menu for instructions"
+		echo ------------------------------------------------------------------
+		echo "Returning to the main menu in 15 seconds."
+		timeout /t 15 /nobreak >nul
+		cls
+		goto menu
+    )
+	
+:check_yimmenu_S
+    set /p yn=Have you downloaded/used YimMenu before? (Y/N): 
+    if /i "%yn%"=="Y" (
+        goto download_silent_night
     ) else (
 		cls
         echo "Please download and use YimMenu first before installing the Extras Addon."
@@ -191,6 +229,25 @@ if not exist "%destinationFolder3%\FateInjector.exe" (
 timeout /t 5 /nobreak >nul
 cls
 goto menu
+
+:download_addons
+cls
+echo ------------------------------------------------------------------
+echo 	Download addons
+echo ------------------------------------------------------------------
+echo Choose addon:
+echo 1. Extras-Addon
+echo 2. Ultimate-Menu
+echo 3. Silent-Night
+echo 4. Back to Main Menu
+echo ------------------------------------------------------------------
+echo More injectors may be added in the future!
+
+choice /c 12345 /n
+if errorlevel 4 goto menu
+if errorlevel 3 goto check_yimmenu_S
+if errorlevel 2 goto check_yimmenu_U
+if errorlevel 1 goto check_yimmenu_E
 
 :download_injectors
 cls
