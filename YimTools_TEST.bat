@@ -19,6 +19,9 @@ if errorlevel 1 (
     move /y "%scriptFolder%YimTools_TEST.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
     echo Script updated successfully!
 	echo "restarting new bat file. Exit..."
+	echo 1. Cancel exit (In caces infinity restarting)
+	choice /c 1 /n
+if errorlevel 1 goto menu
 	timeout /t 3 /nobreak >nul
 
         start YimTools_TEST.bat
