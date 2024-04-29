@@ -19,10 +19,19 @@ if errorlevel 1 (
     move /y "%scriptFolder%YimTools_TEST.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
     echo Script updated successfully!
 	echo "restarting new bat file. Exit..."
-	echo 1. Cancel exit (In caces infinity restarting)
-	choice /c 1 /n
-if errorlevel 1 goto menu
-	timeout /t 3 >nul goto restart
+	echo -n "Cancel exit? y/n (In caces infinity restarting)"
+read item
+case "$item" in
+    y|Y) echo "Restarting canceled..."
+	goto menu
+        ;;
+    n|N) echo "Restarting..."
+        goto restart
+        ;;
+    *) echo "Default action ( exit)..."
+        ;;
+esac
+	timeout /t 3 /nobreak >nul 
 	
 ) else (
     echo No updates found.
