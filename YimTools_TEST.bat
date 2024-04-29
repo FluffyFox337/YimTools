@@ -71,6 +71,7 @@ echo "                                                               "
 echo "                    YimTools bat edition                       "
 echo "                                                               "
 echo "                  Script Version: TEST                         "
+echo "        skip          update            option                 "
 echo "  ______   ______   ______   ______   ______   ______   ______ "
 echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
 
