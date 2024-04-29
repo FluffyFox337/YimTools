@@ -1,5 +1,28 @@
 @ECHO OFF
 
+:: Set environment variables for source and destination paths
+set "destinationFolder=%APPDATA%\YimMenu\scripts"
+set "destinationFolder2=%USERPROFILE%\Downloads"
+set "destinationFolder3=%USERPROFILE%\Downloads"
+if not exist "%destinationFolder2%" (
+    set "destinationFolder2=%USERPROFILE%\OneDrive\Desktop"
+)
+:: If Downloads folder does not exist default to onedrive desktop
+if not exist "%destinationFolder3%" (
+    set "destinationFolder3=%USERPROFILE%\OneDrive\Desktop"
+)
+:: If Onedrive destination does not exist, default to normal Desktop
+if not exist "%destinationFolder2%" (
+    set "destinationFolder2=%USERPROFILE%\Desktop"
+)
+if not exist "%destinationFolder3%" (
+    set "destinationFolder3=%USERPROFILE%\Desktop"
+)
+
+:: Set environment variables
+set "scriptFolder=%~dp0"
+set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_TEST.bat"
+
 :: Paste something for trig update 
 echo 111
 cls
@@ -14,9 +37,6 @@ if errorlevel 1 goto menu
 
 :continue
 cls
-:: Set environment variables
-set "scriptFolder=%~dp0"
-set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_TEST.bat"
 
 :: Check for updates
 echo Checking Repository for updates to YimTools_TEST.bat...
@@ -43,6 +63,7 @@ if errorlevel 1 (
 :: Continue with the main script
 
 :menu
+
 cls
 echo "  ______   ______   ______   ______   ______   ______   ______ "
 echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
@@ -53,24 +74,7 @@ echo "                  Script Version: TEST                         "
 echo "  ______   ______   ______   ______   ______   ______   ______ "
 echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
 
-:: Set environment variables for source and destination paths
-set "destinationFolder=%APPDATA%\YimMenu\scripts"
-set "destinationFolder2=%USERPROFILE%\Downloads"
-set "destinationFolder3=%USERPROFILE%\Downloads"
-if not exist "%destinationFolder2%" (
-    set "destinationFolder2=%USERPROFILE%\OneDrive\Desktop"
-)
-:: If Downloads folder does not exist default to onedrive desktop
-if not exist "%destinationFolder3%" (
-    set "destinationFolder3=%USERPROFILE%\OneDrive\Desktop"
-)
-:: If Onedrive destination does not exist, default to normal Desktop
-if not exist "%destinationFolder2%" (
-    set "destinationFolder2=%USERPROFILE%\Desktop"
-)
-if not exist "%destinationFolder3%" (
-    set "destinationFolder3=%USERPROFILE%\Desktop"
-)
+
 echo ------------------------------------------------------------------
 echo   This app is for easily Downloading/Updating YimMenu/Addons
 echo 	  and tools you may want/need for YimMenu itself.
@@ -92,13 +96,13 @@ echo If your downloads folder is not in the proper location on your
 echo harddrive, the downloads will default to your desktop, instead.
 
 choice /c 1234567 /n
-if errorlevel 7 goto goodbye
-if errorlevel 6 goto instructions
-if errorlevel 5 goto optional_downloads
-if errorlevel 4 goto delete_cache_folder
-if errorlevel 3 goto download_addons
-if errorlevel 2 goto download_yimmenu
-if errorlevel 1 goto download_injectors
+ if errorlevel 7 goto goodbye
+ if errorlevel 6 goto instructions
+ if errorlevel 5 goto optional_downloads
+ if errorlevel 4 goto delete_cache_folder
+ if errorlevel 3 goto download_addons
+ if errorlevel 2 goto download_yimmenu
+ if errorlevel 1 goto download_injectors
 
 :instructions
 
@@ -118,6 +122,24 @@ echo "Exiting to the main menu in 10 seconds."
 timeout /t 10 /nobreak >nul
 cls
 goto menu
+
+:download_injectors
+
+cls
+echo ------------------------------------------------------------------
+echo 	Download injectors
+echo ------------------------------------------------------------------
+echo Choose Injector:
+echo 1. Xenos
+echo 2. Fate_Injector
+echo 3. Back to Main Menu
+echo ------------------------------------------------------------------
+echo More injectors may be added in the future!
+
+choice /c 1234 /n
+if errorlevel 3 goto menu
+if errorlevel 2 goto download_fate_injector
+if errorlevel 1 goto download_xenos
 
 :check_yimmenu_E
     set /p yn=Have you downloaded/used YimMenu before? (Y/N): 
@@ -315,22 +337,6 @@ if errorlevel 3 goto menu
 if errorlevel 2 goto check_yimmenu_U
 if errorlevel 1 goto check_yimmenu_E
 
-:download_injectors
-cls
-echo ------------------------------------------------------------------
-echo 	Download injectors
-echo ------------------------------------------------------------------
-echo Choose Injector:
-echo 1. Xenos
-echo 2. Fate_Injector
-echo 3. Back to Main Menu
-echo ------------------------------------------------------------------
-echo More injectors may be added in the future!
-
-choice /c 1234 /n
-if errorlevel 3 goto menu
-if errorlevel 2 goto download_fate_injector
-if errorlevel 1 goto download_xenos
 
 :optional_downloads
 cls
