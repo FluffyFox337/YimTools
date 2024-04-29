@@ -4,7 +4,7 @@
 echo 111
 cls
 
-:: Skip update option
+:: Skip Update Option
 echo "skip update?"
 echo 1. yes
 echo 2. no
@@ -99,6 +99,25 @@ if errorlevel 4 goto delete_cache_folder
 if errorlevel 3 goto download_addons
 if errorlevel 2 goto download_yimmenu
 if errorlevel 1 goto download_injectors
+
+:instructions
+
+cls
+echo ------------------------------------------------------------------
+echo 		How to Install/Use YimMenu
+echo ------------------------------------------------------------------
+echo "1. Start GTA 5 on your PC"
+echo "2. Open your preferred injector, and find/select YimMenu.dll"
+echo "3. Select the process (gta5.exe) to inject YimMenu into"
+echo "4. Once YimMenu is injected open GTA and you should see the menu"
+echo "If this is your first time using YimMenu, press Update Cache"
+echo "Press the Insert key to open/close the menu"
+echo "Go to Settings > GUI and uncheck Show Overlay to show/hide Yim"
+timeout /t 10 /nobreak >nul
+echo "Exiting to the main menu in 10 seconds."
+timeout /t 10 /nobreak >nul
+cls
+goto menu
 
 :check_yimmenu_E
     set /p yn=Have you downloaded/used YimMenu before? (Y/N): 
@@ -225,9 +244,7 @@ timeout /t 3 /nobreak >nul
 cls
 goto menu
 
-:exit
-echo Exiting...
-exit /b
+
 
 :download_fate_injector
 cls
@@ -363,23 +380,6 @@ cls
 	cls
 	goto optional_downloads
 
-:instructions
-cls
-echo ------------------------------------------------------------------
-echo 		How to Install/Use YimMenu
-echo ------------------------------------------------------------------
-echo "1. Start GTA 5 on your PC"
-echo "2. Open your preferred injector, and find/select YimMenu.dll"
-echo "3. Select the process (gta5.exe) to inject YimMenu into"
-echo "4. Once YimMenu is injected open GTA and you should see the menu"
-echo "If this is your first time using YimMenu, press Update Cache"
-echo "Press the Insert key to open/close the menu"
-echo "Go to Settings > GUI and uncheck Show Overlay to show/hide Yim"
-timeout /t 10 /nobreak >nul
-echo "Exiting to the main menu in 10 seconds."
-timeout /t 10 /nobreak >nul
-cls
-goto menu
 
 :restart
 echo "restarting new bat file. Exit..."
@@ -392,3 +392,7 @@ echo "Thank you for using Extras Addon!  Brought to you by DeadlineEm, USBMenus 
 echo "Exiting in 3 seconds."
 timeout /t 3 /nobreak >nul
 exit
+
+:exit
+echo Exiting...
+exit /b
