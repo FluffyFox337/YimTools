@@ -1,19 +1,19 @@
 @ECHO OFF
 
+:: Set environment variables
+set "scriptFolder=%~dp0"
+set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_TEST.bat"
+
 :: Paste something for trig update 
 echo skip update?
 echo 1. yes
 echo 2. no
-choice /c 12 /n
+choice /c 123 /n
 if errorlevel 1 goto menu
 if errorlevel 2 goto continue
 cls
 
 :continue
-
-:: Set environment variables
-set "scriptFolder=%~dp0"
-set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_TEST.bat"
 
 :: Check for updates
 echo Checking Repository for updates to YimTools_TEST.bat...
