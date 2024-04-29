@@ -18,10 +18,8 @@ if errorlevel 1 (
     echo Update found! Updating your YimTools_TEST.bat to the latest version...
     move /y "%scriptFolder%YimTools_TEST.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
     echo Script updated successfully!
-	   echo "restarting new bat file. Exit..."
- timeout /t 3 /nobreak >nul
-
-goto restart
+    timeout /t 3 /nobreak >nul
+    goto restart
  
 ) else (
     echo No updates found.
@@ -30,9 +28,6 @@ goto restart
 	timeout /t 1 /nobreak >nul
 )
 
-:restart
-        start YimTools_TEST.bat
-	exit
 	
 :: Continue with the main script
 goto menu
@@ -375,6 +370,12 @@ echo "Exiting to the main menu in 10 seconds."
 timeout /t 10 /nobreak >nul
 cls
 goto menu
+
+:restart
+    echo "restarting new bat file. Exit..."
+	timeout /t 3 /nobreak >nul
+    start YimTools_TEST.bat
+exit
 
 :goodbye
 echo "Thank you for using Extras Addon!  Brought to you by DeadlineEm, USBMenus & KAOS Incorporated"
