@@ -21,21 +21,20 @@ if errorlevel 1 (
 	echo "restarting new bat file. Exit..."
 	echo 1. Cancel exit (In caces infinity restarting)
 	choice /c 1 /n
-	timeout /t 3 /nobreak >nul
 if errorlevel 1 goto menu
-if not defined choice goto restart
-	timeout /t 3 /nobreak >nul
+	timeout /t 3 >nul goto restart
 	
-:restart
-        start YimTools_TEST.bat
-
-	exit
 ) else (
     echo No updates found.
     del "%scriptFolder%YimTools_TEST.bat.new" >nul
 	echo "Returning to the main menu in 1 second."
 	timeout /t 1 /nobreak >nul
 )
+
+:restart
+        start YimTools_TEST.bat
+	exit
+	
 :: Continue with the main script
 goto menu
 
