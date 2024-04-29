@@ -18,13 +18,13 @@ if errorlevel 1 (
     echo Update found! Updating your YimTools_TEST.bat to the latest version...
     move /y "%scriptFolder%YimTools_TEST.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
     echo Script updated successfully!
-    timeout /t 3 /nobreak >nul
+    timeout /t 1 /nobreak >nul
     goto restart
  
 ) else (
     echo No updates found.
     del "%scriptFolder%YimTools_TEST.bat.new" >nul
-    echo "Returning to the main menu in 1 second."
+    echo "Returning to the main menu."
     timeout /t 1 /nobreak >nul
     goto menu
 )
@@ -208,9 +208,9 @@ if not exist "%destinationFolder2%\YimMenu_3179.dll" (
     echo "Error: Failed to download YimMenu. Check the internet connection or the source URL."
 ) else (
     echo "YimMenu downloaded successfully. File Location: %destinationFolder2%\YimMenu_3179.dll"
-    echo "Returning to the main menu in 5 seconds."
+    echo "Returning to the main menu in 3 seconds."
 )
-timeout /t 5 /nobreak >nul
+timeout /t 3 /nobreak >nul
 cls
 goto menu
 
@@ -238,9 +238,9 @@ if not exist "%destinationFolder3%\FateInjector.exe" (
     echo "Error: Failed to download FateInjector. Check the internet connection or the source URL."
 ) else (
     echo "FateInjector downloaded successfully. File Location: %destinationFolder3%\FateInjector.exe"
-    echo "Returning to the main menu in 5 seconds."
+    echo "Returning to the main menu in 3 seconds."
 )
-timeout /t 5 /nobreak >nul
+timeout /t 3 /nobreak >nul
 cls
 goto menu
 
@@ -256,17 +256,17 @@ if exist "%destinationFolder3%\Xenos64.exe" (
     echo "No existing application was found."
 )
 
-echo "Downloading FateInjector from the repository..." 
+echo "Downloading Xenos64 from the repository..." 
 set "url3=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/Xenos64.exe"
 powershell -command "& { Invoke-WebRequest -Uri '%url3%' -OutFile '%destinationFolder3%\Xenos64.exe' }"
 
-if not exist "%destinationFolder3%\enos64.exe" (
-    echo "Error: Failed to download Xenox injector. Check the internet connection or the source URL."
+if not exist "%destinationFolder3%\Xenos64.exe" (
+    echo "Error: Failed to download Xenox64 injector. Check the internet connection or the source URL."
 ) else (
-    echo "Xenos Injector downloaded successfully. File Location: %destinationFolder3%\Xenos64.exe"
-    echo "Returning to the main menu in 5 seconds."
+    echo "Xenos64 Injector downloaded successfully. File Location: %destinationFolder3%\Xenos64.exe"
+    echo "Returning to the main menu in 3 seconds."
 )
-timeout /t 5 /nobreak >nul
+timeout /t 3 /nobreak >nul
 cls
 goto menu
 
@@ -371,9 +371,9 @@ cls
 goto menu
 
 :restart
-    echo "restarting new bat file. Exit..."
-	timeout /t 3 /nobreak >nul
-    start YimTools_TEST.bat
+echo "restarting new bat file. Exit..."
+timeout /t 2 /nobreak >nul
+start YimTools_TEST.bat
 exit
 
 :goodbye
