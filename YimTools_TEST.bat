@@ -1,8 +1,15 @@
 @ECHO OFF
 
 :: Paste something for trig update 
-echo 111
+echo skip update?
+echo 1. yes
+echo 2. no
+choice /c 12 /n
+if errorlevel 1 goto menu
+if errorlevel 2 goto contstart
 cls
+
+:contstart
 
 :: Set environment variables
 set "scriptFolder=%~dp0"
@@ -353,6 +360,9 @@ cls
 	goto optional_downloads
 
 :instructions
+timeout /t 3 /nobreak >nul
+echo test
+goto menu
 cls
 echo ------------------------------------------------------------------
 echo 		How to Install/Use YimMenu
