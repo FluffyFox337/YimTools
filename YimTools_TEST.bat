@@ -27,7 +27,7 @@ set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/ma
 echo 111
 cls
 
-:: Skip Update Option
+:: Skip update option
 echo "skip update?"
 echo 1. yes
 echo 2. no
