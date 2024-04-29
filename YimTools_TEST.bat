@@ -4,7 +4,7 @@
 echo 111
 cls
 
-:: Skip Update Option
+:: Skip update option
 echo "skip update?"
 echo 1. yes
 echo 2. no
@@ -364,9 +364,6 @@ cls
 	goto optional_downloads
 
 :instructions
-timeout /t 3 /nobreak >nul
-echo test
-goto menu
 cls
 echo ------------------------------------------------------------------
 echo 		How to Install/Use YimMenu
