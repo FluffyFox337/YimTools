@@ -22,6 +22,7 @@ if errorlevel 1 (
 	timeout /t 3 /nobreak >nul
 
         start YimTools_TEST.bat
+
 	exit
 ) else (
     echo No updates found.
