@@ -379,7 +379,7 @@ cls
 :restart
 echo "restarting new bat file. Exit..."
 timeout /t 2 /nobreak >nul
-start YimTools_TEST.bat
+start YimTools_TESTauto.bat
 exit
 
 :goodbye
