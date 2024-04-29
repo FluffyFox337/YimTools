@@ -29,6 +29,7 @@ case "$item" in
         goto restart
         ;;
     *) echo "Default action ( exit)..."
+        goto restart
         ;;
 esac
 	timeout /t 3 /nobreak >nul 
