@@ -24,14 +24,13 @@ if errorlevel 1 (
 ) else (
     echo No updates found.
     del "%scriptFolder%YimTools_TEST.bat.new" >nul
-	echo "Returning to the main menu in 1 second."
-	timeout /t 1 /nobreak >nul
+    echo "Returning to the main menu in 1 second."
+    timeout /t 1 /nobreak >nul
+    goto menu
 )
 
 	
 :: Continue with the main script
-goto menu
-
 
 :menu
 echo "  ______   ______   ______   ______   ______   ______   ______ "
