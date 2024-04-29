@@ -21,8 +21,8 @@ if errorlevel 1 (
 	echo "restarting new bat file. Exit..."
 	echo 1. Cancel exit (In caces infinity restarting)
 	choice /c 1 /n
-if not defined choice goto restart
 if errorlevel 1 goto menu
+if not defined choice goto restart
 	timeout /t 3 /nobreak >nul
 	
 :restart
