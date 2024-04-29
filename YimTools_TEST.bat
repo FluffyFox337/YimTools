@@ -18,22 +18,11 @@ if errorlevel 1 (
     echo Update found! Updating your YimTools_TEST.bat to the latest version...
     move /y "%scriptFolder%YimTools_TEST.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
     echo Script updated successfully!
-	echo "restarting new bat file. Exit..."
-	echo -n "Cancel exit? y/n (In caces infinity restarting)"
-read item
-case "$item" in
-    y|Y) echo "Restarting canceled..."
-	goto menu
-        ;;
-    n|N) echo "Restarting..."
-        goto restart
-        ;;
-    *) echo "Default action ( exit)..."
-        goto restart
-        ;;
-esac
-	timeout /t 3 /nobreak >nul 
-	
+	   echo "restarting new bat file. Exit..."
+ timeout /t 3 /nobreak >nul
+
+goto restart
+ 
 ) else (
     echo No updates found.
     del "%scriptFolder%YimTools_TEST.bat.new" >nul
