@@ -9,8 +9,8 @@ echo "skip update?"
 echo 1. yes
 echo 2. no
 choice /c 12 /n
-if errorlevel 1 goto menu 
 if errorlevel 2 goto exit 
+if errorlevel 1 goto menu 
 
 :: Set environment variables
 set "scriptFolder=%~dp0"
