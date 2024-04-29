@@ -13,7 +13,7 @@ if errorlevel 2 goto continue
 if errorlevel 1 goto menu  
 
 :continue
-
+cls
 :: Set environment variables
 set "scriptFolder=%~dp0"
 set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_TEST.bat"
@@ -43,6 +43,7 @@ if errorlevel 1 (
 :: Continue with the main script
 
 :menu
+cls
 echo "  ______   ______   ______   ______   ______   ______   ______ "
 echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
 echo "                                                               "
