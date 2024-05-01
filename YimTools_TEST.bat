@@ -35,7 +35,7 @@ set "animDictsCompactUrl=https://raw.githubusercontent.com/DurtyFree/gta-v-data-
 :: goto menu
 
 :: Set update script link
-set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_TESTauto.bat"
+set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_TEST.bat"
 set "exeupdateUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_alfa.exe"
 
 :: Paste something for trig update ->> test renaming folders
@@ -50,6 +50,7 @@ fc "%scriptFolder%YimTools_TESTauto.bat.new" "%scriptFolder%YimTools_TESTauto.ba
 if errorlevel 1 (
     echo Update found! Updating your YimTools_TESTauto.bat to the latest version...
     move /y "%scriptFolder%YimTools_TESTauto.bat.new" "%scriptFolder%YimTools_TESTauto.bat" >nul
+	cls
     echo Script updated successfully!
     timeout /t 1 /nobreak >nul
     goto restart
@@ -72,6 +73,7 @@ fc "%scriptFolder%YimTools_alfa.exe.new" "%scriptFolder%YimTools_alfa.exe" >nul
 if errorlevel 1 (
     echo Update found! Updating your YimTools_alfa.exe to the latest version...
     move /y "%scriptFolder%YimTools_alfa.exe.new" "%scriptFolder%YimTools_alfa.exe" >nul
+	cls
     echo Script updated successfully!
     timeout /t 1 /nobreak >nul
     goto exestart
@@ -205,6 +207,7 @@ if /i "%yn%"=="Y" (
 echo "Deleting YimMenu's cache folder, this is ONLY necessary if you've updated YimMenu.dll and you're still crashing."
 echo "If this does not fix the issue, check their github issues page at https://github.com/YimMenu/YimMenu/issues"
 rmdir /s /q "%/YimMenu%\cache"
+cls
 echo "Cache folder deleted successfully."
 echo "Returning to main menu in 10 seconds."
 timeout /t 10 /nobreak >nul
@@ -230,6 +233,7 @@ if not exist "%/Scripts%\Extras-Addon.lua" (
 	) else if not exist "%/Scripts%\json.lua" (
 		echo "Error: Failed to download Json. Check the internet connection or the source URL."
 	) else (
+	    cls
 		echo "Extras Addon downloaded successfully. File Location: %/Scripts%\Extras-Addon.lua"
 		echo "Json downloaded successfully. (Required json config file) File Location: %/Scripts%\json.lua"
 		echo "Extras-data downloaded successfully. (Required, stores objects, vehicles, etc.) File Location: %/Scripts%\json.lua"
@@ -254,6 +258,7 @@ echo "Downloading new version of Ultimate_Menu.lua from the repository..."
 if not exist "%/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua" (
 		echo "Error: Failed to download Addon. Check the internet connection or the source URL."
 	) else (
+	    cls
 		echo "Ultimate_Menu downloaded successfully. File Location: %/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua"
 	)
 timeout /t 10 /nobreak >nul
@@ -275,6 +280,7 @@ echo "Downloading new version of YimMenu.dll from the repository..."
 if not exist "%/Downloads%\YimMenu_3179.dll" (
     echo "Error: Failed to download YimMenu. Check the internet connection or the source URL."
 ) else (
+    cls
     echo "YimMenu downloaded successfully. File Location: %/Downloads%\YimMenu_3179.dll"
     echo "Returning to the main menu in 3 seconds."
 )
@@ -303,6 +309,7 @@ echo "Downloading FateInjector from the repository..."
 if not exist "%/Downloads%\FateInjector.exe" (
     echo "Error: Failed to download FateInjector. Check the internet connection or the source URL."
 ) else (
+    cls
     echo "FateInjector downloaded successfully. File Location: %/Downloads%\FateInjector.exe"
     echo "Returning to the main menu in 3 seconds."
 )
@@ -329,6 +336,7 @@ echo "Downloading Xenos64 from the repository..."
 if not exist "%/Downloads%\Xenos64.exe" (
     echo "Error: Failed to download Xenox64 injector. Check the internet connection or the source URL."
 ) else (
+    cls
     echo "Xenos64 Injector downloaded successfully. File Location: %/Downloads%\Xenos64.exe"
     echo "Returning to the main menu in 3 seconds."
 )
@@ -395,6 +403,7 @@ echo "Downloading new version of animDictsCompact.json from the repository..."
 if not exist "%/YimMenu%/animDictsCompact.json" (
 		echo "Error: Failed to download Animations. Check the internet connection or the source URL."
 	) else (
+	    cls
 		echo "Extras Addon downloaded successfully. File Location: %/YimMenu%/animDictsCompact.json"
 		echo "Returning to the main menu in 5 seconds."
 	)
