@@ -62,6 +62,7 @@ if errorlevel 1 (
     goto menu
 )
 
+:download_exe_yimtools
 	
 :: Continue with the main script
 
@@ -93,12 +94,14 @@ echo 4. Delete YimMenu Cache Folder (Quick fix when GTA updates)
 echo 5. Optional Downloads
 echo 6. Instruction to install/use YimMenu
 echo 7. Exit the application
+echo 8. Download new EXE edition YimTools
 
 echo ------------------------------------------------------------------
 echo If your downloads folder is not in the proper location on your
 echo harddrive, the downloads will default to your desktop, instead.
 
 choice /c 1234567 /n
+ if errorlevel 7 goto download_exe_yimtools
  if errorlevel 7 goto goodbye
  if errorlevel 6 goto instructions
  if errorlevel 5 goto optional_downloads
