@@ -357,7 +357,9 @@ if errorlevel 1 goto download_XML_Maps
 :download_XML_Maps
 echo Opening MagicModz89's MEGA drive in a browser window...
 start "XML Maps" "%XML_mapsUrl%"
+
 :: cscript //nologo BringToFront.vbs
+
 echo To use these, download the file as zip and extract the corresponding contents to %/YimMenu%\xml_maps and xml_vehicles
 echo Returning to Optional Downloads Menu
 timeout /t 5 /nobreak >nul
@@ -387,13 +389,13 @@ goto optional_downloads
 
 
 :restart
-echo "restarting new bat file. Exit..."
+echo "restarting new exe file. Exit..."
 timeout /t 2 /nobreak >nul
-start YimTools_TESTauto.bat
+start YimTools_alfa.exe
 exit
 
 :goodbye
-echo "Thank you for using Extras Addon!  Brought to you by DeadlineEm, USBMenus & KAOS Incorporated"
+echo "Thank you for using YimTools!"
 echo "Exiting in 3 seconds."
 timeout /t 3 /nobreak >nul
 exit
