@@ -1,6 +1,7 @@
 @ECHO OFF
 
 :: Set environment variables for source and destination paths
+   :: in script needed "/" back to %link% . %link%/root 
 set "scriptFolder=%~dp0"
 set "/YimMenu=%APPDATA%\YimMenu"
 set "/Scripts=%APPDATA%\YimMenu\scripts"
@@ -24,6 +25,7 @@ set "Extras-AddonUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-f
 set "Extras-DataUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-data.lua"
 set "Extras-JsonUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/json.lua"
 
+:: needed fix link to download ultimate menu (error 404 )
 set "UltimateMenuUrl=https://raw.githubusercontent.com/L7NEG/Ultimate-Menu/main/YimMenu/Ultimate_Menu%20For%20YimMenu%20V2.1%201.68.lua"
 
 set "XML_mapsUrl=https://mega.nz/folder/BnM2jQoT#Lb6MG4m24nGv0GkNGsD3sQ"
@@ -232,7 +234,7 @@ del "%/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua" >nul 2>&1
 
 echo "Downloading new version of Ultimate_Menu.lua from the repository..."
 	
-	powershell -command "& { Invoke-WebRequest -Uri '%UltimateMenuUrl%' -OutFile '%/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua' }"
+	powershell -command "& { Invoke-WebRequest -Uri '%UltimateMenuUrl%' -OutFile '%/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua' } "
 
 if not exist "%/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua" (
 		echo "Error: Failed to download Addon. Check the internet connection or the source URL."
@@ -369,16 +371,16 @@ echo ------------------------------------------------------------------
 echo 	Downloading Animations Dictionary from the repository
 echo ------------------------------------------------------------------
 echo "Checking to see if there is an existing version of animDictsCompact.json"
-del "%/YimMenu%animDictsCompact.json" >nul 2>&1
+del "%/YimMenu%/animDictsCompact.json" >nul 2>&1
 
 echo "Downloading new version of animDictsCompact.json from the repository..."
 	
-	powershell -command "& { Invoke-WebRequest -Uri '%animDictsCompactUrl%' -OutFile '%/YimMenu%animDictsCompact.json' }"
+	powershell -command "& { Invoke-WebRequest -Uri '%animDictsCompactUrl%' -OutFile '%/YimMenu%/animDictsCompact.json' }"
 
-if not exist "%/YimMenu%animDictsCompact.json" (
+if not exist "%/YimMenu%/animDictsCompact.json" (
 		echo "Error: Failed to download Animations. Check the internet connection or the source URL."
 	) else (
-		echo "Extras Addon downloaded successfully. File Location: %/YimMenu%animDictsCompact.json"
+		echo "Extras Addon downloaded successfully. File Location: %/YimMenu%/animDictsCompact.json"
 		echo "Returning to the main menu in 5 seconds."
 	)
 timeout /t 5 /nobreak >nul
