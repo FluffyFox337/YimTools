@@ -43,13 +43,13 @@ set "exeupdateUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/
 
 :: Check for updates
 echo Checking Repository for updates to YimTools_TEST.bat...
-powershell -command "& { Invoke-WebRequest -Uri '%updateScriptUrl%' -OutFile '%scriptFolder%YimTools_TESTauto.bat.new' }"
+powershell -command "& { Invoke-WebRequest -Uri '%updateScriptUrl%' -OutFile '%scriptFolder%YimTools_TEST.bat.new' }"
 
 :: Compare the current script with the updated version
-fc "%scriptFolder%YimTools_TESTauto.bat.new" "%scriptFolder%YimTools_TESTauto.bat" >nul
+fc "%scriptFolder%YimTools_TEST.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
 if errorlevel 1 (
-    echo Update found! Updating your YimTools_TESTauto.bat to the latest version...
-    move /y "%scriptFolder%YimTools_TESTauto.bat.new" "%scriptFolder%YimTools_TESTauto.bat" >nul
+    echo Update found! Updating your YimTools_TEST.bat to the latest version...
+    move /y "%scriptFolder%YimTools_TEST.bat.new" "%scriptFolder%YimTools_TEST.bat" >nul
 	cls
     echo Script updated successfully!
     timeout /t 1 /nobreak >nul
@@ -57,7 +57,7 @@ if errorlevel 1 (
  
 ) else (
     echo No updates found.
-    del "%scriptFolder%YimTools_TESTauto.bat.new" >nul
+    del "%scriptFolder%YimTools_TEST.bat.new" >nul
     echo "Returning to the main menu."
     timeout /t 1 /nobreak >nul
     goto menu
@@ -65,6 +65,7 @@ if errorlevel 1 (
 
 :download_exe_yimtools
 
+cls
 echo Download YimTools_alfa.exe...
 powershell -command "& { Invoke-WebRequest -Uri '%exeupdateUrl%' -OutFile '%scriptFolder%YimTools_alfa.exe.new' }"
 
@@ -115,7 +116,7 @@ echo If your downloads folder is not in the proper location on your
 echo harddrive, the downloads will default to your desktop, instead.
 
 choice /c 12345678 /n
- if errorlevel 7 goto download_exe_yimtools
+ if errorlevel 8 goto download_exe_yimtools
  if errorlevel 7 goto goodbye
  if errorlevel 6 goto instructions
  if errorlevel 5 goto optional_downloads
