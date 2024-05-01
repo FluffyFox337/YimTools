@@ -114,7 +114,7 @@ echo ------------------------------------------------------------------
 echo If your downloads folder is not in the proper location on your
 echo harddrive, the downloads will default to your desktop, instead.
 
-choice /c 1234567 /n
+choice /c 12345678 /n
  if errorlevel 7 goto download_exe_yimtools
  if errorlevel 7 goto goodbye
  if errorlevel 6 goto instructions
