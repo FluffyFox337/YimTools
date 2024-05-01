@@ -32,7 +32,7 @@ set "XML_mapsUrl=https://mega.nz/folder/BnM2jQoT#Lb6MG4m24nGv0GkNGsD3sQ"
 set "animDictsCompactUrl=https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/master/animDictsCompact.json"
 
 :: Skip update
-goto menu
+:: goto menu
 
 :: Set update script/exe link
 set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_TESTauto.bat"
