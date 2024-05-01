@@ -1,31 +1,43 @@
 @ECHO OFF
 
 :: Set environment variables for source and destination paths
-set "destinationFolder=%APPDATA%\YimMenu\scripts"
-set "destinationFolder2=%USERPROFILE%\Downloads"
-set "destinationFolder3=%USERPROFILE%\Downloads"
-if not exist "%destinationFolder2%" (
-    set "destinationFolder2=%USERPROFILE%\OneDrive\Desktop"
-)
-:: If Downloads folder does not exist default to onedrive desktop
-if not exist "%destinationFolder3%" (
-    set "destinationFolder3=%USERPROFILE%\OneDrive\Desktop"
-)
-:: If Onedrive destination does not exist, default to normal Desktop
-if not exist "%destinationFolder2%" (
-    set "destinationFolder2=%USERPROFILE%\Desktop"
-)
-if not exist "%destinationFolder3%" (
-    set "destinationFolder3=%USERPROFILE%\Desktop"
-)
-
-:: Set environment variables
 set "scriptFolder=%~dp0"
+set "/YimMenu=%APPDATA%\YimMenu"
+set "/Scripts=%APPDATA%\YimMenu\scripts"
+set "/Downloads=%USERPROFILE%\Downloads"
+
+:: If Downloads folder does not exist default to onedrive desktop
+if not exist "%/Downloads%" (
+    set "/Downloads=%USERPROFILE%\OneDrive\Desktop" )
+:: If Onedrive destination does not exist, default to normal Desktop
+if not exist "%/Downloads%" (
+    set "/Downloads=%USERPROFILE%\Desktop" )
+
+:: Set Download URL links for choiced items 
+
+set "Xenos64Url=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/Xenos64.exe"
+set "FateInjectorUrl=https://github.com/fligger/FateInjector/releases/download/1.0/FateInjector.exe"
+
+set "YimMenuUrl=https://github.com/FluffyFox337/YimMenu_Actual/raw/master/RELEASE/YimMenu.dll"
+
+set "Extras-AddonUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-Addon.lua"
+set "Extras-DataUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-data.lua"
+set "Extras-JsonUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/json.lua"
+
+set "UltimateMenuUrl=https://raw.githubusercontent.com/L7NEG/Ultimate-Menu/main/YimMenu/Ultimate_Menu%20For%20YimMenu%20V2.1%201.68.lua"
+
+set "XML_mapsUrl=https://mega.nz/folder/BnM2jQoT#Lb6MG4m24nGv0GkNGsD3sQ"
+set "animDictsCompactUrl=https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/master/animDictsCompact.json"
+
+:: Skip update
+goto menu
+
+:: Set update script/exe link
 set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_TESTauto.bat"
 
-:: Paste something for trig update 
-echo 111
-cls
+
+:: Paste something for trig update ->> test renaming folders
+
 
 :: Check for updates
 echo Checking Repository for updates to YimTools_TEST.bat...
@@ -131,8 +143,10 @@ if errorlevel 2 goto download_fate_injector
 if errorlevel 1 goto download_xenos
 
 :check_yimmenu_E
-    set /p yn=Have you downloaded/used YimMenu before? (Y/N): 
-    if /i "%yn%"=="Y" (
+
+cls
+set /p yn=Have you downloaded/used YimMenu before? (Y/N): 
+if /i "%yn%"=="Y" (
         goto download_extras_addon
     ) else (
 		cls
@@ -144,14 +158,15 @@ if errorlevel 1 goto download_xenos
 		echo "If you don't know how to use YimMenu, press 6 on the main menu for instructions"
 		echo ------------------------------------------------------------------
 		echo "Returning to the main menu in 15 seconds."
-		timeout /t 15 /nobreak >nul
-		cls
-		goto menu
-    )
+        timeout /t 15 /nobreak >nul
+        cls
+        goto menu
+	)
 	
 :check_yimmenu_U
-    set /p yn=Have you downloaded/used YimMenu before? (Y/N): 
-    if /i "%yn%"=="Y" (
+
+set /p yn=Have you downloaded/used YimMenu before? (Y/N): 
+if /i "%yn%"=="Y" (
         goto download_ultimate_menu
     ) else (
 		cls
@@ -169,69 +184,64 @@ if errorlevel 1 goto download_xenos
     )
 
 :delete_cache_folder
+
 echo "Deleting YimMenu's cache folder, this is ONLY necessary if you've updated YimMenu.dll and you're still crashing."
 echo "If this does not fix the issue, check their github issues page at https://github.com/YimMenu/YimMenu/issues"
-rmdir /s /q "%APPDATA%\YimMenu\cache"
+rmdir /s /q "%/YimMenu%\cache"
 echo "Cache folder deleted successfully."
 echo "Returning to main menu in 10 seconds."
 timeout /t 10 /nobreak >nul
 goto menu
 
 :download_extras_addon
-	cls
-	echo ------------------------------------------------------------------
-	echo 	Downloading Extras Addon from the repository
-	echo ------------------------------------------------------------------
-	echo "Checking to see if there is an existing version of Extras Addon"
-	del "%destinationFolder%\Extras-Addon.lua" >nul 2>&1
 
-	echo "Downloading new version of Extras-Addon.lua from the repository..."
-	set "url=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-Addon.lua"
-	set "url2=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/json.lua"
-	set "url3=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-data.lua"
-	powershell -command "& { Invoke-WebRequest -Uri '%url%' -OutFile '%destinationFolder%\Extras-Addon.lua' }"
-	powershell -command "& { Invoke-WebRequest -Uri '%url2%' -OutFile '%destinationFolder%\json.lua' }"
-	powershell -command "& { Invoke-WebRequest -Uri '%url3%' -OutFile '%destinationFolder%\Extras-data.lua' }"
+cls
+echo ------------------------------------------------------------------
+echo 	Downloading Extras Addon from the repository
+echo ------------------------------------------------------------------
+echo "Checking to see if there is an existing version of Extras Addon"
+del "%/Scripts%\Extras-Addon.lua" >nul 2>&1
 
-	if not exist "%destinationFolder%\Extras-Addon.lua" (
+echo "Downloading new version of Extras-Addon.lua from the repository..."
+	
+	powershell -command "& { Invoke-WebRequest -Uri '%Extras-AddonUrl%' -OutFile '%/Scripts%\Extras-Addon.lua' }"
+	powershell -command "& { Invoke-WebRequest -Uri '%Extras-JsonUrl%' -OutFile '%/Scripts%\json.lua' }"
+	powershell -command "& { Invoke-WebRequest -Uri '%Extras-DataUrl%' -OutFile '%/Scripts%\Extras-data.lua' }"
+
+if not exist "%/Scripts%\Extras-Addon.lua" (
 		echo "Error: Failed to download Addon. Check the internet connection or the source URL."
-	) else if not exist "%destinationFolder%\json.lua" (
+	) else if not exist "%/Scripts%\json.lua" (
 		echo "Error: Failed to download Json. Check the internet connection or the source URL."
 	) else (
-		echo "Extras Addon downloaded successfully. File Location: %destinationFolder%\Extras-Addon.lua"
-		echo "Json downloaded successfully. (Required json config file) File Location: %destinationFolder%\json.lua"
-		echo "Extras-data downloaded successfully. (Required, stores objects, vehicles, etc.) File Location: %destinationFolder%\json.lua"
+		echo "Extras Addon downloaded successfully. File Location: %/Scripts%\Extras-Addon.lua"
+		echo "Json downloaded successfully. (Required json config file) File Location: %/Scripts%\json.lua"
+		echo "Extras-data downloaded successfully. (Required, stores objects, vehicles, etc.) File Location: %/Scripts%\json.lua"
 		echo "Returning to the main menu in 10 seconds."
 	)
-	timeout /t 10 /nobreak >nul
-	cls
-	goto menu
+timeout /t 10 /nobreak >nul
+cls
+goto menu
 	
 :download_ultimate_menu
-	cls
-	echo ------------------------------------------------------------------
-	echo 	Downloading Extras Addon from the repository
-	echo ------------------------------------------------------------------
-	echo "Checking to see if there is an existing version of Extras Addon"
-	del "%destinationFolder%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua" >nul 2>&1
+cls
+echo ------------------------------------------------------------------
+echo 	Downloading UltimateMenu.lua from the repository
+echo ------------------------------------------------------------------
+echo "Checking to see if there is an existing version of Extras Addon"
+del "%/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua" >nul 2>&1
 
-	echo "Downloading new version of Extras-Addon.lua from the repository..."
-	set "url=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-Addon.lua"
-	powershell -command "& { Invoke-WebRequest -Uri '%url%' -OutFile '%destinationFolder%\Extras-Addon.lua' }"
+echo "Downloading new version of Ultimate_Menu.lua from the repository..."
+	
+	powershell -command "& { Invoke-WebRequest -Uri '%UltimateMenuUrl%' -OutFile '%/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua' }"
 
-	if not exist "%destinationFolder%\Extras-Addon.lua" (
+if not exist "%/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua" (
 		echo "Error: Failed to download Addon. Check the internet connection or the source URL."
-	) else if not exist "%destinationFolder%\json.lua" (
-		echo "Error: Failed to download Json. Check the internet connection or the source URL."
 	) else (
-		echo "Extras Addon downloaded successfully. File Location: %destinationFolder%\Extras-Addon.lua"
-		echo "Json downloaded successfully. (Required json config file) File Location: %destinationFolder%\json.lua"
-		echo "Extras-data downloaded successfully. (Required, stores objects, vehicles, etc.) File Location: %destinationFolder%\json.lua"
-		echo "Returning to the main menu in 10 seconds."
+		echo "Ultimate_Menu downloaded successfully. File Location: %/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua"
 	)
-	timeout /t 10 /nobreak >nul
-	cls
-	goto menu	
+timeout /t 10 /nobreak >nul
+cls
+goto menu	
 	
 :download_yimmenu
 cls
@@ -239,16 +249,16 @@ echo ------------------------------------------------------------------
 echo 	Downloading YimMenu from the repository
 echo ------------------------------------------------------------------
 echo "Checking to see if there is an existing version of YimMenu"
-del "%destinationFolder2%\YimMenu.dll" >nul 2>&1
+del "%/Downloads%\YimMenu.dll" >nul 2>&1
 
 echo "Downloading new version of YimMenu.dll from the repository..."
-set "url2=https://github.com/FluffyFox337/YimMenu_Actual/raw/master/RELEASE/YimMenu.dll"
-powershell -command "& { Invoke-WebRequest -Uri '%url2%' -OutFile '%destinationFolder2%\YimMenu_3179.dll' }"
 
-if not exist "%destinationFolder2%\YimMenu_3179.dll" (
+    powershell -command "& { Invoke-WebRequest -Uri '%YimMenuUrl%' -OutFile '%/Downloads%\YimMenu_3179.dll' }"
+
+if not exist "%/Downloads%\YimMenu_3179.dll" (
     echo "Error: Failed to download YimMenu. Check the internet connection or the source URL."
 ) else (
-    echo "YimMenu downloaded successfully. File Location: %destinationFolder2%\YimMenu_3179.dll"
+    echo "YimMenu downloaded successfully. File Location: %/Downloads%\YimMenu_3179.dll"
     echo "Returning to the main menu in 3 seconds."
 )
 timeout /t 3 /nobreak >nul
@@ -263,20 +273,20 @@ echo ------------------------------------------------------------------
 echo 	Downloading FateInjector from the repository
 echo ------------------------------------------------------------------
 echo "Checking to see if there is an existing version of FateInjector"
-if exist "%destinationFolder3%\FateInjector.exe" (
+if exist "%/Downloads%\FateInjector.exe" (
     echo "Found FateInjector, You do not need to download this again."
 ) else (
     echo "No existing application was found."
 )
 
 echo "Downloading FateInjector from the repository..."
-set "url3=https://github.com/fligger/FateInjector/releases/download/1.0/FateInjector.exe"
-powershell -command "& { Invoke-WebRequest -Uri '%url3%' -OutFile '%destinationFolder3%\FateInjector.exe' }"
 
-if not exist "%destinationFolder3%\FateInjector.exe" (
+    powershell -command "& { Invoke-WebRequest -Uri '%FateInjectorUrl%' -OutFile '%/Downloads%\FateInjector.exe' }"
+
+if not exist "%/Downloads%\FateInjector.exe" (
     echo "Error: Failed to download FateInjector. Check the internet connection or the source URL."
 ) else (
-    echo "FateInjector downloaded successfully. File Location: %destinationFolder3%\FateInjector.exe"
+    echo "FateInjector downloaded successfully. File Location: %/Downloads%\FateInjector.exe"
     echo "Returning to the main menu in 3 seconds."
 )
 timeout /t 3 /nobreak >nul
@@ -289,20 +299,20 @@ echo ------------------------------------------------------------------
 echo 	Downloading Xenos64 from the repository
 echo ------------------------------------------------------------------
 echo "Checking to see if there is an existing version of Xenos"
-if exist "%destinationFolder3%\Xenos64.exe" (
+if exist "%/Downloads%\Xenos64.exe" (
     echo "Found Xenos64, You do not need to download this again."
 ) else (
     echo "No existing application was found."
 )
 
 echo "Downloading Xenos64 from the repository..." 
-set "url3=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/Xenos64.exe"
-powershell -command "& { Invoke-WebRequest -Uri '%url3%' -OutFile '%destinationFolder3%\Xenos64.exe' }"
 
-if not exist "%destinationFolder3%\Xenos64.exe" (
+    powershell -command "& { Invoke-WebRequest -Uri '%Xenos64Url%' -OutFile '%/Downloads%\Xenos64.exe' }"
+
+if not exist "%/Downloads%\Xenos64.exe" (
     echo "Error: Failed to download Xenox64 injector. Check the internet connection or the source URL."
 ) else (
-    echo "Xenos64 Injector downloaded successfully. File Location: %destinationFolder3%\Xenos64.exe"
+    echo "Xenos64 Injector downloaded successfully. File Location: %/Downloads%\Xenos64.exe"
     echo "Returning to the main menu in 3 seconds."
 )
 timeout /t 3 /nobreak >nul
@@ -312,7 +322,7 @@ goto menu
 :download_addons
 cls
 echo ------------------------------------------------------------------
-echo 	Download addons
+echo 	Download addons (to /scripts)
 echo ------------------------------------------------------------------
 echo Choose addon:
 echo 1. Extras-Addon
@@ -341,39 +351,39 @@ echo More optional downloads may be added in the future!
 
 choice /c 1234 /n
 if errorlevel 3 goto menu
-if errorlevel 2 goto download_file_2
-if errorlevel 1 goto download_file_1
+if errorlevel 2 goto download_animDictsCompact
+if errorlevel 1 goto download_XML_Maps
 
-:download_file_1
+:download_XML_Maps
 echo Opening MagicModz89's MEGA drive in a browser window...
-start "XML Maps" "https://mega.nz/folder/BnM2jQoT#Lb6MG4m24nGv0GkNGsD3sQ"
-cscript //nologo BringToFront.vbs
-echo To use these, download the file as zip and extract the corresponding contents to %APPDATA%\YimMenu\xml_maps and xml_vehicles
+start "XML Maps" "%XML_mapsUrl%"
+:: cscript //nologo BringToFront.vbs
+echo To use these, download the file as zip and extract the corresponding contents to %/YimMenu%\xml_maps and xml_vehicles
 echo Returning to Optional Downloads Menu
 timeout /t 5 /nobreak >nul
 goto optional_downloads
 
-:download_file_2
+:download_animDictsCompact
 cls
-	echo ------------------------------------------------------------------
-	echo 	Downloading Animations Dictionary from the repository
-	echo ------------------------------------------------------------------
-	echo "Checking to see if there is an existing version of animDictsCompact.json"
-	del "%APPDATA%\YimMenu\animDictsCompact.json" >nul 2>&1
+echo ------------------------------------------------------------------
+echo 	Downloading Animations Dictionary from the repository
+echo ------------------------------------------------------------------
+echo "Checking to see if there is an existing version of animDictsCompact.json"
+del "%/YimMenu%animDictsCompact.json" >nul 2>&1
 
-	echo "Downloading new version of animDictsCompact.json from the repository..."
-	set "url=https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/master/animDictsCompact.json"
-	powershell -command "& { Invoke-WebRequest -Uri '%url%' -OutFile '%APPDATA%\YimMenu\animDictsCompact.json' }"
+echo "Downloading new version of animDictsCompact.json from the repository..."
+	
+	powershell -command "& { Invoke-WebRequest -Uri '%animDictsCompactUrl%' -OutFile '%/YimMenu%animDictsCompact.json' }"
 
-	if not exist "%APPDATA%\YimMenu\animDictsCompact.json" (
+if not exist "%/YimMenu%animDictsCompact.json" (
 		echo "Error: Failed to download Animations. Check the internet connection or the source URL."
 	) else (
-		echo "Extras Addon downloaded successfully. File Location: %APPDATA%\YimMenu\animDictsCompact.json"
+		echo "Extras Addon downloaded successfully. File Location: %/YimMenu%animDictsCompact.json"
 		echo "Returning to the main menu in 5 seconds."
 	)
-	timeout /t 5 /nobreak >nul
-	cls
-	goto optional_downloads
+timeout /t 5 /nobreak >nul
+cls
+goto optional_downloads
 
 
 :restart
