@@ -26,7 +26,8 @@ set "Extras-DataUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-fo
 set "Extras-JsonUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/json.lua"
 
 :: needed fix link to download ultimate menu (error 404 )
-set "UltimateMenuUrl=https://raw.githubusercontent.com/L7NEG/Ultimate-Menu/main/YimMenu/Ultimate_Menu%20For%20YimMenu%20V2.1%201.68.lua"
+:: set "UltimateMenuUrl=https://raw.githubusercontent.com/L7NEG/Ultimate-Menu/main/YimMenu/Ultimate_Menu%20For%20YimMenu%20V2.1%201.68.lua"
+set "UltimateMenuUrl=https://github.com/L7NEG/Ultimate-Menu/blob/main/YimMenu/Ultimate_Menu%20For%20YimMenu%20V2.1%201.68.lua"
 
 set "XML_mapsUrl=https://mega.nz/folder/BnM2jQoT#Lb6MG4m24nGv0GkNGsD3sQ"
 set "animDictsCompactUrl=https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/master/animDictsCompact.json"
@@ -188,6 +189,7 @@ if /i "%yn%"=="Y" (
 echo "Deleting YimMenu's cache folder, this is ONLY necessary if you've updated YimMenu.dll and you're still crashing."
 echo "If this does not fix the issue, check their github issues page at https://github.com/YimMenu/YimMenu/issues"
 rmdir /s /q "%/YimMenu%\cache"
+cls
 echo "Cache folder deleted successfully."
 echo "Returning to main menu in 10 seconds."
 timeout /t 10 /nobreak >nul
@@ -213,6 +215,7 @@ if not exist "%/Scripts%\Extras-Addon.lua" (
 	) else if not exist "%/Scripts%\json.lua" (
 		echo "Error: Failed to download Json. Check the internet connection or the source URL."
 	) else (
+	    cls
 		echo "Extras Addon downloaded successfully. File Location: %/Scripts%\Extras-Addon.lua"
 		echo "Json downloaded successfully. (Required json config file) File Location: %/Scripts%\json.lua"
 		echo "Extras-data downloaded successfully. (Required, stores objects, vehicles, etc.) File Location: %/Scripts%\json.lua"
@@ -237,6 +240,7 @@ echo "Downloading new version of Ultimate_Menu.lua from the repository..."
 if not exist "%/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua" (
 		echo "Error: Failed to download Addon. Check the internet connection or the source URL."
 	) else (
+	    cls
 		echo "Ultimate_Menu downloaded successfully. File Location: %/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua"
 	)
 timeout /t 10 /nobreak >nul
@@ -258,6 +262,7 @@ echo "Downloading new version of YimMenu.dll from the repository..."
 if not exist "%/Downloads%\YimMenu_3179.dll" (
     echo "Error: Failed to download YimMenu. Check the internet connection or the source URL."
 ) else (
+    cls
     echo "YimMenu downloaded successfully. File Location: %/Downloads%\YimMenu_3179.dll"
     echo "Returning to the main menu in 3 seconds."
 )
@@ -286,6 +291,7 @@ echo "Downloading FateInjector from the repository..."
 if not exist "%/Downloads%\FateInjector.exe" (
     echo "Error: Failed to download FateInjector. Check the internet connection or the source URL."
 ) else (
+    cls
     echo "FateInjector downloaded successfully. File Location: %/Downloads%\FateInjector.exe"
     echo "Returning to the main menu in 3 seconds."
 )
@@ -312,6 +318,7 @@ echo "Downloading Xenos64 from the repository..."
 if not exist "%/Downloads%\Xenos64.exe" (
     echo "Error: Failed to download Xenox64 injector. Check the internet connection or the source URL."
 ) else (
+    cls
     echo "Xenos64 Injector downloaded successfully. File Location: %/Downloads%\Xenos64.exe"
     echo "Returning to the main menu in 3 seconds."
 )
@@ -380,6 +387,7 @@ echo "Downloading new version of animDictsCompact.json from the repository..."
 if not exist "%/YimMenu%/animDictsCompact.json" (
 		echo "Error: Failed to download Animations. Check the internet connection or the source URL."
 	) else (
+	    cls
 		echo "Extras Addon downloaded successfully. File Location: %/YimMenu%/animDictsCompact.json"
 		echo "Returning to the main menu in 5 seconds."
 	)
