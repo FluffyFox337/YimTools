@@ -34,9 +34,9 @@ set "animDictsCompactUrl=https://raw.githubusercontent.com/DurtyFree/gta-v-data-
 :: Skip update
 :: goto menu
 
-:: Set update script/exe link
+:: Set update script link
 set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_TESTauto.bat"
-
+set "exeupdateUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_alfa.exe"
 
 :: Paste something for trig update ->> test renaming folders
 
@@ -63,6 +63,18 @@ if errorlevel 1 (
 )
 
 :download_exe_yimtools
+
+echo Download YimTools_alfa.exe...
+powershell -command "& { Invoke-WebRequest -Uri '%exeupdateUrl%' -OutFile '%scriptFolder%YimTools_alfa.exe.new' }"
+
+:: Compare the current script with the updated version
+fc "%scriptFolder%YimTools_alfa.exe.new" "%scriptFolder%YimTools_alfa.exe" >nul
+if errorlevel 1 (
+    echo Update found! Updating your YimTools_alfa.exe to the latest version...
+    move /y "%scriptFolder%YimTools_alfa.exe.new" "%scriptFolder%YimTools_alfa.exe" >nul
+    echo Script updated successfully!
+    timeout /t 1 /nobreak >nul
+    goto exestart
 	
 :: Continue with the main script
 
@@ -406,3 +418,9 @@ exit
 :exit
 echo Exiting...
 exit /b
+
+:exestart 
+echo "starting new EXE edition. Exit..."
+timeout /t 2 /nobreak >nul
+start YimTools_alfa.exe
+exit
