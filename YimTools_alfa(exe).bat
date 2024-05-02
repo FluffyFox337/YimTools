@@ -16,7 +16,7 @@ if not exist "%/Downloads%" (
 
 :: Set Download URL links for choiced items 
 
-set "Xenos64Url=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/Xenos64.exe"
+set "Xenos64Url=https://raw.githubusercontent.com/FluffyFox337/YimTols/main/Xenos64.exe"
 set "FateInjectorUrl=https://github.com/fligger/FateInjector/releases/download/1.0/FateInjector.exe"
 
 set "YimMenuUrl=https://github.com/FluffyFox337/YimMenu_Actual/raw/master/RELEASE/YimMenu.dll"
@@ -36,7 +36,7 @@ set "animDictsCompactUrl=https://raw.githubusercontent.com/DurtyFree/gta-v-data-
 :: goto menu
 
 :: Set update script/exe link
-set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/UpdateBAT/main/YimTools_alfa.exe"
+set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/YimTools/main/YimTools_alfa.exe"
 
 
 :: Check for updates
