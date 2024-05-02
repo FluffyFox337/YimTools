@@ -21,7 +21,7 @@ set "FateInjectorUrl=https://github.com/fligger/FateInjector/releases/download/1
 
 set "YimMenuUrl=https://github.com/FluffyFox337/YimMenu_Actual/raw/master/RELEASE/YimMenu.dll"
 
-set "settingsUrl=https://github.com/FluffyFox337/YimTools/main/settings.json"
+set "settingsUrl=https://raw.githubusercontent.com/FluffyFox337/YimTools/main/settings.json"
 
 set "Extras-AddonUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-Addon.lua"
 set "Extras-DataUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-data.lua"
