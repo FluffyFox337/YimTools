@@ -1,3 +1,36 @@
+::[Bat To Exe Converter]
+::
+::YAwzoRdxOk+EWAjk
+::fBw5plQjdCyDJGyX8VAjFDVdTw+bAE+1EbsQ5+n//Na+q0ApW+0za8/LyLuEJeMHqkD8cKoh2X1V1sIPA3s=
+::YAwzuBVtJxjWCl3EqQJgSA==
+::ZR4luwNxJguZRRnk
+::Yhs/ulQjdF+5
+::cxAkpRVqdFKZSDk=
+::cBs/ulQjdF+5
+::ZR41oxFsdFKZSDk=
+::eBoioBt6dFKZSDk=
+::cRo6pxp7LAbNWATEpCI=
+::egkzugNsPRvcWATEpCI=
+::dAsiuh18IRvcCxnZtBJQ
+::cRYluBh/LU+EWAnk
+::YxY4rhs+aU+IeA==
+::cxY6rQJ7JhzQF1fEqQJgZksaHErQXA==
+::ZQ05rAF9IBncCkqN+0xwdVs0
+::ZQ05rAF9IAHYFVzEqQIJIRZgQwuOLws=
+::eg0/rx1wNQPfEVWB+kM9LVsJDGQ=
+::fBEirQZwNQPfEVWB+kM9LVsJDD2LMV+1CbkP1+n36evn
+::cRolqwZ3JBvQF1fEqQIEIBJHDBeBLmKqEvUR6eP+/KqOtg0YVfEmOJvUmqGeJOEH7wXle5Jt0nVNlscDDR8YRxumLiIxp3sCt2qBd8aYt0LuRFvJ4EQiW2Z7imXfnj86Yt9t2tYQ1m7e
+::dhA7uBVwLU+EWDk=
+::YQ03rBFzNR3SWATElA==
+::dhAmsQZ3MwfNWATElA==
+::ZQ0/vhVqMQ3MEVWAtB9wSA==
+::Zg8zqx1/OA3MEVWAtB9wSA==
+::dhA7pRFwIByZRRma4VUlNns=
+::Zh4grVQjdCyDJGyX8VAjFDVdTw+bAE+1EbsQ5+n//Na+q0ApW+0za8/LyLuEJeMHqkD8cKoU33dul8QAHyRZchSqIAosrA4=
+::YB416Ek+ZG8=
+::
+::
+::978f952a14a936cc963da21a135fa983
 @ECHO OFF
 
 :: Set environment variables for source and destination paths
@@ -16,7 +49,7 @@ if not exist "%/Downloads%" (
 
 :: Set Download URL links for choiced items 
 
-set "Xenos64Url=https://raw.githubusercontent.com/FluffyFox337/YimTols/main/Xenos64.exe"
+set "Xenos64Url=https://github.com/FluffyFox337/YimTools/raw/main/Xenos64.exe"
 set "FateInjectorUrl=https://github.com/fligger/FateInjector/releases/download/1.0/FateInjector.exe"
 
 set "YimMenuUrl=https://github.com/FluffyFox337/YimMenu_Actual/raw/master/RELEASE/YimMenu.dll"
@@ -28,7 +61,7 @@ set "Extras-DataUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-fo
 set "Extras-JsonUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/json.lua"
 
 :: needed fix link to download ultimate menu from original repository (error 404 )
-:: set "UltimateMenuUrl=https://raw.githubusercontent.com/L7NEG/Ultimate-Menu/main/YimMenu/Ultimate_Menu%20For%20YimMenu%20V2.1%201.68.lua"
+::set "UltimateMenuUrl2=https://raw.githubusercontent.com/L7NEG/Ultimate-Menu/main/YimMenu/Ultimate_Menu%20For%20YimMenu%20V2.1%201.68.lua"
 set "UltimateMenuUrl=https://raw.githubusercontent.com/FluffyFox337/YimTools/main/Ultimate_Menu_YimMenu-V2.1-1.68.lua"
 
 set "XML_mapsUrl=https://mega.nz/folder/BnM2jQoT#Lb6MG4m24nGv0GkNGsD3sQ"
