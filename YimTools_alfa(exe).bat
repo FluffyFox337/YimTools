@@ -21,19 +21,21 @@ set "FateInjectorUrl=https://github.com/fligger/FateInjector/releases/download/1
 
 set "YimMenuUrl=https://github.com/FluffyFox337/YimMenu_Actual/raw/master/RELEASE/YimMenu.dll"
 
+set "settingsUrl=https://github.com/FluffyFox337/YimTools/main/settings.json"
+
 set "Extras-AddonUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-Addon.lua"
 set "Extras-DataUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/Extras-data.lua"
 set "Extras-JsonUrl=https://raw.githubusercontent.com/Deadlineem/Extras-Addon-for-YimMenu/main/json.lua"
 
-:: needed fix link to download ultimate menu (error 404 )
+:: needed fix link to download ultimate menu from original repository (error 404 )
 :: set "UltimateMenuUrl=https://raw.githubusercontent.com/L7NEG/Ultimate-Menu/main/YimMenu/Ultimate_Menu%20For%20YimMenu%20V2.1%201.68.lua"
-set "UltimateMenuUrl=https://github.com/L7NEG/Ultimate-Menu/blob/main/YimMenu/Ultimate_Menu%20For%20YimMenu%20V2.1%201.68.lua"
+set "UltimateMenuUrl=https://github.com/FluffyFox337/YimTools/main/Ultimate_Menu_YimMenu-V2.1-1.68.lua"
 
 set "XML_mapsUrl=https://mega.nz/folder/BnM2jQoT#Lb6MG4m24nGv0GkNGsD3sQ"
 set "animDictsCompactUrl=https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/master/animDictsCompact.json"
 
 :: Skip update
-:: goto menu
+  :: goto menu
 
 :: Set update script/exe link
 set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/YimTools/main/YimTools_alfa.exe"
@@ -72,7 +74,7 @@ echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
 echo "                                                               "
 echo "                    YimTools exe edition                       "
 echo "                                                               "
-echo "                  Script Version: alfa                         "
+echo "                  Script Version: alfa 0.0.0.2                 "
 echo "  ______   ______   ______   ______   ______   ______   ______ "
 echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
 
@@ -352,12 +354,14 @@ echo ------------------------------------------------------------------
 echo Choose an option:
 echo 1. Get XML Maps/Vehicles (Opens in Browser)
 echo 2. Download Animations Dictionary (To YimMenu Root Folder)
-echo 3. Back to Main Menu
+echo 3. Import YimMenu's settings ( my settings, maybe you like that )
+echo 4. Back to Main Menu
 echo ------------------------------------------------------------------
 echo More optional downloads may be added in the future!
 
 choice /c 1234 /n
-if errorlevel 3 goto menu
+if errorlevel 4 goto menu
+if errorlevel 3 goto import_settings
 if errorlevel 2 goto download_animDictsCompact
 if errorlevel 1 goto download_XML_Maps
 
@@ -395,6 +399,29 @@ timeout /t 5 /nobreak >nul
 cls
 goto optional_downloads
 
+:import_settings
+
+cls
+echo ------------------------------------------------------------------
+echo 	Downloading settings.json to the YimMenu repository
+echo ------------------------------------------------------------------
+echo "Deleting old settings.json"
+del "%/YimMenu%/animDictsCompact.json" >nul 2>&1
+
+echo "Downloading new version of custom settings.json from the repository..."
+	
+	powershell -command "& { Invoke-WebRequest -Uri '%settingsUrl%' -OutFile '%/YimMenu%/settings.json' }"
+
+if not exist "%/YimMenu%/settings.json" (
+		echo "Error: Failed to download settings. Check the internet connection or the source URL."
+	) else (
+	    cls
+		echo "Settings downloaded successfully. File Location: %/YimMenu%/settigs.json"
+		echo "Returning to the main menu in 5 seconds."
+	)
+timeout /t 5 /nobreak >nul
+cls
+goto optional_downloads
 
 :restart
 echo "restarting new exe file. Exit..."
