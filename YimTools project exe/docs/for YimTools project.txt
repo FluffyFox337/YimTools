@@ -1,0 +1,11 @@
+Icon: C:\Users\Nicky\Downloads\logo.ico
+
+File version: 0.0.0.2
+
+Product name: YimTools
+
+Internal name: YimTools_alfa
+
+Description: This script makes it easy to update and download Yim Menu and add-ons for comfortable use.
+
+Comments: ~uwu~
