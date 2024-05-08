@@ -46,6 +46,7 @@ set "UltimateMenuUrl=https://raw.githubusercontent.com/FluffyFox337/YimTools/mai
 
 set "XML_mapsUrl=https://mega.nz/folder/BnM2jQoT#Lb6MG4m24nGv0GkNGsD3sQ"
 set "animDictsCompactUrl=https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/master/animDictsCompact.json"
+set "YimMenu_instructionstxtUrl=https://raw.githubusercontent.com/FluffyFox337/YimTools/main/instructions_Xenos.txt"
 
 
 :languageQUEST
@@ -54,12 +55,13 @@ echo ------------------------------------------------------------------
 echo 	Choice language  / Выберите язык 
 echo ------------------------------------------------------------------
 echo 1. English
-echo 2. Russian
+echo 2. Русский
 echo ------------------------------------------------------------------
 
 choice /c 12 /n
  if errorlevel 2 goto russianscript
  if errorlevel 1 goto englishscript
+ 
 
 
 :englishscript
@@ -132,9 +134,9 @@ choice /c 1234567 /n
  if errorlevel 6 goto instructions_EN
  if errorlevel 5 goto optional_downloads_EN
  if errorlevel 4 goto delete_cache_folder_EN
- if errorlevel 3 goto download_addons_EN
+ if errorlevel 3 goto choice_addons_EN
  if errorlevel 2 goto download_yimmenu_EN
- if errorlevel 1 goto download_injectors_EN
+ if errorlevel 1 goto choice_injectors_EN
  
 
 
@@ -199,7 +201,7 @@ choice /c 1 /n
 
 
 
-:download_injectors_EN
+:choice_injectors_EN
 
 cls
 echo ------------------------------------------------------------------
@@ -380,42 +382,45 @@ cls
 goto menu_EN
 
 :download_xenos_EN
+
 cls
 echo ------------------------------------------------------------------
-echo 	Downloading Xenos64 from the repository
+echo 	Downloading Xenos64 from the repository 
 echo ------------------------------------------------------------------
 echo "Checking to see if there is an existing version of Xenos"
- if exist "%/Downloads%\Xenos64.exe" (
-   echo "Found Xenos64, You do not need to download this again."
-   goto queststartXenos
-	)
-      else (
-       echo "Downloading Xenos64 from the repository..." 
 
-       powershell -command "& { Invoke-WebRequest -Uri '%Xenos64Url%' -OutFile '%/Downloads%\Xenos64.exe' }"
+if exist "%/Downloads%\Xenos64.exe" (
+cls
+echo " Found Xenos64, You do not need to download this again. "
+goto quest_start_Xenos_EN
+) else (
+  echo "Downloading Xenos64 from the repository..."
+  powershell -command "& { Invoke-WebRequest -Uri '%Xenos64Url%' -OutFile '%/Downloads%\Xenos64.exe' }"
+  if not exist "%/Downloads%\Xenos64.exe" (
+  echo "Error: Failed to download Xenox64 injector. Check the internet connection or the source URL." 
+  ) else (
+    cls
+    echo "Xenos64 Injector downloaded successfully. "
+    @echo.
+    echo "File Location: %/Downloads%\Xenos64.exe"
+    timeout /t 1 /nobreak >nul
+    goto quest_start_Xenos_EN )
+)
 
-        if not exist "%/Downloads%\Xenos64.exe" (
-          echo "Error: Failed to download Xenox64 injector. Check the internet connection or the source URL." )
-            else (
-              cls
-              echo "Xenos64 Injector downloaded successfully. "
-	          echo "File Location: %/Downloads%\Xenos64.exe"
-	          timeout /t 3 /nobreak >nul
-              :queststartXenos			  
-			  set /p yn=Do you wanna start Xenos64? (Y/N): 
-               if /i "%yn%"=="y" (
-                 goto startXenos_EN )
-                   else (
-		             cls
-		             echo "Returning to the main menu in 3 seconds."
-                     timeout /t 3 /nobreak >nul
-                     cls
-                     goto menu_EN )
-		    )
-	    )
+:quest_start_Xenos_EN
+cls
+set /p yn=Do you wanna start Xenos64? (Y/N): 
+if /i "%yn%"=="y" (
+goto start_Xenos_EN
+) else (
+cls
+echo "Exit to the main menu..."
+timeout /t 1 /nobreak >nul
+cls
+goto menu_EN )
 
 
-:download_addons_EN
+:choice_addons_EN
 cls
 echo ------------------------------------------------------------------
 echo 	Download addons (to /scripts)
@@ -469,7 +474,7 @@ echo ------------------------------------------------------------------
 echo 	Downloading Animations Dictionary from the repository
 echo ------------------------------------------------------------------
 echo "Checking to see if there is an existing version of animDictsCompact.json"
-del "%/YimMenu%/animDictsCompact.json" >nul 2>&1
+del "%/YimMenu%\animDictsCompact.json" >nul 2>&1
 
 echo "Downloading new version of animDictsCompact.json from the repository..."
 	
@@ -494,7 +499,7 @@ echo ------------------------------------------------------------------
 echo 	Downloading settings.json to the YimMenu repository
 echo ------------------------------------------------------------------
 echo "Deleting old settings.json"
-del "%/YimMenu%/animDictsCompact.json" >nul 2>&1
+del "%/YimMenu%\animDictsCompact.json" >nul 2>&1
 
 echo "Downloading new version of custom settings.json from the repository..."
 	
@@ -511,6 +516,19 @@ if not exist "%/YimMenu%/settings.json" (
 timeout /t 5 /nobreak >nul
 cls
 goto optional_downloads_EN
+
+:: //////////////////////////////////////////////////////////////////////
+:: \\\\\\\\\\\\\ \\\\\\\\\\\ astions links EN \\\\\\\\\\\\\\\\\\\\\\\\\
+:: /////////////////////////////////////////////////////////////////////
+
+:start_Xenos_EN
+
+cls
+echo Starting injector Xenos ...
+timeout /t 2 /nobreak >nul
+start "" %/Downloads%\Xenos64.exe
+:: start Xenos64.exe
+exit
 
 :restart_EN
 echo "restarting new exe file. Exit..."
@@ -533,7 +551,7 @@ exit /b
 :russianscript
 
 :: Skip update (for debug&develop)
-  goto menuRU
+  goto menu_RU
 
 
 :: Check for updates
@@ -562,7 +580,7 @@ fc "%scriptFolder%YimTools_alfa.exe.new" "%scriptFolder%YimTools_alfa.exe" >nul
 	
 :: Continue with the main script
 
-:menuRU
+:menu_RU
 
 cls
 echo "  ______   ______   ______   ______   ______   ______   ______ "
@@ -576,7 +594,7 @@ echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
 
 
 echo ------------------------------------------------------------------
-echo   Эта программа упростит процесс скачивания свежих версий YimTools,
+echo   Эта программа упростит процесс скачивания свежих версий YimMenu,
 echo   скриптов к нему и возможно других приятных плюшек. 
 echo                     ~ Пользуйтесь с удовольствием ~
 echo ------------------------------------------------------------------
@@ -589,21 +607,24 @@ echo 2. Скачать чит меню YimMenu (в папку Загрузки или на рабочий стол)
 echo 3. Установить дополнения-скрипты для YimMenu (в папку YimMenu\scripts)
 echo 4. Очистить папку кеша YimMenu (быстрый фикс после обновы GTA V)
 echo 5. Дополнительные плюшки
-echo 6. Инструкция по запуску чита
-echo 7. Выход
-
+@echo.
+echo 7.        \\ Мне лень, сделайся все само //
 echo ------------------------------------------------------------------
+echo 8. Инструкция по запуску чита
+echo 9. Выход
 echo If your downloads folder is not in the proper location on your
 echo harddrive, the downloads will default to your desktop, instead.
 
-choice /c 1234567 /n
- if errorlevel 7 goto goodbye_RU
- if errorlevel 6 goto instructions_RU
+choice /c 123456789 /n
+ if errorlevel 9 goto goodbye_RU
+ if errorlevel 8 goto instructions_RU
+ if errorlevel 7 goto auto_mode_RU
+ if errorlevel 6 goto 
  if errorlevel 5 goto optional_downloads_RU
  if errorlevel 4 goto delete_cache_folder_RU
- if errorlevel 3 goto download_addons_RU
+ if errorlevel 3 goto choice_addons_RU
  if errorlevel 2 goto download_yimmenu_RU
- if errorlevel 1 goto download_injectors_RU
+ if errorlevel 1 goto choice_injectors_RU
  
 
 :instructions_RU
@@ -664,11 +685,11 @@ echo  Нажмите 1 для выхода в главное меню ...
 timeout /t 1 /nobreak >nul
 
 choice /c 1 /n
- if errorlevel 1 goto menuRU
+ if errorlevel 1 goto menu_RU
  
  
 
-:download_injectors_RU
+:choice_injectors_RU
 
 cls
 echo ------------------------------------------------------------------
@@ -690,40 +711,40 @@ choice /c 123 /n
 cls
 set /p yn=Использовали-ли вы YimMenu ранее? (Y/N): 
 if /i "%yn%"=="Y" (
-        goto download_extras_addon_RU
-    ) else (
-		cls
-        echo "Пожалуйста сначала загрузите и запустите YimMenu перед загрузкой Extras Addon."
-        echo "После запуска YimMenu, вы можете вернуться в этот пункт и загрузить Extras Addon."
-        echo "Для запуска YimMenu вам необходимо загрузить программу-инжектор FateInjector, Xenos и иные."
-		echo ------------------------------------------------------------------
-		echo "Перед запуском YimMenu загрузитесь в сюжетный режим или онлайн."
-		echo "Если вы не знаете, как использовать YimMenu, нажмите 6 в главном меню, чтобы получить инструкции."
-		echo ------------------------------------------------------------------
-		echo "Выход в главное меню (15сек)."
-        timeout /t 15 /nobreak >nul
-        cls
-        goto menu_RU
+goto download_extras_addon_RU
+) else (
+    cls
+    echo "Пожалуйста сначала загрузите и запустите YimMenu перед загрузкой Extras Addon."
+    echo "После запуска YimMenu, вы можете вернуться в этот пункт и загрузить Extras Addon."
+    echo "Для запуска YimMenu вам необходимо загрузить программу-инжектор FateInjector, Xenos и иные."
+	echo ------------------------------------------------------------------
+	echo "Перед запуском YimMenu загрузитесь в сюжетный режим или онлайн."
+	echo "Если вы не знаете, как использовать YimMenu, нажмите 6 в главном меню, чтобы получить инструкции."
+	echo ------------------------------------------------------------------
+	echo "Выход в главное меню (15сек)."
+    timeout /t 15 /nobreak >nul
+    cls
+    goto menu_RU
 	)
 	
 :check_yimmenu_U_RU
 
 set /p yn=Использовали-ли вы YimMenu ранее? (Y/N): 
 if /i "%yn%"=="Y" (
-        goto download_ultimate_menu_RU
-    ) else (
-		cls
-        echo "Пожалуйста сначала загрузите и запустите YimMenu перед загрузкой Extras Addon."
-        echo "После запуска YimMenu, вы можете вернуться в этот пункт и загрузить Extras Addon."
-        echo "Для запуска YimMenu вам необходимо загрузить программу-инжектор FateInjector, Xenos и иные."
-		echo ------------------------------------------------------------------
-		echo "Перед запуском YimMenu загрузитесь в сюжетный режим или онлайн."
-		echo "Если вы не знаете, как использовать YimMenu, нажмите 6 в главном меню, чтобы получить инструкции."
-		echo ------------------------------------------------------------------
-		echo "Выход в главное меню (15сек)."
-		timeout /t 15 /nobreak >nul
-		cls
-		goto menu_RU
+ goto download_ultimate_menu_RU
+ ) else (
+	cls
+    echo "Пожалуйста сначала загрузите и запустите YimMenu перед загрузкой Extras Addon."
+    echo "После запуска YimMenu, вы можете вернуться в этот пункт и загрузить Extras Addon."
+    echo "Для запуска YimMenu вам необходимо загрузить программу-инжектор FateInjector, Xenos и иные."
+	echo ------------------------------------------------------------------
+	echo "Перед запуском YimMenu загрузитесь в сюжетный режим или онлайн."
+	echo "Если вы не знаете, как использовать YimMenu, нажмите 6 в главном меню, чтобы получить инструкции."
+	echo ------------------------------------------------------------------
+	echo "Выход в главное меню (15сек)."
+	timeout /t 15 /nobreak >nul
+	cls
+	goto menu_RU
     )
 
 :delete_cache_folder_RU
@@ -743,34 +764,152 @@ goto menu_RU
 
 cls
 echo ------------------------------------------------------------------
-echo 	Downloading Extras Addon from the repository
+echo 	Загрузка Extras Addon из репозитория
 echo ------------------------------------------------------------------
-echo "Checking to see if there is an existing version of Extras Addon"
-del "%/Scripts%\Extras-Addon.lua" >nul 2>&1
-
-echo "Downloading new version of Extras-Addon.lua from the repository..."
-	
-	powershell -command "& { Invoke-WebRequest -Uri '%Extras-AddonUrl%' -OutFile '%/Scripts%\Extras-Addon.lua' }"
-	powershell -command "& { Invoke-WebRequest -Uri '%Extras-JsonUrl%' -OutFile '%/Scripts%\json.lua' }"
-	powershell -command "& { Invoke-WebRequest -Uri '%Extras-DataUrl%' -OutFile '%/Scripts%\Extras-data.lua' }"
-
- if not exist "%/Scripts%\Extras-Addon.lua" (
-   echo "Error: Не удалось скачать файл Extras-Addon.lua. Проверьте наличие интернет соединения или актуальность ссылки на файл в коде." )
-     else if not exist "%/Scripts%\json.lua" (
-	  echo "Error: Не удалось скачать файл json.lua. Проверьте наличие интернет соединения или актуальность ссылки на файл в коде." )
-	    else (
-	      cls
-		  echo "Extras Addon downloaded successfully."
-		  echo "File Location: %/Scripts%\Extras-Addon.lua"
-		  echo "Json downloaded successfully. (Required json config file) "
-		  echo "File Location: %/Scripts%\json.lua"
-		  echo "Extras-data downloaded successfully. (Required, stores objects, vehicles, etc.) "
-		  echo "File Location: %/Scripts%\json.lua"
-		  echo "Returning to the main menu in 10 seconds."
-	)
-timeout /t 10 /nobreak >nul
+echo deleting old files...
+timeout /t 1 /nobreak >nul
+del "%/Scripts%\Extras-Addon.lua.old" >nul 2>&1
+del "%/Scripts%\Extras-data.lua.old" >nul 2>&1
+del "%/Scripts%\json.lua.old" >nul 2>&1
+echo old files was deleted.
+timeout /t 1 /nobreak >nul
 cls
-goto menu_RU
+echo Проверка наличия Extras Addon...
+timeout /t 2 /nobreak >nul
+cls
+
+if exist "%/Scripts%\Extras-Addon.lua" (
+  echo "Found Extras-Addon.lua , Archivation files..."
+  timeout /t 2 /nobreak >nul
+  rename "%/Scripts%\Extras-Addon.lua" Extras-Addon.lua.old
+  rename "%/Scripts%\Extras-data.lua" Extras-data.lua.old
+  rename "%/Scripts%\json.lua" json.lua.old
+  goto dwn_extras_noexist 
+  ) else (
+      echo "No old Extras-Addon.lua was found. Clean installing..."
+	  :dwn_extras_noexist
+      del "%/Scripts%\Extras-Addon.lua" >nul 2>&1
+      del "%/Scripts%\Extras-data.lua" >nul 2>&1
+      del "%/Scripts%\json.lua" >nul 2>&1
+      echo "Downloading new version of Extras-Addon.lua from the repository..."
+	  powershell -command "& { Invoke-WebRequest -Uri '%Extras-AddonUrl%' -OutFile '%/Scripts%\Extras-Addon.lua' }"
+      powershell -command "& { Invoke-WebRequest -Uri '%Extras-JsonUrl%' -OutFile '%/Scripts%\json.lua' }"
+	  powershell -command "& { Invoke-WebRequest -Uri '%Extras-DataUrl%' -OutFile '%/Scripts%\Extras-data.lua' }"
+	     )
+	  
+if not exist "%/Scripts%\Extras-Addon.lua" (
+  echo "Error: Не удалось скачать файл Extras-Addon.lua. Проверьте наличие интернет соединения или актуальность ссылки на файл в коде."
+  timeout /t 2 /nobreak >nul
+  echo:
+  echo " Restoring archived files..."
+  timeout /t 1 /nobreak >nul
+  del "%/Scripts%\Extras-Addon.lua" >nul 2>&1
+  del "%/Scripts%\json.lua" >nul 2>&1
+  del "%/Scripts%\Extras-data.lua" >nul 2>&1
+  rename "%/Scripts%\Extras-Addon.lua.old" Extras-Addon.lua
+  rename "%/Scripts%\json.lua.old" json.lua
+  rename "%/Scripts%\Extras-data.lua.old" Extras-data.lua
+  timeout /t 1 /nobreak >nul
+  @echo.
+  @echo.
+  echo ╔════════════════════════════════════════════════════════╗
+  echo ║ !                     WARNING                        ! ║
+  echo ╟────────────────────────────────────────────────────────╢
+  echo ║  old files EXTRAS-ADDON was restored. Download failed  ║
+  echo ╚════════════════════════════════════════════════════════╝
+  @echo.
+  echo ----------------------------------------------------------
+  echo "Нажмите 1 для выхода в главное меню"
+  choice /c 1 /n
+  if errorlevel 1 goto menu_RU
+  		   
+			   
+              ) else (
+		          if not exist "%/Scripts%\json.lua" (
+                  echo "Error: Не удалось скачать файл json.lua. Проверьте наличие интернет соединения или актуальность ссылки на файл в коде." 
+		          timeout /t 2 /nobreak >nul
+	              echo:
+	              echo " Restoring archived files..."
+                  timeout /t 1 /nobreak >nul
+                  del "%/Scripts%\Extras-Addon.lua" >nul 2>&1
+				  del "%/Scripts%\json.lua" >nul 2>&1
+				  del "%/Scripts%\Extras-data.lua" >nul 2>&1
+                  rename "%/Scripts%\Extras-Addon.lua.old" Extras-Addon.lua
+                  rename "%/Scripts%\json.lua.old" json.lua
+                  rename "%/Scripts%\Extras-data.lua.old" Extras-data.lua
+                  timeout /t 1 /nobreak >nul
+                  @echo.
+                  echo ╔════════════════════════════════════════════════════════╗
+                  echo ║ !                     WARNING                        ! ║
+                  echo ╟────────────────────────────────────────────────────────╢
+                  echo ║  old files EXTRAS-ADDON was restored. Download failed  ║
+                  echo ╚════════════════════════════════════════════════════════╝
+				  @echo.
+                  echo ----------------------------------------------------------
+                  echo "Нажмите 1 для выхода в главное меню"
+				  choice /c 1 /n
+                  if errorlevel 1 goto menu_RU
+				  
+  
+				  ) else (
+				      if not exist "%/Scripts%\Extras-data.lua" (
+	                    echo "Error: Не удалось скачать файл Extras-data.lua. Проверьте наличие интернет соединения или актуальность ссылки на файл в коде." 
+	                    echo:
+	                    echo " Restoring archived Extras-data.lua..."
+	                    echo:
+	                    rename "%/Scripts%\Extras-data.lua.old" Extras-data.lua
+			            cls
+			            echo " old Extras-data.lua was restored "
+                        timeout /t 2 /nobreak >nul
+						goto download_extras_addon_RU_Success
+						) else (
+				  
+				  
+				  
+				:download_extras_addon_RU_Success
+	             cls
+				 echo ==================================================
+	             echo "Extras-addon успешно загружен. "
+				 @echo.
+				 @echo.
+				 echo "Где файл?   Тут: %/Scripts%\Extras-Addon.lua"
+				 timeout /t 2 /nobreak >nul
+				 echo --------------------------------------------------
+	             echo "Json успешно загружен. "
+				 @echo.
+				 @echo.
+	             echo "Где файл?   Тут: %/Scripts%\json.lua"
+				 timeout /t 2 /nobreak >nul
+				 echo --------------------------------------------------
+	             echo "Extras-data успешно загружен. "
+				 @echo.
+				 @echo.
+	             echo "Где файл?   Тут: %/Scripts%\Extras-data.lua"
+				 echo ==================================================
+				 timeout /t 2 /nobreak >nul
+				 @echo.
+				 @echo.
+	             echo deleting old files...
+				 timeout /t 1 /nobreak >nul
+				 del "%/Scripts%\Extras-Addon.lua.old" >nul 2>&1
+                 del "%/Scripts%\Extras-data.lua.old" >nul 2>&1
+                 del "%/Scripts%\json.lua.old" >nul 2>&1
+				 cls
+				 echo    ______                                    ______
+                 echo   /_____/                                   /_____/
+                 echo  /_____/ Extras Addon успешно загружен.    /_____/
+				 echo /_____/                                   /_____/
+				 @echo.
+	             timeout /t 2 /nobreak >nul
+	             echo --------------------------------------------------
+	             echo "Выход в главное меню(10сек)..."
+	             timeout /t 10 /nobreak >nul
+                 cls
+                 goto menu_RU 
+				               )
+					     )
+		             )
+		       
 	
 :download_ultimate_menu_RU
 cls
@@ -812,7 +951,7 @@ if not exist "%/Downloads%\YimMenu_3179.dll" (
 ) else (
     cls
     echo "YimMenu downloaded successfully. "
-	echo "File Location: %/Downloads%\YimMenu_3179.dll"
+	echo "Где файл?   Тут: %/Downloads%\YimMenu_3179.dll"
     echo "Returning to the main menu in 3 seconds."
 )
 timeout /t 3 /nobreak >nul
@@ -824,68 +963,81 @@ goto menu_RU
 :download_fate_injector_RU
 cls
 echo ------------------------------------------------------------------
-echo 	Downloading FateInjector from the repository
+echo 	Скачать инжектор FateInjector из репозитория 
 echo ------------------------------------------------------------------
-echo "Checking to see if there is an existing version of FateInjector"
-if exist "%/Downloads%\FateInjector.exe" (
-    echo "Found FateInjector, You do not need to download this again."
-) else (
-    echo "No existing application was found."
-)
-
-echo "Downloading FateInjector from the repository..."
-
-    powershell -command "& { Invoke-WebRequest -Uri '%FateInjectorUrl%' -OutFile '%/Downloads%\FateInjector.exe' }"
-
-if not exist "%/Downloads%\FateInjector.exe" (
-    echo "Error: Failed to download FateInjector. Check the internet connection or the source URL."
-) else (
-    cls
-    echo "FateInjector downloaded successfully. "
-	echo "File Location: %/Downloads%\FateInjector.exe"
-    echo "Returning to the main menu in 3 seconds."
-)
-timeout /t 3 /nobreak >nul
+echo "Проверка наличия FateInjector.exe в папке Загрузки или на рабочем столе ..."
+timeout /t 1 /nobreak >nul
 cls
-goto menu_RU
+
+if exist "%/Downloads%\FateInjector.exe" (
+ echo "Найден FateInjector, Вам не нужно скачивать его снова."
+ timeout /t 1 /nobreak >nul
+ goto quest_start_Fateinjector_RU
+ ) else (
+   echo "Загрузка FateInjector ..."
+   powershell -command "& { Invoke-WebRequest -Uri '%FateInjectorUrl%' -OutFile '%/Downloads%\FateInjector.exe' }"
+   if not exist "%/Downloads%\FateInjector.exe" (
+    echo "Error: Не удалось скачать файл FateInjector.exe. Проверьте наличие интернет соединения или актуальность ссылки на файл ."
+    ) else (
+      cls
+      echo "FateInjector успешно загружен. "
+	  echo "Где файл?   Тут: %/Downloads%\Xenos64.exe"
+	  timeout /t 3 /nobreak >nul )
+	  )
+	  
+:quest_start_Fateinjector_RU
+cls		  
+set /p yn=Хотите запустить программу-инжектор FateInjector.exe? (Y/N): 
+if /i "%yn%"=="y" (
+goto start_FateInjector_RU
+) else (
+cls
+echo "Выход в главное меню..."
+timeout /t 1 /nobreak >nul
+cls
+goto menu_RU 
 
 :download_xenos_RU
 cls
 echo ------------------------------------------------------------------
 echo 	Скачать инжектор Xenos64 из репозитория 
 echo ------------------------------------------------------------------
-echo "Проверка наличия Xenos64.exe в папке Загрузки или на рабочем столе ..."
+echo " Проверка наличия Xenos64.exe в папке Загрузки или на рабочем столе ..."
 timeout /t 1 /nobreak >nul
- if exist "%/Downloads%\Xenos64.exe" (
-   echo "Найден Xenos64, Вам не нужно скачивать его снова."
-   goto queststartXenos
+cls
+
+if exist "%/Downloads%\Xenos64.exe" (
+echo " Найден Xenos64, Вам не нужно скачивать его снова."
+timeout /t 2 /nobreak >nul
+goto quest_start_Xenos_RU
+) else (
+  echo "Загрузка Xenos64 ..."
+  powershell -command "& { Invoke-WebRequest -Uri '%Xenos64Url%' -OutFile '%/Downloads%\Xenos64.exe' }"
+  if not exist "%/Downloads%\Xenos64.exe" (
+  echo "Error: Не удалось скачать файл Xenos64.exe. Проверьте наличие интернет соединения или актуальность ссылки на файл в коде."
+  ) else (
+    cls
+    echo "Xenos64 Injector downloaded successfully. "
+	@echo.
+	echo "File Location: %/Downloads%\Xenos64.exe"
+	timeout /t 1 /nobreak >nul )
+	goto quest_start_Xenos_RU
 	)
-      else (
-       echo "Загрузка Xenos64 ..." 
 
-       powershell -command "& { Invoke-WebRequest -Uri '%Xenos64Url%' -OutFile '%/Downloads%\Xenos64.exe' }"
+:quest_start_Xenos_RU
+cls
+set /p yn=Хотите запустить программу-инжектор Xenos64.exe? (Y/N): 
+if /i "%yn%"=="y" (
+goto start_Xenos_RU
+) else (
+cls
+echo "Выход в главное меню..."
+timeout /t 1 /nobreak >nul
+cls
+goto menu_RU )
 
-        if not exist "%/Downloads%\Xenos64.exe" (
-          echo "Error: Не удалось скачать файл Xenos64.exe. Проверьте наличие интернет соединения или актуальность ссылки на файл в коде." )
-            else (
-              cls
-              echo "Xenos64 Injector downloaded successfully. "
-	          echo "File Location: %/Downloads%\Xenos64.exe"
-	          timeout /t 3 /nobreak >nul
-              :queststartXenos			  
-			  set /p yn=Do you wanna start Xenos64? (Y/N): 
-               if /i "%yn%"=="y" (
-                 goto startXenos_RU )
-                   else (
-		             cls
-		             echo "Returning to the main menu in 3 seconds."
-                     timeout /t 3 /nobreak >nul
-                     cls
-                     goto menu_RU )
-		    )
-	    )
 
-:download_addons_RU
+:choice_addons_RU
 cls
 echo ------------------------------------------------------------------
 echo 	Download addons (to /scripts)
@@ -895,9 +1047,12 @@ echo 1. Extras-Addon
 echo 2. Ultimate-Menu
 echo 3. Back to Main Menu
 echo ------------------------------------------------------------------
-echo More injectors may be added in the future!
+echo 4. Open YimMenu/scripts folder
+
+echo More addons may be added in the future!
 
 choice /c 1234 /n
+ if errorlevel 4 goto open_scripts_folder_RU
  if errorlevel 3 goto menu_RU
  if errorlevel 2 goto check_yimmenu_U_RU
  if errorlevel 1 goto check_yimmenu_E_RU
@@ -911,14 +1066,17 @@ echo ------------------------------------------------------------------
 echo Choose an option:
 echo 1. Get XML Maps/Vehicles (Opens in Browser)
 echo 2. Download Animations Dictionary (To YimMenu Root Folder)
-echo 3. Import YimMenu's settings ( my settings, maybe you like that )
+echo 3. Settings_4_Yim options ( custom settings, maybe you like that )
 echo 4. Back to Main Menu
 echo ------------------------------------------------------------------
+echo 5. Open YimMenu/scripts folder
+
 echo More optional downloads may be added in the future!
 
-choice /c 1234 /n
+choice /c 12345 /n
+ if errorlevel 5 goto open_scripts_folder_RU
  if errorlevel 4 goto menu_RU
- if errorlevel 3 goto import_settings_RU
+ if errorlevel 3 goto choice_settings_RU
  if errorlevel 2 goto download_animDictsCompact_RU
  if errorlevel 1 goto download_XML_Maps_RU
 
@@ -939,7 +1097,7 @@ echo ------------------------------------------------------------------
 echo 	Downloading Animations Dictionary from the repository
 echo ------------------------------------------------------------------
 echo "Checking to see if there is an existing version of animDictsCompact.json"
-del "%/YimMenu%/animDictsCompact.json" >nul 2>&1
+del "%/YimMenu%\animDictsCompact.json" >nul 2>&1
 
 echo "Downloading new version of animDictsCompact.json from the repository..."
 	
@@ -957,18 +1115,40 @@ timeout /t 5 /nobreak >nul
 cls
 goto optional_downloads_RU
 
-:import_settings_RU
+:choice_settings_RU
 
+cls
+echo ------------------------------------------------------------------
+echo 	     YimMenu's Settings.json options
+echo ------------------------------------------------------------------
+echo 1. Import custom settings ( my settings, maybe you like that )
+echo 2. Restore settings ( restore your settings after custom )
+choice /c 12 /n
+ if errorlevel 2 goto restore_settings_RU
+ if errorlevel 1 goto import_settings_RU
+
+
+:import_settings_RU
 cls
 echo ------------------------------------------------------------------
 echo 	Кастомные настройки settings.json для чит меню YimMenu 
 echo ------------------------------------------------------------------
-echo "Удаление уже существующих настроек settings.json ..."
-del "%/YimMenu%/animDictsCompact.json" >nul 2>&1
+echo " Проверка наличия уже существующего файла настроек... "
 
+if exist "%/YimMenu%/settings.json" (
+
+echo "Бекап уже существующих настроек settings.json ..."
+timeout /t 2 /nobreak >nul
+rename "%/YimMenu%\settings.json" settings.json.old
+timeout /t 1 /nobreak >nul
+goto dwn_settings_noexist
+) else (
+:dwn_settings_noexist
 echo "Установка кастомного settings.json от автора YimTools..."
-	
-	powershell -command "& { Invoke-WebRequest -Uri '%settingsUrl%' -OutFile '%/YimMenu%/settings.json' }"
+timeout /t 1 /nobreak >nul
+del "%/YimMenu%\settings.json" >nul 2>&1
+
+powershell -command "& { Invoke-WebRequest -Uri '%settingsUrl%' -OutFile '%/YimMenu%/settings.json' }"
 
 if not exist "%/YimMenu%/settings.json" (
 		echo "Error: Не удалось скачать файл settings.json. Проверьте наличие интернет соединения или актуальность ссылки на файл в коде."
@@ -976,11 +1156,39 @@ if not exist "%/YimMenu%/settings.json" (
 	    cls
 		echo "Кастомные настройки успешно установлены. "
 		echo "Где файл? Тут: %/YimMenu%/settigs.json"
-		echo "Returning to the main menu in 5 seconds."
-	)
+		echo "Returning to the main menu in 5 seconds." )
 timeout /t 5 /nobreak >nul
 cls
-goto optional_downloads_RU
+goto menu_RU )
+
+:restore_settings_RU
+cls
+echo ------------------------------------------------------------------
+echo 	Востановление настроек settings.json для чит меню YimMenu 
+echo ------------------------------------------------------------------
+echo " Проверка наличия бекапа файла settigs.json... "
+timeout /t 2 /nobreak >nul
+if exist "%/YimMenu%/settings.json.old" (
+echo " Выполняется восстановление файла settigs.json... "
+timeout /t 1 /nobreak >nul
+del "%/YimMenu%\settings.json" >nul 2>&1
+rename "%/YimMenu%\settings.json.old" settings.json
+echo " Восстановление файла settigs.json прошло УСПЕШНО "
+timeout /t 2 /nobreak >nul
+goto menu_RU
+) else (
+cls
+echo " Бэкап файла settings.json НЕ НАЙДЕН "
+timeout /t 3 /nobreak >nul
+goto menu_RU )
+
+:: //////////////////////////////////////////////////////////////////////
+:: \\\\\\\\\\\\\ \\\\\\\\\\\ astions link \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+:: /////////////////////////////////////////////////////////////////////
+
+:open_scripts_folder_RU
+start %/Scripts%
+goto choice_addons_RU
 
 :restart_RU
 echo "Запуск новой версии YimTools ..."
@@ -988,22 +1196,22 @@ timeout /t 2 /nobreak >nul
 start YimTools_alfa.exe
 exit
 
-:startXenos_EN
-
-cls
-echo Starting injector Xenos ...
-timeout /t 2 /nobreak >nul
-start "" %/Downloads%\Xenos64.exe
-:: start Xenos64.exe
-exit
-
-:startXenos_RU
+:start_Xenos_RU
 
 cls
 echo Запуск программы-инжектора Xenos ...
 timeout /t 2 /nobreak >nul
 start "" %/Downloads%\Xenos64.exe
 :: start Xenos64.exe
+exit
+
+:start_FateInjector_RU
+
+cls
+echo Запуск программы-инжектора FateInjector ...
+timeout /t 2 /nobreak >nul
+start "" %/Downloads%\FateInjector.exe
+:: FateInjector.exe
 exit
 
 :goodbye_RU
@@ -1015,3 +1223,59 @@ exit
 :exit_RU
 echo Выход ...
 exit /b
+
+
+:auto_mode_RU
+cls
+echo test auto_mode_RU
+timeout /t 5 /nobreak >nul
+
+cls
+echo ------------------------------------------------------------------
+echo 	YimMenu.dll
+echo ------------------------------------------------------------------
+echo "Checking to see if there is an existing version of YimMenu"
+del "%/Downloads%\YimMenu.dll" >nul 2>&1
+
+echo "Downloading new version of YimMenu.dll from the repository..."
+
+    powershell -command "& { Invoke-WebRequest -Uri '%YimMenuUrl%' -OutFile '%/Downloads%\YimMenu_3179.dll' }"
+
+if not exist "%/Downloads%\YimMenu_3179.dll" (
+    echo "Error: Failed to download YimMenu. Check the internet connection or the source URL."
+) else (
+    cls
+    echo "YimMenu downloaded successfully. "
+	echo "Где файл?   Тут: %/Downloads%\YimMenu_3179.dll"
+    echo "Returning to the main menu in 3 seconds."
+)
+timeout /t 3 /nobreak >nul
+
+echo ------------------------------------------------------------------
+echo 	Xenos64.exe
+echo ------------------------------------------------------------------
+
+echo " Проверка наличия Xenos64.exe в папке Загрузки или на рабочем столе ..."
+timeout /t 1 /nobreak >nul
+cls
+
+if exist "%/Downloads%\Xenos64.exe" (
+echo " Найден Xenos64, Вам не нужно скачивать его снова."
+timeout /t 2 /nobreak >nul
+goto start_Xenos_RU
+) else (
+  echo "Загрузка Xenos64 ..."
+  powershell -command "& { Invoke-WebRequest -Uri '%Xenos64Url%' -OutFile '%/Downloads%\Xenos64.exe' }"
+  powershell -command "& { Invoke-WebRequest -Uri '%YimMenu_instructionstxtUrl%' -OutFile '%scriptFolder%instructions_Xenos.txt' }"
+  if not exist "%/Downloads%\Xenos64.exe" (
+  echo "Error: Не удалось скачать файл Xenos64.exe. Проверьте наличие интернет соединения или актуальность ссылки на файл в коде."
+  ) else (
+    cls
+    echo "Xenos64 Injector downloaded successfully. "
+	@echo.
+	echo "File Location: %/Downloads%\Xenos64.exe"
+	timeout /t 1 /nobreak >nul )
+	start instructions_Xenos.txt
+	goto start_Xenos_RU
+	)
+	
