@@ -1,0 +1,2 @@
+start instruction.txt
+exit
