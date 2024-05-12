@@ -1,37 +1,5 @@
-::[Bat To Exe Converter]
-::
-::YAwzoRdxOk+EWAjk
-::fBw5plQjdCyDJGyX8VAjFDVdTw+bAE+1EbsQ5+n//Na+q0ApW+0za7Pf1bedHOwc7UqqfJUitg==
-::YAwzuBVtJxjWCl3EqQJgSA==
-::ZR4luwNxJguZRRnk
-::Yhs/ulQjdF+5
-::cxAkpRVqdFKZSDk=
-::cBs/ulQjdF+5
-::ZR41oxFsdFKZSDk=
-::eBoioBt6dFKZSDk=
-::cRo6pxp7LAbNWATEpCI=
-::egkzugNsPRvcWATEpCI=
-::dAsiuh18IRvcCxnZtBJQ
-::cRYluBh/LU+EWAnk
-::YxY4rhs+aU+IeA==
-::cxY6rQJ7JhzQF1fEqQJgZksaHErRXA==
-::ZQ05rAF9IBncCkqN+0xwdVs0
-::ZQ05rAF9IAHYFVzEqQIJIRZgQwuOLws=
-::eg0/rx1wNQPfEVWB+kM9LVsJDGQ=
-::fBEirQZwNQPfEVWB+kM9LVsJDD2LMV+1CbkP1+n36evn
-::cRolqwZ3JBvQF1fEqQIEIBJHDBeBLmKqEvUR6eP+/KqOtg0YVfEmOJvUmqGeJOEH7wXle5Jt0nVNlscDDR8YRxumLiIxp3sCt2qBd8aYt0LuRFvJ4EQiW2Z7imXfnj86Yt9t2tYQ1m7e
-::dhA7uBVwLU+EWDk=
-::YQ03rBFzNR3SWATElA==
-::dhAmsQZ3MwfNWATElA==
-::ZQ0/vhVqMQ3MEVWAtB9wSA==
-::Zg8zqx1/OA3MEVWAtB9wSA==
-::dhA7pRFwIByZRRma4VUlNns=
-::Zh4grVQjdCyDJGyX8VAjFDVdTw+bAE+1EbsQ5+n//Na+q0ApW+0za7Pi07m6L+8f+QX0Z5kn03lOp84UCSd6axunahwIkGdPgmuKO9SjsgPnSwaM/k5Q
-::YB416Ek+ZG8=
-::
-::
-::978f952a14a936cc963da21a135fa983
 @ECHO OFF
+
 :: ==== File info ====
 :: encoding OEM866 
 :: syntaxis Batch
@@ -43,9 +11,18 @@
   ::  to set %link% if you need to operate with the root section of the link. 
   ::  Sample: set "link=C\data"   -OutFile '%link%\file.txt'  >> C\data\file.txt
   ::                              -OutFile '%link%file.txt'   >> C\file.txt
-  
-echo ///////// Script Version: alfa 0.0.0.3  //////////  
-timeout /t 2 /nobreak >nul
+
+
+:://///////////////////////////////////////////////////////////////
+set "YimTools_version=alfa 0.0.0.5"
+:://///////////////////////////////////////////////////////////////
+
+
+
+echo ///////// Script Version: %YimTools_version%  //////////  
+timeout /t 1 /nobreak >nul
+
+:: ////////////////// FOLDERS SETS //////////////////////////////////////////////////////
 
 set "scriptFolder=%~dp0"
 set "/YimMenu=%APPDATA%\YimMenu"
@@ -64,7 +41,7 @@ if not exist "%/Downloads%" (
 set "updateScriptUrl=https://raw.githubusercontent.com/FluffyFox337/YimTools/main/YimTools_alfa.exe"
 
 
-:: Set Download URL links for choiced items 
+:: ////////////////// Download URL SETS //////////////////////////////////////////////////////
 
 set "Xenos64Url=https://github.com/FluffyFox337/YimTools/raw/main/items/Xenos64.exe"
 set "FateInjectorUrl=https://github.com/fligger/FateInjector/releases/download/1.0/FateInjector.exe"
@@ -83,19 +60,41 @@ set "UltimateMenuUrl=https://github.com/FluffyFox337/YimTools/raw/main/items/Ult
 
 set "XML_mapsUrl=https://mega.nz/folder/BnM2jQoT#Lb6MG4m24nGv0GkNGsD3sQ"
 set "animDictsCompactUrl=https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/master/animDictsCompact.json"
-set "https://raw.githubusercontent.com/FluffyFox337/YimTools/main/items/instructions_Xenos.txt"
+set "YimMenu_instructionstxtUrl=https://raw.githubusercontent.com/FluffyFox337/YimTools/main/items/instructions_Xenos.txt"
+
+:: ////////////////// NAMES DOWNLOADED FILES SETS //////////////////////////////////////////////////////
+
+set "name_dwn_YimTools=YimTools_alfa.exe.new"
+set "name_YimTools=YimTools_alfa.exe"
+
+set "name_Xenos=Xenos64.exe"
+set "name_Xenos-instructions=instructions_Xenos.txt"
+set "name_FateInjector=FateInjector.exe"
+
+set "name_YimMenu=YimMenu_3179.dll"
+set "name_YimMenu-settings=settings.json"
+
+set "name_Extras-Addon=Extras-Addon.lua"
+set "name_Extras-json=json.lua"
+set "name_Extras-data=Extras-data.lua"
+
+set "name_UltimateMenu=Ultimate_Menu_For_YimMenu_V2.1.1.68.lua"
+set "name_animDictsCompact=animDictsCompact.json"
 
 
 :languageQUEST
 cls
-echo ------------------------------------------------------------------
-echo 	Choice language  / ‚ë¡¥à¨â¥ ï§ëª 
-echo ------------------------------------------------------------------
-echo 1. English
-echo 2. ãááª¨©
-echo ------------------------------------------------------------------
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º ?      Choice language  / ‚ë¡¥à¨â¥ ï§ëª              ? º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+echo ³ 1  English                                           1 ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³ 2  ãááª¨©                                           2 ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+echo [3]  Exit / ‚ëå®¤
 
-choice /c 12 /n
+choice /c 123 /n
+ if errorlevel 3 goto goodbye_RU
  if errorlevel 2 goto russianscript
  if errorlevel 1 goto englishscript
  
@@ -588,27 +587,46 @@ exit /b
 :russianscript
 
 :: Skip update (for debug&develop)
- ::goto menu_RU
+:: goto menu_RU
 
 
 :: Check for updates
-echo ¯à®¢¥àª  ­ «¨ç¨ï ­®¢®© ¢¥àá¨¨ YimTools_alfa.exe...
-powershell -command "& { Invoke-WebRequest -Uri '%updateScriptUrl%' -OutFile '%scriptFolder%YimTools_alfa.exe.new' }"
+
+cls
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º   à®¢¥àª  ­ «¨ç¨ï ­®¢®© ¢¥àá¨¨ %name_YimTools%...             º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+timeout /t 1 /nobreak >nul
+
+powershell -command "& { Invoke-WebRequest -Uri '%updateScriptUrl%' -OutFile '%scriptFolder%%name_dwn_YimTools%' }"
 
 :: Compare the current script with the updated version
-fc "%scriptFolder%YimTools_alfa.exe.new" "%scriptFolder%YimTools_alfa.exe" >nul
+fc "%scriptFolder%%name_dwn_YimTools%" "%scriptFolder%%name_YimTools%" >nul
  if errorlevel 1 (
-    echo Ž¡­®¢«¥­¨¥ ­ ©¤¥­®! ‡ £àã§ª  ­®¢®© ¢¥àá¨¨ YimTools_alfa.exe ...
-    move /y "%scriptFolder%YimTools_alfa.exe.new" "%scriptFolder%YimTools_alfa.exe" >nul
-	cls
-    echo à®£à ¬¬  ãá¯¥è­® ®¡­®¢«¥­ !
+ 
+    echo ³ Ž¡­®¢«¥­¨¥ ­ ©¤¥­®! ‡ £àã§ª  ­®¢®© ¢¥àá¨¨ %name_YimTools% ...    ³
+    echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+	
+	rename "%scriptFolder%%name_dwn_YimTools%" %name_YimTools%
+    ::move /y "%scriptFolder%%name_YimTools%.new" "%scriptFolder%%name_YimTools%" >nul
+	::del "%scriptFolder%%name_YimTools%.new" >nul 2>&1s
+	
+    echo º            à®£à ¬¬  ãá¯¥è­® ®¡­®¢«¥­ !                          º
+    echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+    echo ----------------------------------------------------------------------
+    echo ’¥ªãé ï ¢¥àá¨ï: %YimTools_version%
+	echo [~]  ¥à¥§ ¯ãáª.
     timeout /t 1 /nobreak >nul
     goto restart_RU
  
 ) else (
-    echo “ ¢ á ã¦¥ á¢¥¦ ï ¢¥àá¨ï ¯à®£à ¬¬ë.
-    del "%scriptFolder%YimTools_alfa.exe.new" >nul
-    echo "‚®§¢à é ¥¬áï ¢ £« ¢­®¥ ¬¥­î ..."
+
+    del "%scriptFolder%%name_dwn_YimTools%" >nul 2>&1s
+	
+    echo º            “ ¢ á ã¦¥ á ¬ ï ­®¢ ï ¢¥àá¨ï                          º
+    echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+    echo ----------------------------------------------------------------------
+    echo ’¥ªãé ï ¢¥àá¨ï: %YimTools_version%
     timeout /t 1 /nobreak >nul
     goto menu_RU
 )
@@ -620,37 +638,53 @@ fc "%scriptFolder%YimTools_alfa.exe.new" "%scriptFolder%YimTools_alfa.exe" >nul
 :menu_RU
 
 cls
-echo "  ______   ______   ______   ______   ______   ______   ______ "
-echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
-echo "                                                               "
-echo "                    YimTools exe edition                       "
-echo "                                                               "
-echo "                  ‚¥àá¨ï áªà¨¯â : alfa 0.0.0.3                 "
-echo "  ______   ______   ______   ______   ______   ______   ______ "
-echo " /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/ "
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³   ______   ______   ______   ______   ______   ______   ______    ³
+echo ³  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/    ³
+echo ³                                                                   ³
+echo ³                     YimTools exe edition                          ³
+echo ³                                                                   ³
+echo ³                   ‚¥àá¨ï áªà¨¯â : %YimTools_version%                    ³
+echo ³   ______   ______   ______   ______   ______   ______   ______    ³
+echo ³  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/    ³
+echo ³                                                                   ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-
-echo ------------------------------------------------------------------
+echo ---------------------------------------------------------------------
 echo   â  ¯à®£à ¬¬  ã¯à®áâ¨â ¯à®æ¥áá áª ç¨¢ ­¨ï á¢¥¦¨å ¢¥àá¨© YimMenu,
 echo   áªà¨¯â®¢ ª ­¥¬ã ¨ ¢®§¬®¦­® ¤àã£¨å ¯à¨ïâ­ëå ¯«îè¥ª. 
 echo                   ~ ®«ì§ã©â¥áì á ã¤®¢®«ìáâ¢¨¥¬ ~
-echo ------------------------------------------------------------------
-echo ------------------------------------------------------------------
-echo 			ƒ« ¢­®¥ ¬¥­î
-echo ------------------------------------------------------------------
-echo ‚ë¡¥à¨ çâ® å®ç¥èì á¤¥« âì:
-echo 1. ‘ª ç âì ¯à®£à ¬¬ã-¨­¦¥ªâ®à (¢ ¯ ¯ªã ‡ £àã§ª¨ ¨«¨ ­   ¡®ç¨© áâ®«)
-echo 2. ‘ª ç âì ç¨â ¬¥­î YimMenu (¢ ¯ ¯ªã ‡ £àã§ª¨ ¨«¨ ­   ¡®ç¨© áâ®«)
-echo 3. “áâ ­®¢¨âì ¤®¯®«­¥­¨ï-áªà¨¯âë ¤«ï YimMenu (¢ ¯ ¯ªã: YimMenu\scripts)
-echo 4. Žç¨áâ¨âì ¯ ¯ªã ª¥è  YimMenu (¡ëáâàë© ä¨ªá ¯®á«¥ ®¡­®¢ë GTA V)
-echo 5. „®¯®«­¨â¥«ì­ë¥ ¯«îèª¨
+echo ---------------------------------------------------------------------
+timeout /t 2 /nobreak >nul
 @echo.
-echo 7.        \\ Œ­¥ «¥­ì, á¤¥« ©áï ¢á¥ á ¬® //
-echo ------------------------------------------------------------------
-echo 8. ˆ­áâàãªæ¨ï ¯® § ¯ãáªã ç¨â 
-echo 9. ‚ëå®¤
-echo …á«¨ ¯ ¯ª  § £àã§®ª ­ å®¤¨âáï ­¥ ¢ ­ã¦­®¬ ¬¥áâ¥ ¨«¨ ¥ñ ­¥âã, 
-echo â®£¤  ¯® ã¬®«ç ­¨î § £àã§ª¨ ¡ã¤ãâ ­  à ¡®ç¥¬ áâ®«¥.
+
+echo ---------------------------------------------------------------------
+echo 			ƒ« ¢­®¥ ¬¥­î
+echo ---------------------------------------------------------------------
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º ?           ‚ë¡¥à¨ çâ® å®ç¥èì á¤¥« âì                           ? º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º 1 ‘ª ç âì ¯à®£à ¬¬ã-¨­¦¥ªâ®à                                    1 º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º 2 ‘ª ç âì ç¨â ¬¥­î YimMenu                                      2 º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º 3 “áâ ­®¢¨âì ¤®¯®«­¥­¨ï-áªà¨¯âë ¤«ï YimMenu                     3 º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º 4 Žç¨áâ¨âì ¯ ¯ªã ª¥è  YimMenu (¡ëáâàë© ä¨ªá ¯®á«¥ ®¡­®¢ë GTA V) 4 º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º 5 „®¯®«­¨â¥«ì­ë¥ ¯«îèª¨                                         5 º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º 6                                                               6 º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º 7             \\ Œ­¥ «¥­ì, á¤¥« ©áï ¢á¥ á ¬® //                  º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+echo [8] ˆ­áâàãªæ¨ï ¯® § ¯ãáªã ç¨â .
+echo [9] ‚ë©â¨ ¨§ ¯à®£à ¬¬ë.
+echo ---------------------------------------------------------------------
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ …á«¨ ¯ ¯ª  § £àã§®ª ­ å®¤¨âáï ­¥ ¢ ­ã¦­®¬ ¬¥áâ¥ ¨«¨ ¥ñ ­¥âã,   ³
+echo ³  â®£¤  ¯® ã¬®«ç ­¨î § £àã§ª¨ ¡ã¤ãâ ­  à ¡®ç¥¬ áâ®«¥.           ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
 choice /c 123456789 /n
  if errorlevel 9 goto goodbye_RU
@@ -715,7 +749,7 @@ echo      ¯à®©¤¨â¥ ¢ ­ áâà®©ª¨: Settings - GUI ¨ ã¡¥à¨â¥ £ «®çªã á ¯ã­ªâ  Show O
 @echo.
 @echo.
 echo ===================================================================
-echo   ¦¬¨â¥ 1 ¤«ï ¢ëå®¤  ¢ £« ¢­®¥ ¬¥­î ...
+echo [1]  ¦¬¨â¥ 1 ¤«ï ¢ëå®¤  ¢ £« ¢­®¥ ¬¥­î ...
 
 timeout /t 1 /nobreak >nul
 
@@ -727,14 +761,14 @@ choice /c 1 /n
 :choice_injectors_RU
 
 cls
-echo ------------------------------------------------------------------
-echo 	‘ª ç âì ¯à®£à ¬¬ã-¨­¦¥ªâ®à
-echo ------------------------------------------------------------------
-echo ‚ë¡¥à¨â¥ ¯à®£à ¬¬ã-¨­¦¥ªâ®à:
-echo 1. Xenos
-echo 2. Fate_Injector
-echo 3. ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î
-echo ------------------------------------------------------------------
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º         ‘ª ç âì ¯à®£à ¬¬ã-¨­¦¥ªâ®à                   º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+echo ³ 1  Xenos                                             1 ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³ 2  Fate_Injector                                     2 ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+echo [3]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
 
 choice /c 123 /n
  if errorlevel 3 goto menu_RU
@@ -744,7 +778,11 @@ choice /c 123 /n
 :check_yimmenu_E_RU
 
 cls
-set /p yn=ˆá¯®«ì§®¢ «¨-«¨ ¢ë YimMenu à ­¥¥? (Y/N): 
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º ?        ˆá¯®«ì§®¢ «¨-«¨ ¢ë YimMenu à ­¥¥? (Y/N)     ? º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+set /p yn=  ¦¬¨â¥ Y ¢ á«ãç ¥ ¯®«®¦¨â¥«ì­®£® ®â¢¥â : 
 if /i "%yn%"=="Y" (
 goto download_extras_addon_RU
 ) else (
@@ -764,7 +802,12 @@ goto download_extras_addon_RU
 	
 :check_yimmenu_U_RU
 
-set /p yn=ˆá¯®«ì§®¢ «¨-«¨ ¢ë YimMenu à ­¥¥? (Y/N): 
+cls
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º ?        ˆá¯®«ì§®¢ «¨-«¨ ¢ë YimMenu à ­¥¥? (Y/N)     ? º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+set /p yn=  ¦¬¨â¥ Y ¢ á«ãç ¥ ¯®«®¦¨â¥«ì­®£® ®â¢¥â : 
 if /i "%yn%"=="Y" (
  goto download_ultimate_menu_RU
  ) else (
@@ -785,214 +828,471 @@ if /i "%yn%"=="Y" (
 :delete_cache_folder_RU
 
 cls
-echo "“¤ «¥­¨¥ ª¥è  YimMenu ­¥®¡å®¤¨¬® ’Ž‹œŠŽ ¥á«¨ ¢ë ®¡­®¢¨«¨ YimMenu.dll, ­® á¡®¨ ¢á¥ ¥é¥ ¯à®¨áå®¤ïâ."
-echo "…á«¨ íâ® ­¥ à¥è¨â ¯à®¡«¥¬ã, ¯à®¢¥àìâ¥ áâà ­¨æã ¯à®¡«¥¬ ­  GitHub ¯®  ¤à¥áã https://github.com/YimMenu/YimMenu/issues"
-timeout /t 5 /nobreak >nul
-rmdir /s /q "%/YimMenu%\cache"
-cls
-echo "Š¥è ¡ë« ãá¯¥è­® ®ç¨é¥­."
-echo "‚ëå®¤ ¢ £« ¢­®¥ ¬¥­î ..."
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º !                         ‚ˆŒ€ˆ…                              ! º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º    “¤ «¥­¨¥ ª¥è  YimMenu ­¥®¡å®¤¨¬® ’Ž‹œŠŽ ¥á«¨ ¢ë ®¡­®¢¨«¨       º
+echo º     YimMenu.dll, ­® á¡®¨ ¢á¥ ¥é¥ ¯à®¨áå®¤ïâ.                      º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
 timeout /t 2 /nobreak >nul
+echo ³ ‚ë¯®«­ï¥âáï ®âç¨áâª  ª¥è ...                                      ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+timeout /t 2 /nobreak >nul
+rmdir /s /q "%/YimMenu%\cache"
+echo ³ Š¥è ¡ë« ãá¯¥è­® ®ç¨é¥­.                                           ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+timeout /t 1 /nobreak >nul
+echo ³  ‚ëå®¤ ¢ £« ¢­®¥ ¬¥­î .                                           ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+echo ---------------------------------------------------------------------
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ …á«¨ íâ® ­¥ à¥è¨â ¯à®¡«¥¬ã, ¯à®¢¥àìâ¥ áâà ­¨æã ¯à®¡«¥¬ ­  GitHub  ³
+echo ³  ¯®  ¤à¥áã https://github.com/YimMenu/YimMenu/issues .            ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+timeout /t 3 /nobreak >nul
+cls
+
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º !                         ‚ˆŒ€ˆ…                              ! º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º    “¤ «¥­¨¥ ª¥è  YimMenu ­¥®¡å®¤¨¬® ’Ž‹œŠŽ ¥á«¨ ¢ë ®¡­®¢¨«¨       º
+echo º     YimMenu.dll, ­® á¡®¨ ¢á¥ ¥é¥ ¯à®¨áå®¤ïâ.                      º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+echo ³ ‚ë¯®«­ï¥âáï ®âç¨áâª  ª¥è ...                                      ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³ Š¥è ¡ë« ãá¯¥è­® ®ç¨é¥­.                                           ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³  ‚ëå®¤ ¢ £« ¢­®¥ ¬¥­î ..                                         ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+echo ---------------------------------------------------------------------
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ …á«¨ íâ® ­¥ à¥è¨â ¯à®¡«¥¬ã, ¯à®¢¥àìâ¥ áâà ­¨æã ¯à®¡«¥¬ ­  GitHub  ³
+echo ³  ¯®  ¤à¥áã https://github.com/YimMenu/YimMenu/issues .            ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+timeout /t 6 /nobreak >nul
+cls
+
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º !                         ‚ˆŒ€ˆ…                              ! º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º    “¤ «¥­¨¥ ª¥è  YimMenu ­¥®¡å®¤¨¬® ’Ž‹œŠŽ ¥á«¨ ¢ë ®¡­®¢¨«¨       º
+echo º     YimMenu.dll, ­® á¡®¨ ¢á¥ ¥é¥ ¯à®¨áå®¤ïâ.                      º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+echo ³ ‚ë¯®«­ï¥âáï ®âç¨áâª  ª¥è ...                                      ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³ Š¥è ¡ë« ãá¯¥è­® ®ç¨é¥­.                                           ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³  ‚ëå®¤ ¢ £« ¢­®¥ ¬¥­î ...                                        ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+echo ---------------------------------------------------------------------
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ …á«¨ íâ® ­¥ à¥è¨â ¯à®¡«¥¬ã, ¯à®¢¥àìâ¥ áâà ­¨æã ¯à®¡«¥¬ ­  GitHub  ³
+echo ³  ¯®  ¤à¥áã https://github.com/YimMenu/YimMenu/issues .            ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+timeout /t 1 /nobreak >nul
 goto menu_RU
 
 :download_extras_addon_RU
-
 cls
-echo ------------------------------------------------------------------
-echo 	‡ £àã§ª  Extras Addon ¨§ à¥¯®§¨â®à¨ï
-echo ------------------------------------------------------------------
-echo deleting old files...
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º        “áâ ­®¢ª   Extras Addon ¨§ à¥¯®§¨â®à¨ï          º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
 timeout /t 1 /nobreak >nul
-del "%/Scripts%\Extras-Addon.lua.old" >nul 2>&1
-del "%/Scripts%\Extras-data.lua.old" >nul 2>&1
-del "%/Scripts%\json.lua.old" >nul 2>&1
-echo old files was deleted.
+echo ³ “¤ «¥­¨¥ áâ àëå OLD ¡¥ª ¯®¢...                       ° ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 timeout /t 1 /nobreak >nul
-cls
-echo à®¢¥àª  ­ «¨ç¨ï Extras Addon...
-timeout /t 2 /nobreak >nul
-cls
+del "%/Scripts%\%name_Extras-Addon%.old" >nul 2>&1
+del "%/Scripts%\%name_Extras-json%.old" >nul 2>&1
+del "%/Scripts%\%name_Extras-data%.old" >nul 2>&1
 
-if exist "%/Scripts%\Extras-Addon.lua" (
-  echo "Found Extras-Addon.lua , Archivation files..."
+timeout /t 1 /nobreak >nul
+
+
+if exist "%/Scripts%\%name_Extras-Addon%" (
+
+  echo ³ Ž¡­ àã¦¥­ Extras-Addon.lua. ‘®§¤ ­¨¥ ­®¢®£® ¡¥ª ¯ ...  ³
+  echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
   timeout /t 2 /nobreak >nul
-  rename "%/Scripts%\Extras-Addon.lua" Extras-Addon.lua.old
-  rename "%/Scripts%\Extras-data.lua" Extras-data.lua.old
-  rename "%/Scripts%\json.lua" json.lua.old
-  goto dwn_extras_noexist 
-  ) else (
-      echo "No old Extras-Addon.lua was found. Clean installing..."
-	  :dwn_extras_noexist
-      del "%/Scripts%\Extras-Addon.lua" >nul 2>&1
-      del "%/Scripts%\Extras-data.lua" >nul 2>&1
-      del "%/Scripts%\json.lua" >nul 2>&1
-      echo "Downloading new version of Extras-Addon.lua from the repository..."
-	  powershell -command "& { Invoke-WebRequest -Uri '%Extras-AddonUrl%' -OutFile '%/Scripts%\Extras-Addon.lua' }"
-      powershell -command "& { Invoke-WebRequest -Uri '%Extras-JsonUrl%' -OutFile '%/Scripts%\json.lua' }"
-	  powershell -command "& { Invoke-WebRequest -Uri '%Extras-DataUrl%' -OutFile '%/Scripts%\Extras-data.lua' }"
-	     )
+  rename "%/Scripts%\%name_Extras-Addon%" %name_Extras-Addon%.old
+  rename "%/Scripts%\%name_Extras-json%" %name_Extras-json%.old
+  rename "%/Scripts%\%name_Extras-data%" %name_Extras-data%.old
+  
+  echo ³ ¥ª ¯ á®§¤ ­. “áâ ­®¢ª  Extras-Addon...                ³
+  echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+  
+  powershell -command "& { Invoke-WebRequest -Uri '%Extras-AddonUrl%' -OutFile '%/Scripts%\%name_Extras-Addon%' }"
+  powershell -command "& { Invoke-WebRequest -Uri '%Extras-JsonUrl%' -OutFile '%/Scripts%\%name_Extras-json%' }"
+  powershell -command "& { Invoke-WebRequest -Uri '%Extras-DataUrl%' -OutFile '%/Scripts%\%name_Extras-data%' }"
+  
+) else (
 	  
-if not exist "%/Scripts%\Extras-Addon.lua" (
-  echo "Error: ¥ ã¤ «®áì áª ç âì ä ©« Extras-Addon.lua. à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì ááë«ª¨ ­  ä ©« ¢ ª®¤¥."
+    echo ³ Extras-Addon.lua ­¥ ®¡­ àã¦¥­. —¨áâ ï ãáâ ­®¢ª ...     ³
+    echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+	  
+    del "%/Scripts%\%name_Extras-Addon%" >nul 2>&1
+	del "%/Scripts%\%name_Extras-json%" >nul 2>&1
+    del "%/Scripts%\%name_Extras-data%" >nul 2>&1
+      
+    powershell -command "& { Invoke-WebRequest -Uri '%Extras-AddonUrl%' -OutFile '%/Scripts%\%name_Extras-Addon%' }"
+    powershell -command "& { Invoke-WebRequest -Uri '%Extras-JsonUrl%' -OutFile '%/Scripts%\%name_Extras-json%' }"
+    powershell -command "& { Invoke-WebRequest -Uri '%Extras-DataUrl%' -OutFile '%/Scripts%\%name_Extras-data%' }"
+	  
+	timeout /t 3 /nobreak >nul )
+
+
+if exist "%/Scripts%\%name_Extras-Addon%" (
+
+  if exist "%/Scripts%\%name_Extras-json%" (
+  goto continue_dwn_extras_addon 
+  
+  ) else (
+	echo ³ ! ERROR: ¥ ã¤ «®áì áª ç âì ä ©« json.lua            ! ³
+    echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+	timeout /t 2 /nobreak >nul
+	              
+	echo ³ ! ‚®ááâ ­®¢«¥­¨¥ ¡¥ª ¯ ...                           ! ³
+    echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+    timeout /t 1 /nobreak >nul
+    del "%/Scripts%\%name_Extras-Addon%" >nul 2>&1
+	del "%/Scripts%\%name_Extras-json%" >nul 2>&1
+    del "%/Scripts%\%name_Extras-data%" >nul 2>&1
+	
+    rename "%/Scripts%\%name_Extras-Addon%.old" %name_Extras-Addon%
+    rename "%/Scripts%\%name_Extras-json%.old" %name_Extras-json%
+    rename "%/Scripts%\%name_Extras-data%.old" %name_Extras-data%
+    timeout /t 1 /nobreak >nul
+    @echo.
+    echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+    echo º !                     ‚ˆŒ€ˆ…                       ! º
+    echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+    echo º  ¥ª ¯ ¢®ááâ ­®¢«¥­. ‡ £àã§ª  ­®¢ëå ä ©«®¢ … “„€‹€‘œ  º
+    echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+	@echo.
+    echo ----------------------------------------------------------
+    echo à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì 
+    echo  ááë«ª¨ ­  ä ©« ¢ ª®¤¥.
+    echo ----------------------------------------------------------
+    echo [1]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
+	choice /c 1 /n
+    if errorlevel 1 goto menu_RU 
+	    )
+				  
+) else (
+
+  echo ³ ! ERROR: ¥ ã¤ «®áì áª ç âì ä ©« Extras-Addon.lua    ! ³
+  echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
   timeout /t 2 /nobreak >nul
-  echo:
-  echo " Restoring archived files..."
+  
+  echo ³ ! ‚®ááâ ­®¢«¥­¨¥ ¡¥ª ¯ ...                           ! ³
+  echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
   timeout /t 1 /nobreak >nul
-  del "%/Scripts%\Extras-Addon.lua" >nul 2>&1
-  del "%/Scripts%\json.lua" >nul 2>&1
-  del "%/Scripts%\Extras-data.lua" >nul 2>&1
-  rename "%/Scripts%\Extras-Addon.lua.old" Extras-Addon.lua
-  rename "%/Scripts%\json.lua.old" json.lua
-  rename "%/Scripts%\Extras-data.lua.old" Extras-data.lua
+  del "%/Scripts%\%name_Extras-Addon%" >nul 2>&1
+  del "%/Scripts%\%name_Extras-json%" >nul 2>&1
+  del "%/Scripts%\%name_Extras-data%" >nul 2>&1
+  
+  rename "%/Scripts%\%name_Extras-Addon%.old" %name_Extras-Addon%
+  rename "%/Scripts%\%name_Extras-json%.old" %name_Extras-json%
+  rename "%/Scripts%\%name_Extras-data%.old" %name_Extras-data%
   timeout /t 1 /nobreak >nul
   @echo.
   @echo.
   echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
-  echo º !                     WARNING                        ! º
+  echo º !                     ‚ˆŒ€ˆ…                       ! º
   echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
-  echo º  old files EXTRAS-ADDON was restored. Download failed  º
+  echo º  ¥ª ¯ ¢®ááâ ­®¢«¥­. ‡ £àã§ª  ­®¢ëå ä ©«®¢ … “„€‹€‘œ  º
   echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
   @echo.
   echo ----------------------------------------------------------
-  echo " ¦¬¨â¥ 1 ¤«ï ¢ëå®¤  ¢ £« ¢­®¥ ¬¥­î"
+  echo à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì 
+  echo  ááë«ª¨ ­  ä ©« ¢ ª®¤¥.
+  echo ----------------------------------------------------------
+  echo [1]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
   choice /c 1 /n
   if errorlevel 1 goto menu_RU
-  		   
-			   
-              ) else (
-		          if not exist "%/Scripts%\json.lua" (
-                  echo "Error: ¥ ã¤ «®áì áª ç âì ä ©« json.lua. à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì ááë«ª¨ ­  ä ©« ¢ ª®¤¥." 
-		          timeout /t 2 /nobreak >nul
-	              echo:
-	              echo " Restoring archived files..."
-                  timeout /t 1 /nobreak >nul
-                  del "%/Scripts%\Extras-Addon.lua" >nul 2>&1
-				  del "%/Scripts%\json.lua" >nul 2>&1
-				  del "%/Scripts%\Extras-data.lua" >nul 2>&1
-                  rename "%/Scripts%\Extras-Addon.lua.old" Extras-Addon.lua
-                  rename "%/Scripts%\json.lua.old" json.lua
-                  rename "%/Scripts%\Extras-data.lua.old" Extras-data.lua
-                  timeout /t 1 /nobreak >nul
-                  @echo.
-                  echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
-                  echo º !                     WARNING                        ! º
-                  echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
-                  echo º  old files EXTRAS-ADDON was restored. Download failed  º
-                  echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
-				  @echo.
-                  echo ----------------------------------------------------------
-                  echo " ¦¬¨â¥ 1 ¤«ï ¢ëå®¤  ¢ £« ¢­®¥ ¬¥­î"
-				  choice /c 1 /n
-                  if errorlevel 1 goto menu_RU
-				  
+       )
+		
+:continue_dwn_extras_addon
+					   
+if exist "%/Scripts%\%name_Extras-data%" (
+  goto download_extras_addon_RU_Success 
   
-				  ) else (
-				      if not exist "%/Scripts%\Extras-data.lua" (
-	                    echo "Error: ¥ ã¤ «®áì áª ç âì ä ©« Extras-data.lua. à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì ááë«ª¨ ­  ä ©« ¢ ª®¤¥." 
-	                    echo:
-	                    echo " Restoring archived Extras-data.lua..."
-	                    echo:
-	                    rename "%/Scripts%\Extras-data.lua.old" Extras-data.lua
-			            cls
-			            echo " old Extras-data.lua was restored "
-                        timeout /t 2 /nobreak >nul
-						goto download_extras_addon_RU_Success
-						) else (
-				  
-				  
-				  
-				:download_extras_addon_RU_Success
-	             cls
-				 echo ==================================================
-	             echo "Extras-addon ãá¯¥è­® § £àã¦¥­. "
-				 @echo.
-				 @echo.
-				 echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\Extras-Addon.lua"
-				 timeout /t 2 /nobreak >nul
-				 echo --------------------------------------------------
-	             echo "Json ãá¯¥è­® § £àã¦¥­. "
-				 @echo.
-				 @echo.
-	             echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\json.lua"
-				 timeout /t 2 /nobreak >nul
-				 echo --------------------------------------------------
-	             echo "Extras-data ãá¯¥è­® § £àã¦¥­. "
-				 @echo.
-				 @echo.
-	             echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\Extras-data.lua"
-				 echo ==================================================
-				 timeout /t 2 /nobreak >nul
-				 @echo.
-				 @echo.
-	             echo deleting old files...
-				 timeout /t 1 /nobreak >nul
-				 del "%/Scripts%\Extras-Addon.lua.old" >nul 2>&1
-                 del "%/Scripts%\Extras-data.lua.old" >nul 2>&1
-                 del "%/Scripts%\json.lua.old" >nul 2>&1
-				 cls
-				 echo    ______                                    ______
-                 echo   /_____/                                   /_____/
-                 echo  /_____/ Extras Addon ãá¯¥è­® § £àã¦¥­.    /_____/
-				 echo /_____/                                   /_____/
-				 @echo.
-	             timeout /t 2 /nobreak >nul
-	             echo --------------------------------------------------
-	             echo "‚ëå®¤ ¢ £« ¢­®¥ ¬¥­î(10á¥ª)..."
-	             timeout /t 10 /nobreak >nul
-                 cls
-                 goto menu_RU 
-				               )
-					     )
-		             )
-		       
-	
-:download_ultimate_menu_RU
-cls
-echo ------------------------------------------------------------------
-echo 	Downloading UltimateMenu.lua from the repository
-echo ------------------------------------------------------------------
-echo "Checking to see if there is an existing version of Extras Addon"
-del "%/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua" >nul 2>&1
+  ) else (
+	echo ³ ! ERROR: ¥ ã¤ «®áì áª ç âì ä ©« Extras-data.lua     ! ³
+    echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+	timeout /t 1 /nobreak >nul
+						
+	echo ³ ! ‚®ááâ ­®¢«¥­¨¥ %name_Extras-data%...               ! ³
+    echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+	@echo.
+	rename "%/Scripts%\%name_Extras-data%.old" %name_Extras-data%
+    timeout /t 2 /nobreak >nul
+	goto download_extras_addon_RU_Success_Data_Notice )
+				  	  
+:download_extras_addon_RU_Success
+	             
+echo ³ Extras-addon.lua ãá¯¥è­® § £àã¦¥­.                    ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+				 
+timeout /t 1 /nobreak >nul
+echo ³ Json.lua ãá¯¥è­® § £àã¦¥­.                            ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+	             
+timeout /t 1 /nobreak >nul
+echo ³ Extras-data.lua ãá¯¥è­® § £àã¦¥­.                     ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+	             
+timeout /t 1 /nobreak >nul
 
-echo "Downloading new version of Ultimate_Menu.lua from the repository..."
-	
-	powershell -command "& { Invoke-WebRequest -Uri '%UltimateMenuUrl%' -OutFile '%/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua' } "
-
-if not exist "%/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua" (
-		echo "Error: Failed to download Addon. Check the internet connection or the source URL."
-	) else (
-	    cls
-		echo "Ultimate_Menu downloaded successfully. "
-		echo "File Location: %/Scripts%\Ultimate_Menu_For_YimMenu_V2.1.1.68.lua"
-	)
+echo ³  “¤ «¥­¨¥ ¡¥ª ¯ ...                                    ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+timeout /t 1 /nobreak >nul
+del "%/Scripts%\%name_Extras-Addon%.old" >nul 2>&1
+del "%/Scripts%\%name_Extras-json%.old" >nul 2>&1
+del "%/Scripts%\%name_Extras-data%.old" >nul 2>&1
+				 
+				 
+echo º ‘ªà¨¯â Extras-addon ãá¯¥è­® ãáâ ­®¢«¥­.               º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+@echo.
+timeout /t 1 /nobreak >nul
+echo ----------------------------------------------------------
+echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_Extras-Addon%"
+echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_Extras-json%"
+echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_Extras-data%"
+echo ----------------------------------------------------------
+echo  ‚ëå®¤ ¢ £« ¢­®¥ ¬¥­î ç¥à¥§ 10 á¥ª...
 timeout /t 10 /nobreak >nul
 cls
-goto menu_RU
+goto menu_RU 
+				               
+
+:download_extras_addon_RU_Success_Data_Notice
+	             
+echo ³ Extras-addon.lua ãá¯¥è­® § £àã¦¥­.                    ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+@echo.
+@echo.
+				 
+timeout /t 1 /nobreak >nul
+echo ³ Json.lua ãá¯¥è­® § £àã¦¥­.                            ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+@echo.
+@echo.
+	             
+timeout /t 1 /nobreak >nul
+echo ³ Extras-data.lua ¢®ááâ ­®¢«¥­. ‡ £àã§ª  ­¥ ã¤ « áì   ! ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+@echo.
+@echo.
+	             
+echo ==================================================
+timeout /t 1 /nobreak >nul
+@echo.
+@echo.
+echo ³ “¤ «¥­¨¥ ¡¥ª ¯ ...                                     ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+timeout /t 1 /nobreak >nul
+del "%/Scripts%\%name_Extras-Addon%.old" >nul 2>&1
+del "%/Scripts%\%name_Extras-json%.old" >nul 2>&1
+del "%/Scripts%\%name_Extras-data%.old" >nul 2>&1
+				 
+				 
+echo º! ‘ªà¨¯â Extras-addon “‘‹Ž‚Ž ãá¯¥è­® ãáâ ­®¢«¥­.     ! º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+@echo.
+timeout /t 1 /nobreak >nul
+echo ----------------------------------------------------------
+echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_Extras-Addon%"
+echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_Extras-json%"
+echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_Extras-data%"
+echo ----------------------------------------------------------
+echo  ‚ëå®¤ ¢ £« ¢­®¥ ¬¥­î ç¥à¥§ 10 á¥ª...
+timeout /t 10 /nobreak >nul
+cls
+goto menu_RU 
+					 
+					 
+:download_ultimate_menu_RU
+cls
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º        “áâ ­®¢ª  UltimateMenu ¨§ à¥¯®§¨â®à¨ï          º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+timeout /t 1 /nobreak >nul
+echo ³ “¤ «¥­¨¥ áâ àëå OLD ¡¥ª ¯®¢...                       ° ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+timeout /t 1 /nobreak >nul
+del "%/Scripts%\%name_UltimateMenu%.old" >nul 2>&1
+
+
+if exist "%/Scripts%\%name_UltimateMenu%" (
+
+  echo ³ Ž¡­ àã¦¥­ UltimateMenu.lua. ‘®§¤ ­¨¥ ­®¢®£® ¡¥ª ¯ ...  ³
+  echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+  timeout /t 2 /nobreak >nul
+  rename "%/Scripts%\%name_UltimateMenu%" %name_UltimateMenu%.old
+
+  echo ³ ¥ª ¯ á®§¤ ­. ‡ £àã§ª  Extras-Addon...                 ³
+  echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+  
+  powershell -command "& { Invoke-WebRequest -Uri '%UltimateMenuUrl%' -OutFile '%/Scripts%\%name_UltimateMenu%' } "
+  
+) else (
+
+echo ³ Extras-Addon.lua ­¥ ®¡­ àã¦¥­. —¨áâ ï ãáâ ­®¢ª ...    ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+	  
+del "%/Scripts%\%name_UltimateMenu%" >nul 2>&1
+
+powershell -command "& { Invoke-WebRequest -Uri '%UltimateMenuUrl%' -OutFile '%/Scripts%\%name_UltimateMenu%' } "
+
+timeout /t 3 /nobreak >nul )
+
+
+if exist "%/Scripts%\%name_UltimateMenu%" (
+
+timeout /t 1 /nobreak >nul
+echo ³ UltimateMenu.lua ãá¯¥è­® § £àã¦¥­.                    ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+	             
+timeout /t 1 /nobreak >nul
+echo ³  “¤ «¥­¨¥ ¡¥ª ¯ ...                                    ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+
+timeout /t 1 /nobreak >nul
+del "%/Scripts%\%name_UltimateMenu%.old" >nul 2>&1
+				 
+				 
+echo º ‘ªà¨¯â UltimateMenu ãá¯¥è­® ãáâ ­®¢«¥­.               º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+@echo.
+timeout /t 1 /nobreak >nul
+echo ----------------------------------------------------------
+echo "ƒ¤¥ ä ©«?  ’ãâ: %/Scripts%\%name_UltimateMenu%"
+echo ----------------------------------------------------------
+echo  ‚ëå®¤ ¢ £« ¢­®¥ ¬¥­î ç¥à¥§ 10 á¥ª...
+timeout /t 10 /nobreak >nul
+cls
+goto menu_RU 
+
+	) else (
+	
+	echo ³ ! ERROR: ¥ ã¤ «®áì áª ç âì ä ©« UltimateMenu.lua    ! ³
+    echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+
+    timeout /t 2 /nobreak >nul	
+	echo ³ ! ‚®ááâ ­®¢«¥­¨¥ ¡¥ª ¯ ...                           ! ³
+    echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+    timeout /t 1 /nobreak >nul
+    del "%/Scripts%\%name_UltimateMenu%" >nul 2>&1
+    rename "%/Scripts%\%name_UltimateMenu%.old" %name_UltimateMenu%
+
+    @echo.
+    echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+    echo º !                     ‚ˆŒ€ˆ…                       ! º
+    echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+    echo º  ¥ª ¯ ¢®ááâ ­®¢«¥­. ‡ £àã§ª  ­®¢ëå ä ©«®¢ … “„€‹€‘œ  º
+    echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+	@echo.
+    echo ----------------------------------------------------------
+    echo à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì 
+    echo  ááë«ª¨ ­  ä ©« ¢ ª®¤¥.
+    echo ----------------------------------------------------------
+    echo [1]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
+	choice /c 1 /n
+    if errorlevel 1 goto menu_RU 
+	    )
+
 	
 :download_yimmenu_RU
 cls
-echo ------------------------------------------------------------------
-echo 	Downloading YimMenu from the repository
-echo ------------------------------------------------------------------
-echo "Checking to see if there is an existing version of YimMenu"
-del "%/Downloads%\YimMenu.dll" >nul 2>&1
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º       ‡ £àã§ª  ­®¢®© ¢¥àá¨¨ YimMenu ¨§ à¥¯®§¨â®à¨ï   º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+timeout /t 1 /nobreak >nul
+echo ³ “¤ «¥­¨¥ áâ àëå OLD ¡¥ª ¯®¢...                       ° ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+timeout /t 1 /nobreak >nul
+del "%/Downloads%\%name_YimMenu%.old" >nul 2>&1
 
-echo "Downloading new version of YimMenu.dll from the repository..."
+if exist "%/Downloads%\%name_YimMenu%" (
 
-    powershell -command "& { Invoke-WebRequest -Uri '%YimMenuUrl%' -OutFile '%/Downloads%\YimMenu_3179.dll' }"
+  echo ³ Ž¡­ àã¦¥­ %name_YimMenu%. ‘®§¤ ­¨¥ ­®¢®£® ¡¥ª ¯ ...    ³
+  echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+  timeout /t 2 /nobreak >nul
+  rename "%/Downloads%\%name_YimMenu%" %name_YimMenu%.old
 
-if not exist "%/Downloads%\YimMenu_3179.dll" (
-    echo "Error: Failed to download YimMenu. Check the internet connection or the source URL."
+  echo ³ ¥ª ¯ á®§¤ ­. ‡ £àã§ª  YimMenu...                      ³
+  echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+
+  powershell -command "& { Invoke-WebRequest -Uri '%YimMenuUrl%' -OutFile '%/Downloads%\%name_YimMenu%' }"
+	
 ) else (
-    cls
-    echo "YimMenu downloaded successfully. "
-	echo "ƒ¤¥ ä ©«?   ’ãâ: %/Downloads%\YimMenu_3179.dll"
-    echo "Returning to the main menu in 3 seconds."
-)
-timeout /t 3 /nobreak >nul
-cls
-goto menu_RU
 
+echo ³ YimMenu.dll ­¥ ®¡­ àã¦¥­.      —¨áâ ï ãáâ ­®¢ª ...    ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+	  
+del "%/Downloads%\%name_YimMenu%" >nul 2>&1
+
+powershell -command "& { Invoke-WebRequest -Uri '%YimMenuUrl%' -OutFile '%/Downloads%\%name_YimMenu%' }"
+
+timeout /t 3 /nobreak >nul )
+
+if exist "%/Downloads%\%name_YimMenu%" (
+
+timeout /t 1 /nobreak >nul
+echo ³ YimMenu.dll ãá¯¥è­® § £àã¦¥­.                         ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+	             
+timeout /t 1 /nobreak >nul
+echo ³  “¤ «¥­¨¥ ¡¥ª ¯ ...                                    ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+
+timeout /t 1 /nobreak >nul
+del "%/Downloads%\%name_YimMenu%.old" >nul 2>&1
+				 
+				 
+echo º —¨â-¬¥­î  YimMenu ãá¯¥è­® ãáâ ­®¢«¥­.                 º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+@echo.
+timeout /t 1 /nobreak >nul
+echo ----------------------------------------------------------
+echo "ƒ¤¥ ä ©«?  ’ãâ: %/Downloads%\%name_YimMenu%"
+echo ----------------------------------------------------------
+echo  ‚ëå®¤ ¢ £« ¢­®¥ ¬¥­î ç¥à¥§ 10 á¥ª...
+timeout /t 10 /nobreak >nul
+cls
+goto menu_RU 
+
+) else (
+
+    echo ³ ! ERROR: ¥ ã¤ «®áì áª ç âì ä ©« YimMenu.dll         ! ³
+    echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+
+    timeout /t 2 /nobreak >nul	
+	echo ³ ! ‚®ááâ ­®¢«¥­¨¥ ¡¥ª ¯ ...                           ! ³
+    echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+    timeout /t 1 /nobreak >nul
+    del "%/Downloads%\%name_YimMenu%" >nul 2>&1
+    rename "%/Downloads%\%name_YimMenu%.old" %name_YimMenu%
+
+    @echo.
+    echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+    echo º !                     ‚ˆŒ€ˆ…                       ! º
+    echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+    echo º  ¥ª ¯ ¢®ááâ ­®¢«¥­. ‡ £àã§ª  ­®¢ëå ä ©«®¢ … “„€‹€‘œ  º
+    echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+	@echo.
+    echo ----------------------------------------------------------
+    echo à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì 
+    echo  ááë«ª¨ ­  ä ©« ¢ ª®¤¥.
+    echo ----------------------------------------------------------
+    echo [1]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
+	choice /c 1 /n
+    if errorlevel 1 goto menu_RU 
+	    )
 
 
 :download_fate_injector_RU
@@ -1004,19 +1304,19 @@ echo "à®¢¥àª  ­ «¨ç¨ï FateInjector.exe ¢ ¯ ¯ª¥ ‡ £àã§ª¨ ¨«¨ ­  à ¡®ç¥¬ áâ®«¥ ..
 timeout /t 1 /nobreak >nul
 cls
 
-if exist "%/Downloads%\FateInjector.exe" (
+if exist "%/Downloads%\%name_FateInjector%" (
  echo " ©¤¥­ FateInjector, ‚ ¬ ­¥ ­ã¦­® áª ç¨¢ âì ¥£® á­®¢ ."
  timeout /t 1 /nobreak >nul
  goto quest_start_Fateinjector_RU
  ) else (
    echo "‡ £àã§ª  FateInjector ..."
-   powershell -command "& { Invoke-WebRequest -Uri '%FateInjectorUrl%' -OutFile '%/Downloads%\FateInjector.exe' }"
-   if not exist "%/Downloads%\FateInjector.exe" (
-    echo "Error: ¥ ã¤ «®áì áª ç âì ä ©« FateInjector.exe. à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì ááë«ª¨ ­  ä ©« ."
+   powershell -command "& { Invoke-WebRequest -Uri '%FateInjectorUrl%' -OutFile '%/Downloads%\%name_FateInjector%' }"
+   if not exist "%/Downloads%\%name_FateInjector%" (
+    echo "Error: ¥ ã¤ «®áì áª ç âì ä ©« %name_FateInjector%. à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì ááë«ª¨ ­  ä ©« ."
     ) else (
       cls
       echo "FateInjector ãá¯¥è­® § £àã¦¥­. "
-	  echo "ƒ¤¥ ä ©«?   ’ãâ: %/Downloads%\Xenos64.exe"
+	  echo "ƒ¤¥ ä ©«?   ’ãâ: %/Downloads%\%name_FateInjector%"
 	  timeout /t 3 /nobreak >nul )
 	  )
 	  
@@ -1041,27 +1341,27 @@ echo " à®¢¥àª  ­ «¨ç¨ï Xenos64.exe ¢ ¯ ¯ª¥ ‡ £àã§ª¨ ¨«¨ ­  à ¡®ç¥¬ áâ®«¥ ..."
 timeout /t 1 /nobreak >nul
 cls
 
-if exist "%/Downloads%\Xenos64.exe" (
+if exist "%/Downloads%\%name_Xenos%" (
 echo "  ©¤¥­ Xenos64, ‚ ¬ ­¥ ­ã¦­® áª ç¨¢ âì ¥£® á­®¢ ."
 timeout /t 2 /nobreak >nul
 goto quest_start_Xenos_RU
 ) else (
   echo "‡ £àã§ª  Xenos64 ..."
-  powershell -command "& { Invoke-WebRequest -Uri '%Xenos64Url%' -OutFile '%/Downloads%\Xenos64.exe' }"
-  if not exist "%/Downloads%\Xenos64.exe" (
-  echo "Error: ¥ ã¤ «®áì áª ç âì ä ©« Xenos64.exe. à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì ááë«ª¨ ­  ä ©« ¢ ª®¤¥."
+  powershell -command "& { Invoke-WebRequest -Uri '%Xenos64Url%' -OutFile '%/Downloads%\%name_Xenos%' }"
+  if not exist "%/Downloads%\%name_Xenos%" (
+  echo "Error: ¥ ã¤ «®áì áª ç âì ä ©« %name_Xenos%. à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì ááë«ª¨ ­  ä ©« ¢ ª®¤¥."
   ) else (
     cls
     echo "Xenos64 Injector downloaded successfully. "
 	@echo.
-	echo "File Location: %/Downloads%\Xenos64.exe"
+	echo "File Location: %/Downloads%\%name_Xenos%"
 	timeout /t 1 /nobreak >nul )
 	goto quest_start_Xenos_RU
 	)
 
 :quest_start_Xenos_RU
 cls
-set /p yn=•®â¨â¥ § ¯ãáâ¨âì ¯à®£à ¬¬ã-¨­¦¥ªâ®à Xenos64.exe? (Y/N): 
+set /p yn=•®â¨â¥ § ¯ãáâ¨âì ¯à®£à ¬¬ã-¨­¦¥ªâ®à %name_Xenos%? (Y/N): 
 if /i "%yn%"=="y" (
 goto start_Xenos_RU
 ) else (
@@ -1074,17 +1374,16 @@ goto menu_RU )
 
 :choice_addons_RU
 cls
-echo ------------------------------------------------------------------
-echo 	Download addons (to /scripts)
-echo ------------------------------------------------------------------
-echo Choose addon:
-echo 1. Extras-Addon
-echo 2. Ultimate-Menu
-echo 3. Back to Main Menu
-echo ------------------------------------------------------------------
-echo 4. Open YimMenu/scripts folder
-
-echo More addons may be added in the future!
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º  ‚ë¡¥à¨â¥ áªà¨¯â- ¤¤®­ ¤«ï ãáâ ­®¢ª¨. (to /scripts)  º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+echo ³ [1]  Extras-Addon                                    1 ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³ [2]  Ultimate-Menu                                   2 ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+echo [3]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
+echo ----------------------------------------------------------
+echo [4] ß Žâªàëâì ¯ ¯ªã /scripts. ’ ¬ áªà¨¯âë-¤®¯®«­¥­¨ï.
 
 choice /c 1234 /n
  if errorlevel 4 goto open_scripts_folder_RU
@@ -1095,70 +1394,153 @@ choice /c 1234 /n
 
 :optional_downloads_RU
 cls
-echo ------------------------------------------------------------------
-echo 	Optional Downloads
-echo ------------------------------------------------------------------
-echo Choose an option:
-echo 1. Get XML Maps/Vehicles (Opens in Browser)
-echo 2. Download Animations Dictionary (To YimMenu Root Folder)
-echo 3. Settings_4_Yim options ( custom settings, maybe you like that )
-echo 4. Back to Main Menu
-echo ------------------------------------------------------------------
-echo 5. Open YimMenu/scripts folder
-
-echo More optional downloads may be added in the future!
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º          §«¨ç­ë¥ ¯«îèª¨                             º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+echo ³ 1  Get XML Maps/Vehicles (Opens in Browser)          1 ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³ 2  Download Animations Dictionary (Yim root folder)  2 ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³ 3  “¯à ¢«¥­¨¥ ­ áâà®©ª ¬¨ YimMenu (settings.json)    3 ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+echo [4]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
+echo ----------------------------------------------------------
+echo [5] ß Žâªàëâì ¯ ¯ªã /YimMenu. Š®à­¥¢ ï ¯ ¯ª  ç¨â-¬¥­î.
 
 choice /c 12345 /n
- if errorlevel 5 goto open_scripts_folder_RU
+ if errorlevel 5 goto open_YimMenu_folder_RU
  if errorlevel 4 goto menu_RU
  if errorlevel 3 goto choice_settings_RU
  if errorlevel 2 goto download_animDictsCompact_RU
  if errorlevel 1 goto download_XML_Maps_RU
 
 :download_XML_Maps_RU
-echo Opening MagicModz89's MEGA drive in a browser window...
+cls
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ Žâªàëâ¨¥ ááë«ª¨ MagicModz89's MEGA ¢ ¡à ã§¥à¥...                  ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+timeout /t 1 /nobreak >nul
 start "XML Maps" "%XML_mapsUrl%"
 
 :: cscript //nologo BringToFront.vbs
-
-echo To use these, download the file as zip and extract the corresponding contents to %/YimMenu%\xml_maps and xml_vehicles
-echo Returning to Optional Downloads Menu
-timeout /t 5 /nobreak >nul
-goto optional_downloads_RU
+:xml_info
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ —â®¡ë ¨á¯®«ì§®¢ âì ¨å, § £àã§¨â¥ ä ©« ¢ ä®à¬ â¥ zip               ³
+echo ³  ¨ ¨§¢«¥ª¨â¥ á®®â¢¥âáâ¢ãîé¥¥ á®¤¥à¦¨¬®¥ ¯® ¯ãâ¨:                  ³
+echo ³-------------------------------------------------------------------³
+echo ³  %/YimMenu%\xml_maps and xml_vehicles ³ 
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+echo ---------------------------------------------------------------------
+echo [1]  ‚ë©â¨ ¢ ¬¥­î ¤®¯ ¯«îè¥ª.
+echo [2] ß Žâªàëâì ¯ ¯ªã /xml_maps and xml_vehicles.
+choice /c 12 /n
+ if errorlevel 2 goto open_xml_folder_RU
+ if errorlevel 1 goto optional_downloads_RU
+ 
 
 :download_animDictsCompact_RU
 cls
-echo ------------------------------------------------------------------
-echo 	Downloading Animations Dictionary from the repository
-echo ------------------------------------------------------------------
-echo "Checking to see if there is an existing version of animDictsCompact.json"
-del "%/YimMenu%\animDictsCompact.json" >nul 2>&1
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º    ‡ £àã§ª  ¡ §ë ¤ ­­ëå  ­¨¬ æ¨© ¨§ à¥¯®§¨â®à¨ï      º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+timeout /t 1 /nobreak >nul
+echo ³ “¤ «¥­¨¥ áâ àëå OLD ¡¥ª ¯®¢...                       ° ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+timeout /t 1 /nobreak >nul
+del "%/YimMenu%\%name_animDictsCompact%.old" >nul 2>&1
 
-echo "Downloading new version of animDictsCompact.json from the repository..."
-	
-	powershell -command "& { Invoke-WebRequest -Uri '%animDictsCompactUrl%' -OutFile '%/YimMenu%/animDictsCompact.json' }"
+if exist "%/YimMenu%\%name_animDictsCompact%" (
 
-if not exist "%/YimMenu%/animDictsCompact.json" (
-		echo "Error: Failed to download Animations. Check the internet connection or the source URL."
-	) else (
-	    cls
-		echo "Extras Addon downloaded successfully. "
-		echo "File Location: %/YimMenu%/animDictsCompact.json"
-		echo "Returning to the main menu in 5 seconds."
-	)
+  echo ³ Ž¡­ àã¦¥­ animDictsCompact. ‘®§¤ ­¨¥ ­®¢®£® ¡¥ª ¯ ...  ³
+  echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+  timeout /t 2 /nobreak >nul
+  rename "%/YimMenu%\%name_animDictsCompact%" %name_animDictsCompact%.old
+
+  echo ³ ¥ª ¯ á®§¤ ­. ‡ £àã§ª  animDictsCompact...             ³
+  echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+  
+powershell -command "& { Invoke-WebRequest -Uri '%animDictsCompactUrl%' -OutFile '%/YimMenu%/%name_animDictsCompact%' }"
+
+) else (
+
+echo ³ animDictsCompact ­¥ ®¡­ àã¦¥­.   —¨áâ ï ãáâ ­®¢ª ...  ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+	  
+del "%/YimMenu%\%name_animDictsCompact%" >nul 2>&1
+
+powershell -command "& { Invoke-WebRequest -Uri '%animDictsCompactUrl%' -OutFile '%/YimMenu%/%name_animDictsCompact%' }"
+
+timeout /t 3 /nobreak >nul )
+
+if exist "%/YimMenu%\%name_animDictsCompact%" (
+
+timeout /t 1 /nobreak >nul
+echo ³ animDictsCompact ãá¯¥è­® § £àã¦¥­.                    ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+	             
+timeout /t 1 /nobreak >nul
+echo ³  “¤ «¥­¨¥ ¡¥ª ¯ ...                                    ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+
+timeout /t 1 /nobreak >nul
+del "%/YimMenu%\%name_animDictsCompact%.old" >nul 2>&1
+				 
+				 
+echo º  §  ¤ ­­ëå  ­¨¬ æ¨© ãá¯¥è­® ãáâ ­®¢«¥­ .             º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+@echo.
+timeout /t 1 /nobreak >nul
+echo ----------------------------------------------------------
+echo "ƒ¤¥ ä ©«?  ’ãâ: %/YimMenu%/%name_animDictsCompact%"
+echo ----------------------------------------------------------
+echo  ‚ëå®¤ ¢ ¬¥­î ¤®¯ ¯«îè¥ª ç¥à¥§ 5 á¥ª...
 timeout /t 5 /nobreak >nul
 cls
 goto optional_downloads_RU
+
+) else (
+
+    echo ³ ! ERROR: ¥ ã¤ «®áì áª ç âì animDictsCompact         ! ³
+    echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+
+    timeout /t 2 /nobreak >nul	
+	echo ³ ! ‚®ááâ ­®¢«¥­¨¥ ¡¥ª ¯ ...                           ! ³
+    echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+    timeout /t 1 /nobreak >nul
+    del "%/YimMenu%\%name_animDictsCompact%" >nul 2>&1
+    rename "%/YimMenu%\%name_animDictsCompact%.old" %name_animDictsCompact%
+
+    @echo.
+    echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+    echo º !                     ‚ˆŒ€ˆ…                       ! º
+    echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+    echo º  ¥ª ¯ ¢®ááâ ­®¢«¥­. ‡ £àã§ª  ­®¢ëå ä ©«®¢ … “„€‹€‘œ  º
+    echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+	@echo.
+    echo ----------------------------------------------------------
+    echo à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì 
+    echo  ááë«ª¨ ­  ä ©« ¢ ª®¤¥.
+    echo ----------------------------------------------------------
+    echo [1]  ‚ë©â¨ ¢ ¬¥­î ¤®¯ ¯«îè¥ª
+	choice /c 1 /n
+    if errorlevel 1 goto menu_RU 
+	)
+
 
 :choice_settings_RU
 
 cls
-echo ------------------------------------------------------------------
-echo 	     YimMenu's Settings.json options
-echo ------------------------------------------------------------------
-echo 1. Import custom settings ( my settings, maybe you like that )
-echo 2. Restore settings ( restore your settings after custom )
-choice /c 12 /n
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º    “¯à ¢«¥­¨¥ ­ áâà®©ª ¬¨ YimMenu (Settings.json)    º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+echo ³ [1] “áâ ­®¢¨âì ª áâ®¬­ë¥ ­ áâà®©ª¨ ®â  ¢â®à  YimTools  ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³ [2] ‚®ááâ ­®¢¨âì á¢®¨ à ­¥¥ áãé¥áâ¢®¢ ¢è¨¥ ­ áâà®©ª¨   ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+echo [3]  ‚ë©â¨ ¢ ¬¥­î ¤®¯ ¯«îè¥ª.
+
+choice /c 123 /n
+ if errorlevel 3 goto optional_downloads_RU
  if errorlevel 2 goto restore_settings_RU
  if errorlevel 1 goto import_settings_RU
 
@@ -1170,27 +1552,27 @@ echo 	Š áâ®¬­ë¥ ­ áâà®©ª¨ settings.json ¤«ï ç¨â ¬¥­î YimMenu
 echo ------------------------------------------------------------------
 echo " à®¢¥àª  ­ «¨ç¨ï ã¦¥ áãé¥áâ¢ãîé¥£® ä ©«  ­ áâà®¥ª... "
 
-if exist "%/YimMenu%/settings.json" (
+if exist "%/YimMenu%/%name_YimMenu-settings%" (
 
 echo "¥ª ¯ ã¦¥ áãé¥áâ¢ãîé¨å ­ áâà®¥ª settings.json ..."
 timeout /t 2 /nobreak >nul
-rename "%/YimMenu%\settings.json" settings.json.old
+rename "%/YimMenu%\%name_YimMenu-settings%" %name_YimMenu-settings%.old
 timeout /t 1 /nobreak >nul
 goto dwn_settings_noexist
 ) else (
 :dwn_settings_noexist
 echo "“áâ ­®¢ª  ª áâ®¬­®£® settings.json ®â  ¢â®à  YimTools..."
 timeout /t 1 /nobreak >nul
-del "%/YimMenu%\settings.json" >nul 2>&1
+del "%/YimMenu%\%name_YimMenu-settings%" >nul 2>&1
 
-powershell -command "& { Invoke-WebRequest -Uri '%settingsUrl%' -OutFile '%/YimMenu%/settings.json' }"
+powershell -command "& { Invoke-WebRequest -Uri '%settingsUrl%' -OutFile '%/YimMenu%/%name_YimMenu-settings%' }"
 
-if not exist "%/YimMenu%/settings.json" (
-		echo "Error: ¥ ã¤ «®áì áª ç âì ä ©« settings.json. à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì ááë«ª¨ ­  ä ©« ¢ ª®¤¥."
+if not exist "%/YimMenu%/%name_YimMenu-settings%" (
+		echo "Error: ¥ ã¤ «®áì áª ç âì ä ©« %name_YimMenu-settings%. à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì ááë«ª¨ ­  ä ©« ¢ ª®¤¥."
 	) else (
 	    cls
 		echo "Š áâ®¬­ë¥ ­ áâà®©ª¨ ãá¯¥è­® ãáâ ­®¢«¥­ë. "
-		echo "ƒ¤¥ ä ©«? ’ãâ: %/YimMenu%/settigs.json"
+		echo "ƒ¤¥ ä ©«? ’ãâ: %/YimMenu%/%name_YimMenu-settings%"
 		echo "Returning to the main menu in 5 seconds." )
 timeout /t 5 /nobreak >nul
 cls
@@ -1203,17 +1585,17 @@ echo 	‚®áâ ­®¢«¥­¨¥ ­ áâà®¥ª settings.json ¤«ï ç¨â ¬¥­î YimMenu
 echo ------------------------------------------------------------------
 echo " à®¢¥àª  ­ «¨ç¨ï ¡¥ª ¯  ä ©«  settigs.json... "
 timeout /t 2 /nobreak >nul
-if exist "%/YimMenu%/settings.json.old" (
+if exist "%/YimMenu%/%name_YimMenu-settings%.old" (
 echo " ‚ë¯®«­ï¥âáï ¢®ááâ ­®¢«¥­¨¥ ä ©«  settigs.json... "
 timeout /t 1 /nobreak >nul
-del "%/YimMenu%\settings.json" >nul 2>&1
-rename "%/YimMenu%\settings.json.old" settings.json
-echo " ‚®ááâ ­®¢«¥­¨¥ ä ©«  settigs.json ¯à®è«® “‘…˜Ž "
+del "%/YimMenu%\%name_YimMenu-settings%" >nul 2>&1
+rename "%/YimMenu%\%name_YimMenu-settings%.old" %name_YimMenu-settings%
+echo " ‚®ááâ ­®¢«¥­¨¥ ä ©«  %name_YimMenu-settings% ¯à®è«® “‘…˜Ž "
 timeout /t 2 /nobreak >nul
 goto menu_RU
 ) else (
 cls
-echo " íª ¯ ä ©«  settings.json … €‰„… "
+echo " íª ¯ ä ©«  %name_YimMenu-settings% … €‰„… "
 timeout /t 3 /nobreak >nul
 goto menu_RU )
 
@@ -1224,6 +1606,16 @@ goto menu_RU )
 :open_scripts_folder_RU
 start %/Scripts%
 goto choice_addons_RU
+
+:open_YimMenu_folder_RU
+start %/YimMenu%
+goto optional_downloads_RU
+
+:open_xml_folder_RU
+start %/YimMenu%\xml_maps
+start %/YimMenu%\xml_vehicles
+cls
+goto xml_info
 
 :restart_RU
 echo "‡ ¯ãáª ­®¢®© ¢¥àá¨¨ YimTools ..."
@@ -1236,14 +1628,14 @@ exit
 cls
 echo ‡ ¯ãáª ¯à®£à ¬¬ë-¨­¦¥ªâ®à  Xenos ...
 timeout /t 2 /nobreak >nul
-start "" %/Downloads%\Xenos64.exe
+start "" %/Downloads%\%name_Xenos%
 :: start Xenos64.exe
 exit
 
 :start_instructions_Xenos
 cls
 echo § ¯ãáª â¥ªáâ®¢®© ¨­áâàãªæ¨¨ ¨­¦¥ªâ  YimMenu
-start "" %/Downloads%\instructions_Xenos.txt
+start "" %/Downloads%\%name_Xenos-instructions%
 exit
 
 :start_FateInjector_RU
@@ -1251,7 +1643,7 @@ exit
 cls
 echo ‡ ¯ãáª ¯à®£à ¬¬ë-¨­¦¥ªâ®à  FateInjector ...
 timeout /t 2 /nobreak >nul
-start "" %/Downloads%\FateInjector.exe
+start "" %/Downloads%\%name_FateInjector%
 :: FateInjector.exe
 exit
 
@@ -1263,9 +1655,12 @@ timeout /t 2 /nobreak >nul
 goto menu_RU
 
 :goodbye_RU
-echo "‘¯ á¨¡® §  ¨á¯®«ì§®¢ ­¨¥ YimTools "
-echo "à¨ïâ­®© ¨£àë!"
-timeout /t 3 /nobreak >nul
+cls
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ ~        ‘¯ á¨¡® §  ¨á¯®«ì§®¢ ­¨¥ YimTools,       ~ ³
+echo ³ ~                à¨ïâ­®© ¨£àë!                   ~ ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+timeout /t 2 /nobreak >nul
 exit
 
 :exit_RU
@@ -1274,66 +1669,11 @@ exit /b
 
 
 :auto_mode_RU
-
 cls
-echo test auto_mode_RU
-timeout /t 1 /nobreak >nul
-
-cls
+goto menu_RU
 :: ------------- YimMenu -------------------------------
 
-echo ------------------------------------------------------------------
-echo 	YimMenu.dll
-echo ------------------------------------------------------------------
-echo "Deleting old YimMenu.dll "
-del "%/Downloads%\YimMenu.dll" >nul 2>&1
-cls
-echo "Downloading new version of YimMenu.dll from the repository..."
-powershell -command "& { Invoke-WebRequest -Uri '%YimMenuUrl%' -OutFile '%/Downloads%\YimMenu_3179.dll' }"
 
-if exist "%/Downloads%\YimMenu_3179.dll" (
- cls
- echo "YimMenu downloaded successfully. "
- echo "ƒ¤¥ ä ©«?   ’ãâ: %/Downloads%\YimMenu_3179.dll"
- timeout /t 2 /nobreak >nul
 
 :: ------------- Xenos64 -------------------------------
 
- echo ------------------------------------------------------------------
- echo 	Xenos64.exe
- echo ------------------------------------------------------------------
-
- echo " à®¢¥àª  ­ «¨ç¨ï Xenos64.exe ¢ ¯ ¯ª¥ ‡ £àã§ª¨ ¨«¨ ­  à ¡®ç¥¬ áâ®«¥ ..."
- timeout /t 1 /nobreak >nul
- cls
-
- if exist "%/Downloads%\Xenos64.exe" (
-  echo "  ©¤¥­ Xenos64, ‚ ¬ ­¥ ­ã¦­® áª ç¨¢ âì ¥£® á­®¢ ."
-  timeout /t 2 /nobreak >nul
-  goto start_Xenos_RU
- ) else (
-   echo "‡ £àã§ª  Xenos64 ..."
-   powershell -command "& { Invoke-WebRequest -Uri '%Xenos64Url%' -OutFile '%/Downloads%\Xenos64.exe' }"
-   powershell -command "& { Invoke-WebRequest -Uri '%YimMenu_instructionstxtUrl%' -OutFile '%/Downloads%\instructions_Xenos.txt' }"
-   if not exist "%/Downloads%\Xenos64.exe" (
-    echo "Error: ¥ ã¤ «®áì áª ç âì ä ©« Xenos64.exe. à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì ááë«ª¨ ­  ä ©« ¢ ª®¤¥."
-   ) else (
-     cls
-     echo "Xenos64 § £àã¦¥­ ãá¯¥è­®. "
-	 @echo.
-	 echo "File Location: %/Downloads%\Xenos64.exe"
-	 timeout /t 1 /nobreak >nul )
-	 cls
-     echo ‡ ¯ãáª ¯à®£à ¬¬ë-¨­¦¥ªâ®à  Xenos ...
-     timeout /t 2 /nobreak >nul
-     start "" %/Downloads%\Xenos64.exe
-	 timeout /t 2 /nobreak >nul
-	 cls
-	 echo § ¯ãáª â¥ªáâ®¢®© ¨­áâàãªæ¨¨ ¨­¦¥ªâ  YimMenu
-	 start "" %/Downloads%\instructions_Xenos.txt
-	 exit
-	   )
-) else (  
-  echo "Error: Failed to download YimMenu. Check the internet connection or the source URL."
-  timeout /t 2 /nobreak >nul
-  goto menu_RU )
