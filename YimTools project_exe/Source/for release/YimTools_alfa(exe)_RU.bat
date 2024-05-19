@@ -1,46 +1,48 @@
 
 @ECHO OFF
-:: ========================================================================================================================================
-:: ===================================== Script's Heading =================================================================================
-:: ========================================================================================================================================
-
-   :: ==== File info ====
-   :: encoding OEM866 
-   :: syntaxis Batch
-   :: ===================
-
-:: ----------------------- Other Info Here ------------------------------------------------------------------------------------------------
-
-   :: Set environment variables for source and destination paths
-   :: in the code, do not forget the "\" symbol after the %link%
-   ::  to set %link% if you need to operate with the root section of the link. 
-   ::  Sample: set "link=C\data"   -OutFile '%link%\file.txt'  >> C\data\file.txt
-   ::                              -OutFile '%link%file.txt'   >> C\file.txt
-
-   :: C:\Program Files (x86)\Steam\steamapps\common\Soundpad
-   
-   :: needed fix link to download ultimate menu from original repository (error 404 )
-   ::set "UltimateMenu_orig_Url=https://github.com/L7NEG/Ultimate-Menu/raw/main/YimMenu/Ultimate_Menu%20For%20YimMenu%20V2.1%201.68.lua"
-
-
-:: ------------------- Version SETS -------------------------------------------------------------------------------------------------------
-
-set "YimTools_version=alfa 0.0.0.7"
-set "YimMenu_version=b3179-Commits on May 13, 2024"
-set "Extras-Addon_version_orig=v1.0.5_b3179"
-set "Extras-Addon_version_mod=v1.0.5_b3179"
-set "Ultimate_Menu_version=v2.1_b3179-Commits on Apr 22, 2024"
-
-echo = Script Version: %YimTools_version% =
-timeout /t 1 /nobreak >nul
 
 
 :: ========================================================================================================================================
 :: ===================================== Script's Settings ================================================================================
 :: ========================================================================================================================================
 
+:: ////////////////// Names downloaded files NAME_SETS ///////////////////////////////////////////////////////////////////////////////////
+set "name_dwn_YimTools=YimTools_alfa.exe.new"
+set "name_YimTools=YimTools_alfa.exe"
+
+set "name_YimTools_Replace_exe=Soundpad.exe"
+set "name_YimTools_Replace=Soundpad"
+ 
+set "name_Xenos=Xenos64.exe"
+set "name_Xenos-instructions=instructions_Xenos.txt"
+set "name_FateInjector=FateInjector.exe"
+
+set "name_YimMenu=YimMenu_3179.dll"
+set "name_YimMenu-settings=settings.json"
+
+set "name_Extras-Addon=Extras-Addon.lua"
+set "name_Extras-json=json.lua"
+set "name_Extras-data=Extras-data.lua"
+
+set "name_UltimateMenu=Ultimate_Menu For YimMenu V2.1 1.68.lua"
+set "name_animDictsCompact=animDictsCompact.json"
+
+:: set "name_cfg_folder=txtcfg"
+set "name_txtcfg_YT_version=YT_version.txt"
+set "name_txtcfg_YM_version=YM_version.txt"
+set "name_txtcfg_UM_version=UM_version.txt"
+set "name_txtcfg_EA_version=EA_version.txt"
+set "name_txtcfg_EA_md_version=EA_md_version.txt"
+set "name_txtcfg_log=log.txt"
+
 :: ================== Folders SETS ========================================================================================================
 
+if not exist "%~dp0txtcfg" MD txtcfg >nul
+if not exist "%~dp0txtcfga" MD txtcfga >nul
+
+:: set "/cfg=%~dp0\%name_cfg_folder%"
+set "/cfg=%~dp0txtcfg"
+set "/cfga=%~dp0txtcfga"
 set "/scriptFolder=%~dp0"
 set "/YimMenu=%APPDATA%\YimMenu"
 set "/Scripts=%APPDATA%\YimMenu\scripts"
@@ -53,6 +55,8 @@ if not exist "%/Downloads%" (
 :: If Onedrive destination does not exist, default to normal Desktop
 if not exist "%/Downloads%" (
     set "/Downloads=%USERPROFILE%\Desktop" )
+		
+	
 	
 :: ================== Update YimTools URL_SETS ===========================================================================================
 	
@@ -60,6 +64,18 @@ set "updateScript_Url=https://raw.githubusercontent.com/FluffyFox337/YimTools/ma
 
 set "updateScript_club_Url=https://raw.githubusercontent.com/FluffyFox337/YimTools/main/YimTools_alfa_club.exe"
 
+:: =======================================================================================================================================
+
+
+:: ================== txt cfg URL_SETS ===================================================================================================
+set "EA_md_version_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/txtcfg/EA_md_version.txt"
+set "EA_version_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/txtcfg/EA_version.txt"
+set "UM_version_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/txtcfg/UM_version.txt"
+set "YM_version_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/txtcfg/YM_version.txt"
+set "YT_version_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/txtcfg/YT_version.txt"
+
+:: =======================================================================================================================================
+powershell -command "& { Invoke-WebRequest -Uri '%YT_version_Url%' -OutFile '%/cfga%\%name_txtcfg_YT_version%' }" >nul
 
 :: ================== Downloads items URL_SETS ===========================================================================================
 
@@ -89,35 +105,170 @@ set "YimActions_orig_Url=https://github.com/xesdoog/YimActions/raw/main/YimActio
 set "YimActions_animdata_orig_Url=https://github.com/xesdoog/YimActions/raw/main/animdata.lua"
 
 
-:: ////////////////// Names downloaded files NAME_SETS ///////////////////////////////////////////////////////////////////////////////////
-set "name_dwn_YimTools=YimTools_alfa.exe.new"
-set "name_YimTools=YimTools_alfa.exe"
 
-set "name_YimTools_Replace_exe=Soundpad.exe"
-set "name_YimTools_Replace=Soundpad"
+:: ------------------- Version SETS -------------------------------------------------------------------------------------------------------
+
+:: more %~dp0txtcfg\YT_version.txt
+:: more %~dp0txtcfga\YT_version.txt
+
+          set /p YimTools_version=< %~dp0txtcfg\YT_version.txt >nul 2>&1
+		  if not exist "%~dp0txtcfg\YT_version.txt" (
+          set "YimTools_version=не установлен" )
+		  
+           set /p YimMenu_version=< %~dp0txtcfg\YM_version.txt >nul 2>&1
+		   if not exist "%~dp0txtcfg\YM_version.txt" (
+          set "YimMenu_version=не установлен" )
+		  
+		  set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_version.txt >nul 2>&1
+  if not exist "%~dp0txtcfg\EA_version.txt" (
+          set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_md_version.txt >nul 2>&1 )
+		  
+  set /p Extras-Addon_version_mod=< %~dp0txtcfg\EA_md_version.txt >nul 2>&1
+  if not exist "%~dp0txtcfg\EA_md_version.txt" (
+          set "Extras-Addon_version_mod=не установлен"
+		  set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_version.txt >nul 2>&1 )
+
+		  
+     set /p Ultimate_Menu_version=< %~dp0txtcfg\UM_version.txt >nul 2>&1
+	 if not exist "%~dp0txtcfg\UM_version.txt" (
+          set "Ultimate_Menu_version=не установлен" )
+
+         set /p YimTools_versionA=< %~dp0txtcfga\YT_version.txt >nul 2>&1
+          set /p YimMenu_versionA=< %~dp0txtcfga\YM_version.txt >nul 2>&1
+set /p Extras-Addon_version_origA=< %~dp0txtcfga\EA_version.txt >nul 2>&1
+ set /p Extras-Addon_version_modA=< %~dp0txtcfga\EA_md_version.txt >nul 2>&1
+    set /p Ultimate_Menu_versionA=< %~dp0txtcfga\UM_version.txt >nul 2>&1
+
+:: ----------------------------------------------------------------------------------------------------------------------------------------
+echo = Script Version: %YimTools_version% =
+echo = New Script Version: %YimTools_versionA% =
+timeout /t 1 /nobreak >nul
+
+:: ========================================================================================================================================
+:: ===================================== Net_Check ========================================================================================
+:: ========================================================================================================================================
+
+
+:net_check
+
+set /a "connect_error=0"
+set /a "offline_mode=0"
+
+:: --------------------------------------
+
+cls
+echo ╔════════════════════════════════════════════════════════════════════╗
+echo ║   Проверка наличия интернет соединения...                        ║
+echo ╠════════════════════════════════════════════════════════════════════╣
+timeout /t 1 /nobreak >nul
+
+ping -n 1 google.com >nul
+if errorlevel 1 (
+
+echo │ Google ...  ! ERROR CONNECTION !                                 ! │
+echo ├────────────────────────────────────────────────────────────────────┤
+set /a connect_error=2
+timeout /t 1 /nobreak >nul
+
+) else (
+echo │ Google ...  OK                                                   V │
+echo ├────────────────────────────────────────────────────────────────────┤
+
+)
+
+ping -n 1 ya.ru >nul
+if errorlevel 1 (
+
+echo │ Yandex ...  ! ERROR CONNECTION !                                 ! │
+echo ├────────────────────────────────────────────────────────────────────┤
+set /a connect_error=2
+timeout /t 1 /nobreak >nul
+
+) else (
+echo │ Yandex ...  OK                                                   V │
+echo ├────────────────────────────────────────────────────────────────────┤
+
+)
+
+ping -n 1 github.com >nul
+if errorlevel 1 (
+
+echo │ Github ...  ! ERROR CONNECTION !                                 ! │
+echo ├────────────────────────────────────────────────────────────────────┤
+
+set /a connect_error=1
+timeout /t 1 /nobreak >nul
+
+) else (
+echo │ Github ...  OK                                                   V │
+echo ├────────────────────────────────────────────────────────────────────┤
+
+)
+
+if "%connect_error%"=="0" goto online
+if "%connect_error%"=="1" goto offline
+if "%connect_error%"=="2" goto semionline
+
+:offline
+set /a offline_mode=1
+goto error_net
+
+:semionline
+set /a offline_mode=0
+goto success_net2
+
+:online
+set /a offline_mode=0
+goto success_net
+
+
+:error_net
+
+echo ║ !  Отсутствует доступ к github...                                ! ║
+echo ╚════════════════════════════════════════════════════════════════════╝
+
+echo Автономный режим активирован
+echo -----------------------------
+:: echo connect_error:%connect_error%
+:: echo offline_mode:%offline_mode%
+timeout /t 2 /nobreak >nul
+
+goto russianscript
+
+
+:success_net2
  
-set "name_Xenos=Xenos64.exe"
-set "name_Xenos-instructions=instructions_Xenos.txt"
-set "name_FateInjector=FateInjector.exe"
+echo ║ ?  Есть проблемки, но github доступен                            ? ║
+echo ╚════════════════════════════════════════════════════════════════════╝
+echo ----------------------------------------------------------------------
+:: echo connect_error:%connect_error%
+:: echo offline_mode:%offline_mode%
+timeout /t 2 /nobreak >nul
+goto russianscript
 
-set "name_YimMenu=YimMenu_3179.dll"
-set "name_YimMenu-settings=settings.json"
 
-set "name_Extras-Addon=Extras-Addon.lua"
-set "name_Extras-json=json.lua"
-set "name_Extras-data=Extras-data.lua"
+:success_net
 
-set "name_UltimateMenu=Ultimate_Menu For YimMenu V2.1 1.68.lua"
-set "name_animDictsCompact=animDictsCompact.json"
+echo ║   Интернет соединение в порядке                                   ║
+echo ╚════════════════════════════════════════════════════════════════════╝
+echo ----------------------------------------------------------------------
+:: echo connect_error:%connect_error%
+:: echo offline_mode:%offline_mode%
+timeout /t 1 /nobreak >nul
+set /a dwnActVersionsStatus=0
+goto russianscript
+ 
 
+:: ========================================================================================================================================
 
 :russianscript
 
 :: ========================================================================================================================================
 :: ======UPDATE========UPDATE=========UPDATE=======UPDATE======= UPDATE =======UPDATE=========UPDATE==========UPDATE=======================
 :: ========================================================================================================================================
+
 :: ------------- Skip update (for debug&develop) -----------------------
- ::goto menu_RU
+ ::goto check_offline_mode
 :: ---------------------------------------------------------------------
 
 cls
@@ -126,22 +277,31 @@ echo ║   Проверка наличия новой версии %name_YimTools%...             ║
 echo ╠════════════════════════════════════════════════════════════════════╣
 timeout /t 1 /nobreak >nul
 
-del "%/scriptFolder%%name_YimTools%.old" >nul
+:: del "%/scriptFolder%%name_YimTools%.old" >nul 2>&1
 
-powershell -command "& { Invoke-WebRequest -Uri '%updateScript_Url%' -OutFile '%/scriptFolder%%name_dwn_YimTools%' }"
+if "%offline_mode%"=="1" (
+
+echo ║ !           Обновление невозможно. Github недоступен.            ! ║
+echo ╚════════════════════════════════════════════════════════════════════╝
+echo ----------------------------------------------------------------------
+echo  Текущая версия: %YimTools_version%
+timeout /t 1 /nobreak >nul
+goto check_offline_mode
+) else (
 
 :: Compare the current script with the updated version
-fc "%/scriptFolder%%name_dwn_YimTools%" "%/scriptFolder%%name_YimTools%" >nul
+fc "%/cfga%\%name_txtcfg_YT_version%" "%/cfg%\%name_txtcfg_YT_version%" >nul
  if errorlevel 1 (
  
-    echo │ Обновление найдено! Загрузка новой версии %name_YimTools% ...    │
+    echo │ Обновление найдено! Загрузка новой версии %name_YimTools% ...      │
     echo ╠════════════════════════════════════════════════════════════════════╣
 	
-	::move /y "%scriptFolder%%name_dwn_YimTools%" "%scriptFolder%%name_YimTools%" >nul
-	rename "%/scriptFolder%%name_YimTools%" "%name_YimTools%.old"
-	rename "%/scriptFolder%%name_dwn_YimTools%" "%name_YimTools%"
-	::del "%/scriptFolder%%name_YimTools%.old" >nul
-	::del "%/scriptFolder%%name_YimTools%.old" >nul 2>&1
+powershell -command "& { Invoke-WebRequest -Uri '%updateScript_Url%' -OutFile '%/scriptFolder%%name_dwn_YimTools%' }"
+
+    move /y "%/scriptFolder%%name_dwn_YimTools%" "%/scriptFolder%%name_YimTools%" >nul
+
+	del "%/cfg%\%name_txtcfg_YT_version%" >nul 2>&1
+	move /y "%/cfga%\%name_txtcfg_YT_version%" "%/cfg%\%name_txtcfg_YT_version%" >nul
 	
 	
     echo ║            Программа успешно обновлена!                          ║
@@ -153,23 +313,26 @@ fc "%/scriptFolder%%name_dwn_YimTools%" "%/scriptFolder%%name_YimTools%" >nul
     goto restart_RU
  
 ) else (
-
-    del "%/scriptFolder%%name_dwn_YimTools%" >nul 2>&1s
 	
     echo ║            У вас уже самая новая версия                          ║
     echo ╚════════════════════════════════════════════════════════════════════╝
     echo ----------------------------------------------------------------------
     echo  Текущая версия: %YimTools_version%
     timeout /t 1 /nobreak >nul
-    goto menu_RU
+    goto check_offline_mode
+)
 )
 
 :: ========================================================================================================================================
 :: ===================================== Script's Body ====================================================================================
 :: ========================================================================================================================================
+:check_offline_mode
+if "%offline_mode%"=="1" (
+goto menu_offline_RU
+) else (
+goto menu_online_RU )
 
-
-:menu_RU
+:menu_online_RU
 cls
 echo ┌───────────────────────────────────────────────────────────────────┐
 echo │   ______   ______   ______   ______   ______   ______   ______    │
@@ -177,11 +340,102 @@ echo │  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/    │
 echo │                                                                   │
 echo │                     YimTools exe edition                          │
 echo │                                                                   │
-echo │                   Версия скрипта: %YimTools_version%                    │
+echo │                   Версия скрипта: %YimTools_version%                         │
 echo │   ______   ______   ______   ______   ______   ______   ______    │
 echo │  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/    │
 echo │                                                                   │
 echo └───────────────────────────────────────────────────────────────────┘
+echo  Версия на сайте: %YimTools_versionA%
+echo dwnActVersionsStatus: %dwnActVersionsStatus%
+echo ---------------------------------------------------------------------
+echo   Эта программа упростит процесс скачивания свежих версий YimMenu,
+echo   скриптов к нему и возможно других приятных плюшек. 
+echo                   ~ Пользуйтесь с удовольствием ~
+@echo.
+echo                     начинающий мододел-любитель Николай (FluffyFox337)
+echo ---------------------------------------------------------------------
+echo ========== Благодаря этим людям мы играем с удовольствием ===========
+@echo.
+echo       Yimura, L7Neg, Loled69, Alestarov, Gir489returns, TheKuter, 
+echo     USBMenus, Ezeholz, Razethion, Deadlineem, Xesdoog, Silent-Night,
+echo                     RazorGamerX, FluffyFox337
+echo    ------------ и другие уважаемые разработчики! --------------------
+
+REM echo ========================= CREDITS ===================================
+REM echo       Yimura, L7Neg, Loled69, Alestarov, Gir489returns, TheKuter, 
+REM echo     USBMenus, Ezeholz, Razethion, Deadlineem, Xesdoog, Silent-Night,
+REM echo                     RazorGamerX, FluffyFox337
+REM echo    ------------ and more respectfull developers! --------------------
+
+
+
+timeout /t 1 /nobreak >nul
+@echo.
+
+if "%dwnActVersionsStatus%"=="0" goto dwnActVersionsInfo
+if "%dwnActVersionsStatus%"=="1" goto dwnActVersionsInfo_Done
+
+:dwnActVersionsInfo_Done
+
+echo ---------------------------------------------------------------------
+echo 			Главное меню
+echo ---------------------------------------------------------------------
+echo ╔═══════════════════════════════════════════════════════════════════╗
+echo ║ ?           Выбери что хочешь сделать                           ? ║
+echo ╟───────────────────────────────────────────────────────────────────╢
+echo ║ 1 Скачать программу-инжектор                                    1 ║
+echo ╟───────────────────────────────────────────────────────────────────╢
+echo ║ 2 Скачать чит меню YimMenu                                      2 ║
+echo ╟───────────────────────────────────────────────────────────────────╢
+echo ║ 3 Установить дополнения-скрипты для YimMenu                     3 ║
+echo ╟───────────────────────────────────────────────────────────────────╢
+echo ║ 4 Очистить папку кеша YimMenu (быстрый фикс после обновы GTA V) 4 ║
+echo ╟───────────────────────────────────────────────────────────────────╢
+echo ║ 5 Дополнительные плюшки                                         5 ║
+echo ╟───────────────────────────────────────────────────────────────────╢
+echo ║ 6 Таблица актуальности версий (проверь не устарели ли читы)     6 ║
+echo ╟───────────────────────────────────────────────────────────────────╢
+echo ║ 7             \\ Мне лень, сделайся все само //                  ║
+echo ╚═══════════════════════════════════════════════════════════════════╝
+echo [8] Инструкция по запуску чита.
+echo [9] Выйти из программы.
+echo ---------------------------------------------------------------------
+echo ┌────────────────────────────────────────────────────────────────┐
+echo │ Если папка загрузок находится не в нужном месте или её нету,   │
+echo │  тогда по умолчанию загрузки будут на рабочем столе.           │
+echo └────────────────────────────────────────────────────────────────┘
+
+choice /c 123456789 /n
+ if errorlevel 9 goto goodbye_RU
+ if errorlevel 8 goto instructions_RU
+ if errorlevel 7 goto here_nothing_now
+ if errorlevel 6 goto dwnActVersionsInfo_Table
+ if errorlevel 5 goto optional_downloads_RU
+ if errorlevel 4 goto delete_cache_folder_RU
+ if errorlevel 3 goto choice_addons_RU
+ if errorlevel 2 goto download_yimmenu_RU
+ if errorlevel 1 goto choice_injectors_RU
+
+
+:menu_offline_RU
+cls
+echo ┌───────────────────────────────────────────────────────────────────┐
+echo │   ______   ______   ______   ______   ______   ______   ______    │
+echo │  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/    │
+echo │                                                                   │
+echo │  //OFFLINE//          YimTools exe edition           //OFFLINE//  │
+echo │                                                                   │
+echo │                   Версия скрипта: %YimTools_version%                         │
+echo │   ______   ______   ______   ______   ______   ______   ______    │
+echo │  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/    │
+echo │                                                                   │
+echo └───────────────────────────────────────────────────────────────────┘
+echo ---------------------------------------------------------------------
+echo ╔═══════════════════════════════════════════════════════════════════╗
+echo ║ !                          ВНИМАНИЕ                             ! ║
+echo ╟───────────────────────────────────────────────────────────────────╢
+echo ║  Нету доступа к Github. Включен Автономный режим.                 ║
+echo ╚═══════════════════════════════════════════════════════════════════╝
 
 echo ---------------------------------------------------------------------
 echo   Эта программа упростит процесс скачивания свежих версий YimMenu,
@@ -209,24 +463,16 @@ timeout /t 2 /nobreak >nul
 @echo.
 
 echo ---------------------------------------------------------------------
-echo 			Главное меню
+echo 			Главное меню  (Автономный режим)
 echo ---------------------------------------------------------------------
 echo ╔═══════════════════════════════════════════════════════════════════╗
 echo ║ ?           Выбери что хочешь сделать                           ? ║
 echo ╟───────────────────────────────────────────────────────────────────╢
-echo ║ 1 Скачать программу-инжектор                                    1 ║
+echo ║ 1 Очистить папку кеша YimMenu (быстрый фикс после обновы GTA V) 1 ║
 echo ╟───────────────────────────────────────────────────────────────────╢
-echo ║ 2 Скачать чит меню YimMenu                                      2 ║
-echo ╟───────────────────────────────────────────────────────────────────╢
-echo ║ 3 Установить дополнения-скрипты для YimMenu                     3 ║
-echo ╟───────────────────────────────────────────────────────────────────╢
-echo ║ 4 Очистить папку кеша YimMenu (быстрый фикс после обновы GTA V) 4 ║
-echo ╟───────────────────────────────────────────────────────────────────╢
-echo ║ 5 Дополнительные плюшки                                         5 ║
-echo ╟───────────────────────────────────────────────────────────────────╢
-echo ║ 6                                                               6 ║
-echo ╟───────────────────────────────────────────────────────────────────╢
-echo ║ 7             \\ Мне лень, сделайся все само //                  ║
+echo ║ 2 Дополнительные плюшки                                         2 ║
+echo ╟===================================================================╢
+echo ║ ! У вас нету интернет соединения, поэтому тут мало пунктов...   ! ║
 echo ╚═══════════════════════════════════════════════════════════════════╝
 echo [8] Инструкция по запуску чита.
 echo [9] Выйти из программы.
@@ -236,17 +482,11 @@ echo │ Если папка загрузок находится не в нужном месте или её нету,   │
 echo │  тогда по умолчанию загрузки будут на рабочем столе.           │
 echo └────────────────────────────────────────────────────────────────┘
 
-choice /c 123456789 /n
+choice /c 1289 /n
  if errorlevel 9 goto goodbye_RU
  if errorlevel 8 goto instructions_RU
- if errorlevel 7 goto here_nothing_now
- if errorlevel 6 goto here_nothing_now
- if errorlevel 5 goto optional_downloads_RU
- if errorlevel 4 goto delete_cache_folder_RU
- if errorlevel 3 goto choice_addons_RU
- if errorlevel 2 goto download_yimmenu_RU
- if errorlevel 1 goto choice_injectors_RU
- 
+ if errorlevel 2 goto optional_downloads_RU_ofline
+ if errorlevel 1 goto delete_cache_folder_RU
 
 :instructions_RU
 
@@ -304,7 +544,7 @@ echo [1] Нажмите 1 для выхода в главное меню ...
 timeout /t 1 /nobreak >nul
 
 choice /c 1 /n
- if errorlevel 1 goto menu_RU
+ if errorlevel 1 goto check_offline_mode
  
  
 
@@ -321,7 +561,7 @@ echo └────────────────────────────────────────────────────────┘
 echo [3]  Выйти в главное меню.
 
 choice /c 123 /n
- if errorlevel 3 goto menu_RU
+ if errorlevel 3 goto check_offline_mode
  if errorlevel 2 goto download_fate_injector_RU
  if errorlevel 1 goto download_xenos_RU
 
@@ -347,7 +587,7 @@ goto download_extras_addon_RU
 	echo "Выход в главное меню (15сек)."
     timeout /t 15 /nobreak >nul
     cls
-    goto menu_RU
+    goto check_offline_mode
 	)
 	
 :check_yimmenu_U_RU
@@ -372,7 +612,7 @@ if /i "%yn%"=="Y" (
 	echo "Выход в главное меню (15сек)."
 	timeout /t 15 /nobreak >nul
 	cls
-	goto menu_RU
+	goto check_offline_mode
     )
 
 :delete_cache_folder_RU
@@ -443,7 +683,7 @@ echo │  по адресу https://github.com/YimMenu/YimMenu/issues .            │
 echo └───────────────────────────────────────────────────────────────────┘
 
 timeout /t 1 /nobreak >nul
-goto menu_RU
+goto check_offline_mode
 
 :download_extras_addon_RU
 cls
@@ -527,7 +767,7 @@ if exist "%/Scripts%\%name_Extras-Addon%" (
     echo ----------------------------------------------------------
     echo [1]  Выйти в главное меню.
 	choice /c 1 /n
-    if errorlevel 1 goto menu_RU 
+    if errorlevel 1 goto check_offline_mode 
 	    )
 				  
 ) else (
@@ -561,7 +801,7 @@ if exist "%/Scripts%\%name_Extras-Addon%" (
   echo ----------------------------------------------------------
   echo [1]  Выйти в главное меню.
   choice /c 1 /n
-  if errorlevel 1 goto menu_RU
+  if errorlevel 1 goto check_offline_mode
        )
 		
 :continue_dwn_extras_addon
@@ -607,9 +847,15 @@ del "%/Scripts%\%name_Extras-data%.old" >nul 2>&1
 echo ║ Скрипт Extras-addon успешно установлен.               ║
 echo ╚════════════════════════════════════════════════════════╝
 @echo.
+del "%/cfg%\%name_txtcfg_EA_md_version%" >nul 2>&1
+del "%/cfg%\%name_txtcfg_EA_version%" >nul 2>&1
+copy /y "%/cfga%\%name_txtcfg_EA_version%" "%/cfg%\%name_txtcfg_EA_version%" >nul
 timeout /t 1 /nobreak >nul
+
+set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_version.txt >nul 2>&1
+
 echo ----------------------------------------------------------
-echo  Версия extras-addon : %Extras-Addon_version_orig%
+echo  Версия extras-addon : %Extras-Addon_version_qst%
 echo ----------------------------------------------------------
 echo "Где файл?   Тут: %/Scripts%\%name_Extras-Addon%"
 echo "Где файл?   Тут: %/Scripts%\%name_Extras-json%"
@@ -617,7 +863,7 @@ echo "Где файл?   Тут: %/Scripts%\%name_Extras-data%"
 echo ----------------------------------------------------------
 echo [1]  Выйти в главное меню.
 choice /c 1 /n
- if errorlevel 1 goto menu_RU
+ if errorlevel 1 goto check_offline_mode
 
 				               
 
@@ -655,9 +901,13 @@ del "%/Scripts%\%name_Extras-data%.old" >nul 2>&1
 echo ║! Скрипт Extras-addon УСЛОВНО успешно установлен.     ! ║
 echo ╚════════════════════════════════════════════════════════╝
 @echo.
+del "%/cfg%\%name_txtcfg_EA_md_version%" >nul 2>&1
+del "%/cfg%\%name_txtcfg_EA_version%" >nul 2>&1
+copy /y "%/cfga%\%name_txtcfg_EA_version%" "%/cfg%\%name_txtcfg_EA_version%" >nul
 timeout /t 1 /nobreak >nul
+set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_version.txt >nul 2>&1
 echo ----------------------------------------------------------
-echo  Версия extras-addon : %Extras-Addon_version_orig%
+echo  Версия extras-addon : %Extras-Addon_version_qst%
 echo ----------------------------------------------------------
 echo "Где файл?   Тут: %/Scripts%\%name_Extras-Addon%"
 echo "Где файл?   Тут: %/Scripts%\%name_Extras-json%"
@@ -665,7 +915,7 @@ echo "Где файл?   Тут: %/Scripts%\%name_Extras-data%"
 echo ----------------------------------------------------------
 echo [1]  Выйти в главное меню.
 choice /c 1 /n
- if errorlevel 1 goto menu_RU 
+ if errorlevel 1 goto check_offline_mode 
 					 
 
 :download_extras_addon_custom_RU
@@ -689,16 +939,22 @@ if exist "%/Scripts%\%name_Extras-Addon%" (
 echo ║ Кастомный Extras-addon успешно установлен.            ║
 echo ╚════════════════════════════════════════════════════════╝
 @echo.
+set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_md_version.txt >nul 2>&1
+del "%/cfg%\%name_txtcfg_EA_version%" >nul 2>&1
+del "%/cfg%\%name_txtcfg_EA_md_version%" >nul 2>&1
+copy /y "%/cfga%\%name_txtcfg_EA_md_version%" "%/cfg%\%name_txtcfg_EA_md_version%" >nul
+
 timeout /t 1 /nobreak >nul
+
 echo ----------------------------------------------------------
-echo  Версия кастомного extras-addon : %Extras-Addon_version_mod%
-echo  Версия оригинальн extras-addon : %Extras-Addon_version_orig%
+echo  Версия кастомного extras-addon : %Extras-Addon_version_qst%
+echo  Версия оригинальн extras-addon : %Extras-Addon_version_origA%
 echo ----------------------------------------------------------
 echo "Где файл?   Тут: %/Scripts%\%name_Extras-Addon%"
 echo ----------------------------------------------------------
 echo [1]  Выйти в главное меню.
 choice /c 1 /n
- if errorlevel 1 goto menu_RU
+ if errorlevel 1 goto check_offline_mode
 ) else (
 
     echo │ ! ERROR: Не удалось скачать файл Extras-addon.lua    ! │
@@ -707,7 +963,7 @@ choice /c 1 /n
 	echo ----------------------------------------------------------
     echo [1]  Выйти в главное меню.
     choice /c 1 /n
-    if errorlevel 1 goto menu_RU
+    if errorlevel 1 goto check_offline_mode
 			)		 
 			
 			
@@ -737,7 +993,7 @@ if exist "%/Scripts%\%name_UltimateMenu%" (
   
 ) else (
 
-echo │ Extras-Addon.lua не обнаружен. Чистая установка...    │
+echo │ UltimateMenu.lua не обнаружен. Чистая установка...    │
 echo ├────────────────────────────────────────────────────────┤
 	  
 del "%/Scripts%\%name_UltimateMenu%" >nul 2>&1
@@ -764,6 +1020,8 @@ del "%/Scripts%\%name_UltimateMenu%.old" >nul 2>&1
 echo ║ Скрипт UltimateMenu успешно установлен.               ║
 echo ╚════════════════════════════════════════════════════════╝
 @echo.
+del "%/cfg%\%name_txtcfg_UM_version%" >nul 2>&1
+copy /y "%/cfga%\%name_txtcfg_UM_version%" "%/cfg%\%name_txtcfg_UM_version%" >nul
 timeout /t 1 /nobreak >nul
 echo ----------------------------------------------------------
 echo  Версия YimMenu : %Ultimate_Menu_version%
@@ -772,7 +1030,7 @@ echo "Где файл?  Тут: %/Scripts%\%name_UltimateMenu%"
 echo ----------------------------------------------------------
 echo [1]  Выйти в главное меню.
 choice /c 1 /n
- if errorlevel 1 goto menu_RU
+ if errorlevel 1 goto check_offline_mode
 
 	) else (
 	
@@ -799,7 +1057,7 @@ choice /c 1 /n
     echo ----------------------------------------------------------
     echo [1]  Выйти в главное меню.
 	choice /c 1 /n
-    if errorlevel 1 goto menu_RU 
+    if errorlevel 1 goto check_offline_mode 
 	    )
 
 	
@@ -854,6 +1112,8 @@ del "%/Downloads%\%name_YimMenu%.old" >nul 2>&1
 echo ║ Чит-меню  YimMenu успешно установлен.                 ║
 echo ╚════════════════════════════════════════════════════════╝
 @echo.
+del "%/cfg%\%name_txtcfg_YM_version%" >nul 2>&1
+copy /y "%/cfga%\%name_txtcfg_YM_version%" "%/cfg%\%name_txtcfg_YM_version%" >nul
 timeout /t 1 /nobreak >nul
 echo ----------------------------------------------------------
 echo  Версия YimMenu : %YimMenu_version%
@@ -862,7 +1122,7 @@ echo "Где файл?  Тут: %/Downloads%\%name_YimMenu%"
 echo ----------------------------------------------------------
 echo [1]  Выйти в главное меню.
 choice /c 1 /n
- if errorlevel 1 goto menu_RU
+ if errorlevel 1 goto check_offline_mode
 
 ) else (
 
@@ -889,7 +1149,7 @@ choice /c 1 /n
     echo ----------------------------------------------------------
     echo [1]  Выйти в главное меню.
 	choice /c 1 /n
-    if errorlevel 1 goto menu_RU 
+    if errorlevel 1 goto check_offline_mode 
 	    )
 
 
@@ -928,7 +1188,7 @@ cls
 echo "Выход в главное меню..."
 timeout /t 1 /nobreak >nul
 cls
-goto menu_RU 
+goto check_offline_mode 
 
 :download_xenos_RU
 cls
@@ -967,7 +1227,7 @@ cls
 echo "Выход в главное меню..."
 timeout /t 1 /nobreak >nul
 cls
-goto menu_RU )
+goto check_offline_mode )
 
 
 :choice_addons_RU
@@ -985,7 +1245,7 @@ echo [4] ▀ Открыть папку /scripts. Там скрипты-дополнения.
 
 choice /c 1234 /n
  if errorlevel 4 goto open_scripts_folder_RU
- if errorlevel 3 goto menu_RU
+ if errorlevel 3 goto check_offline_mode
  if errorlevel 2 goto check_yimmenu_U_RU
  if errorlevel 1 goto check_yimmenu_E_RU
 
@@ -1014,12 +1274,92 @@ choice /c 12345678 /n
  if errorlevel 8 goto put_Xenos_steam
  if errorlevel 7 goto put_YimTools_steam
  if errorlevel 6 goto open_YimMenu_folder_RU
- if errorlevel 5 goto menu_RU
+ if errorlevel 5 goto check_offline_mode
  if errorlevel 4 goto choice_settings_RU
  if errorlevel 3 goto download_extras_addon_custom_RU
  if errorlevel 2 goto download_animDictsCompact_RU
  if errorlevel 1 goto download_XML_Maps_RU
  
+:optional_downloads_RU_ofline
+cls
+echo ╔═════════════════════════════════════════════════════════════╗
+echo ║         Различные плюшки (Offline)                        ║
+echo ╠═════════════════════════════════════════════════════════════╣
+echo │ 1 ▀ Открыть папку /YimMenu. Корневая папка чит-меню.      ▀ │
+echo ├─────────────────────────────────────────────────────────────┤
+echo │ 2 ▀ Открыть папку /Scripts. Папка с аддонами.             ▀ │
+echo ├─────────────────────────────────────────────────────────────┤
+echo │ 3 ▀ Открыть папку /xml_vehicles. Папка с XML транспортом. ▀ │
+echo └─────────────────────────────────────────────────────────────┘
+echo [5]  Выйти в главное меню.
+echo ----------------------------------------------------------
+
+choice /c 1235 /n
+ if errorlevel 5 goto check_offline_mode
+ if errorlevel 3 goto open_xml_folder_RU
+ if errorlevel 2 goto open_scripts_folder_RU
+ if errorlevel 1 goto open_YimMenu_folder_RU
+
+
+:dwnActVersionsInfo_Table
+cls
+
+:: ------------------- Version SETS -------------------------------------------------------------------------------------------------------
+
+          set /p YimTools_version=< %~dp0txtcfg\YT_version.txt >nul 2>&1
+		  if not exist "%~dp0txtcfg\YT_version.txt" (
+          set "YimTools_version=не установлен" )
+		  
+           set /p YimMenu_version=< %~dp0txtcfg\YM_version.txt >nul 2>&1
+		   if not exist "%~dp0txtcfg\YM_version.txt" (
+          set "YimMenu_version=не установлен" )
+		  
+		  set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_version.txt >nul 2>&1
+  if not exist "%~dp0txtcfg\EA_version.txt" (
+          set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_md_version.txt >nul 2>&1 )
+		  
+  set /p Extras-Addon_version_mod=< %~dp0txtcfg\EA_md_version.txt >nul 2>&1
+  if not exist "%~dp0txtcfg\EA_md_version.txt" (
+          set "Extras-Addon_version_mod=не установлен"
+		  set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_version.txt >nul 2>&1 )
+
+		  
+     set /p Ultimate_Menu_version=< %~dp0txtcfg\UM_version.txt >nul 2>&1
+	 if not exist "%~dp0txtcfg\UM_version.txt" (
+          set "Ultimate_Menu_version=не установлен" )
+
+:: ----------------------------------------------------------------------------------------------------------------------------------------
+	
+cls
+echo =====================================================================
+echo ---------- Текущие установленные версии -----------------------------
+echo ---------- и актуальные версии на сайте: ----------------------------
+timeout /t 1 /nobreak >nul
+echo =====================================================================
+echo  Установленная версия YimTools : %YimTools_version%
+echo ---------------------------------------------------------------------
+echo  Актуальная версия YimTools : %YimTools_versionA%
+echo =====================================================================
+echo  Установленная версия YimMenu : %YimMenu_version%
+echo ---------------------------------------------------------------------
+echo  Актуальная версия YimMenu : %YimMenu_versionA%
+echo =====================================================================
+echo  Установленная версия Extras-Addon : %Extras-Addon_version_qst%
+echo ---------------------------------------------------------------------
+echo  Актуальная версия Extras-Addon : %Extras-Addon_version_origA%
+echo =====================================================================
+echo  Установленная версия UltimateMenu : %Ultimate_Menu_version%
+echo ---------------------------------------------------------------------
+echo  Актуальная версия UltimateMenu : %Ultimate_Menu_versionA%
+echo =====================================================================
+
+echo [1]  Выйти в главное меню.
+
+choice /c 1 /n
+ if errorlevel 1 goto check_offline_mode
+
+
+
 
 :download_XML_Maps_RU
 cls
@@ -1130,7 +1470,7 @@ goto optional_downloads_RU
     echo ----------------------------------------------------------
     echo [1]  Выйти в меню доп плюшек
 	choice /c 1 /n
-    if errorlevel 1 goto menu_RU 
+    if errorlevel 1 goto check_offline_mode 
 	)
 
 
@@ -1183,7 +1523,7 @@ if not exist "%/YimMenu%/%name_YimMenu-settings%" (
 		echo "Returning to the main menu in 5 seconds." )
 timeout /t 5 /nobreak >nul
 cls
-goto menu_RU )
+goto check_offline_mode )
 
 :restore_settings_RU
 cls
@@ -1199,12 +1539,12 @@ del "%/YimMenu%\%name_YimMenu-settings%" >nul 2>&1
 rename "%/YimMenu%\%name_YimMenu-settings%.old" %name_YimMenu-settings%
 echo " Восстановление файла %name_YimMenu-settings% прошло УСПЕШНО "
 timeout /t 2 /nobreak >nul
-goto menu_RU
+goto check_offline_mode
 ) else (
 cls
 echo " Бэкап файла %name_YimMenu-settings% НЕ НАЙДЕН "
 timeout /t 3 /nobreak >nul
-goto menu_RU )
+goto check_offline_mode )
 
 :: //////////////////////////////////////////////////////////////////////
 :: \\\\\\\\\\\\\ \\\\\\\\\\\ astions link \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -1216,7 +1556,7 @@ goto choice_addons_RU
 
 :open_YimMenu_folder_RU
 start %/YimMenu%
-goto optional_downloads_RU
+goto check_offline_mode
 
 :open_xml_folder_RU
 start %/YimMenu%\xml_maps
@@ -1314,13 +1654,21 @@ timeout /t 1 /nobreak >nul
 exit
 )
 
+:dwnActVersionsInfo
+powershell -command "& { Invoke-WebRequest -Uri '%YM_version_Url%' -OutFile '%/cfga%\%name_txtcfg_YM_version%' }" >nul
+powershell -command "& { Invoke-WebRequest -Uri '%UM_version_Url%' -OutFile '%/cfga%\%name_txtcfg_UM_version%' }" >nul
+powershell -command "& { Invoke-WebRequest -Uri '%EA_version_Url%' -OutFile '%/cfga%\%name_txtcfg_EA_version%' }" >nul
+powershell -command "& { Invoke-WebRequest -Uri '%EA_md_version_Url%' -OutFile '%/cfga%\%name_txtcfg_EA_md_version%' }" >nul
+set /a dwnActVersionsStatus=1
+goto dwnActVersionsInfo_Done
+
 
 :here_nothing_now
 cls
 echo Тут пока что ничего нету, возможно в будущем
 echo появится какая-нибудь новая функция...
 timeout /t 2 /nobreak >nul
-goto menu_RU
+goto check_offline_mode
 
 :goodbye_RU
 cls
@@ -1338,7 +1686,7 @@ exit /b
 
 :auto_mode_RU
 cls
-goto menu_RU
+goto check_offline_mode
 :: ------------- YimMenu -------------------------------
 
 
