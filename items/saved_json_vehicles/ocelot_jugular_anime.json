@@ -1,0 +1,95 @@
+{
+    "MOD_BRAKES": [
+        2,
+        0
+    ],
+    "MOD_ENGINE": [
+        3,
+        0
+    ],
+    "MOD_EXHAUST": [
+        1,
+        0
+    ],
+    "MOD_FRONTWHEEL": [
+        0,
+        1
+    ],
+    "MOD_GRILLE": [
+        0,
+        0
+    ],
+    "MOD_LIVERY": [
+        6,
+        0
+    ],
+    "MOD_REARBUMPER": [
+        0,
+        0
+    ],
+    "MOD_ROOF": [
+        0,
+        0
+    ],
+    "MOD_SIDESKIRT": [
+        1,
+        0
+    ],
+    "MOD_SPOILERS": [
+        4,
+        0
+    ],
+    "MOD_SUSPENSION": [
+        2,
+        0
+    ],
+    "MOD_TIRESMOKE": "TOGGLE",
+    "MOD_TRANSMISSION": [
+        3,
+        0
+    ],
+    "MOD_TURBO": "TOGGLE",
+    "MOD_XENONHEADLIGHTS": "TOGGLE",
+    "clan_logo": 0,
+    "dash_color": 0,
+    "drift_tires": 0,
+    "has_collision": true,
+    "headlight_color": 255,
+    "interior_color": 0,
+    "is_visible": true,
+    "model_attachments": [],
+    "neon_color": [
+        94,
+        255,
+        1
+    ],
+    "neon_lights": [
+        true,
+        true,
+        true,
+        true
+    ],
+    "pearlescent_color": 0,
+    "plate_text": "NICKIFOX",
+    "plate_text_index": 1,
+    "primary_color": 12,
+    "radio_station": "OFF",
+    "secondary_color": 111,
+    "tire_can_burst": 0,
+    "tire_smoke_color": [
+        20,
+        20,
+        20
+    ],
+    "vehicle_attachments": [],
+    "vehicle_extras": [
+        [
+            1,
+            true
+        ]
+    ],
+    "vehicle_model_hash": 4086055493,
+    "vehicle_window_tint": 3,
+    "wheel_color": 0,
+    "wheel_type": 7
+}
