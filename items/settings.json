@@ -1,7 +1,7 @@
 {
     "clone_pv": {
         "clone_plate": false,
-        "garage": "Хранилище автомастерской",
+        "garage": "Форт-Занкудо, ангар 3497",
         "plate": "",
         "preview_vehicle": true,
         "spawn_clone": false,
@@ -18,8 +18,8 @@
     "debug": {
         "external_console": false,
         "logs": {
-            "metric_logs": true,
-            "packet_logs": true,
+            "metric_logs": 1,
+            "packet_logs": 1,
             "script_event": {
                 "filter_player": true,
                 "logs": true,
@@ -114,11 +114,12 @@
         "transaction_rate_limit": {
             "log": false,
             "notify": true
-        }
+        },
+        "warn_metric": false
     },
     "persist_car": {
         "persist_vehicle_sub_folder": "",
-        "preview_vehicle": false,
+        "preview_vehicle": true,
         "spawn_inside": false
     },
     "persist_weapons": {
@@ -145,6 +146,7 @@
     },
     "protections": {
         "admin_check": false,
+        "desync_kick": false,
         "force_relay_connections": false,
         "kick_rejoin": false,
         "receive_pickup": false,
@@ -166,7 +168,7 @@
             "send_to_location": false,
             "sound_spam": false,
             "spectate": false,
-            "start_activity": true,
+            "start_activity": false,
             "teleport_to_warehouse": false,
             "vehicle_kick": false
         },
@@ -174,7 +176,7 @@
     },
     "reactions": {
         "bounty": {
-            "add_to_player_db": true,
+            "add_to_player_db": false,
             "announce_in_chat": false,
             "block_joins": true,
             "is_team_only": false,
@@ -284,7 +286,7 @@
             "timeout": false
         },
         "game_anti_cheat_modder_detection": {
-            "add_to_player_db": false,
+            "add_to_player_db": true,
             "announce_in_chat": false,
             "block_joins": false,
             "is_team_only": false,
@@ -446,7 +448,7 @@
             "timeout": false
         },
         "request_control_event": {
-            "add_to_player_db": false,
+            "add_to_player_db": true,
             "announce_in_chat": false,
             "block_joins": false,
             "is_team_only": false,
@@ -570,7 +572,7 @@
         "transaction_error": {
             "add_to_player_db": true,
             "announce_in_chat": false,
-            "block_joins": true,
+            "block_joins": false,
             "is_team_only": false,
             "kick": false,
             "log": true,
@@ -629,7 +631,7 @@
         }
     },
     "self": {
-        "auto_tp": false,
+        "auto_tp": true,
         "beast_jump": false,
         "clean_player": false,
         "custom_weapon_stop": false,
@@ -2134,6 +2136,14 @@
         "block_muggers": false,
         "chat_command_default_access_level": "none",
         "chat_commands": false,
+        "chat_translator": {
+            "bypass_same_language": true,
+            "draw_result": true,
+            "enabled": false,
+            "endpoint": "http://localhost:5000/translate",
+            "print_result": false,
+            "target_language": "en"
+        },
         "damage_karma": false,
         "decloak_players": true,
         "disable_peds": false,
@@ -2158,7 +2168,7 @@
         "show_cheating_message": false,
         "spam_length": 55,
         "spam_timer": 2.5,
-        "trust_friends": false,
+        "trust_friends": true,
         "unhide_players_from_player_list": true,
         "use_spam_timer": false
     },
@@ -2211,10 +2221,10 @@
     },
     "spawn_vehicle": {
         "plate": "",
-        "preview_vehicle": false,
-        "spawn_inside": false,
-        "spawn_maxed": false,
-        "spawn_type": 0
+        "preview_vehicle": true,
+        "spawn_inside": true,
+        "spawn_maxed": true,
+        "spawn_type": 2
     },
     "spoofing": {
         "badsport_type": 0,
@@ -2226,7 +2236,6 @@
         "player_model": "",
         "rank": 1,
         "rockstar_crew": false,
-        "session_bad_sport": false,
         "session_language": 0,
         "session_player_count": 25,
         "session_region_type": 0,
@@ -2236,11 +2245,12 @@
         "spoof_crew_data": false,
         "spoof_hide_god": true,
         "spoof_hide_spectate": true,
+        "spoof_hide_veh_god": true,
         "spoof_job_points": false,
         "spoof_kd_ratio": false,
         "spoof_player_model": false,
         "spoof_rank": false,
-        "spoof_session_bad_sport_status": false,
+        "spoof_session_bad_sport_status": 0,
         "spoof_session_language": false,
         "spoof_session_player_count": false,
         "spoof_session_region_type": false,
@@ -2314,6 +2324,7 @@
         },
         "god_mode": false,
         "horn_boost": false,
+        "infinite_veh_ammo": false,
         "instant_brake": false,
         "keep_engine_running": false,
         "keep_on_ground": false,
@@ -2340,7 +2351,7 @@
         },
         "seatbelt": false,
         "siren_mute": false,
-        "speed_unit": "miph",
+        "speed_unit": "kmph",
         "speedo_meter": {
             "enabled": true,
             "left_side": false,
@@ -2419,6 +2430,7 @@
             "type": 0
         },
         "custom_weapon": "none",
+        "enable_mk1_variants": false,
         "enable_weapon_hotkeys": false,
         "gravity_gun": {
             "launch_on_release": false
