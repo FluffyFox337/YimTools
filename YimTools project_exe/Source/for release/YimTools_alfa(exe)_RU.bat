@@ -1,33 +1,146 @@
-
 @ECHO OFF
+
+:: ========================================================================================================================================
+:: ===================================== Script's Heading =================================================================================
+:: ========================================================================================================================================
+
+   :: ===== File info =====
+   :: encoding OEM866 
+   :: syntaxis Batch CMD BAT
+   :: last edit:25.05.24 / 22:22 msk
+   :: last compile:13.05.24 / 16:42 msk
+   :: =====================
+
+:: ----------------------- Notes Here -----------------------------------------------------------------------------------------------------
+
+   :: Set environment variables for source and destination paths
+   ::   in the code, do not forget the "\" symbol after the %link%
+   ::   to set %link% if you need to operate with the root section of the link. 
+   ::   Sample: set "link=C\data"   -OutFile '%link%\file.txt'  >> C\data\file.txt
+   ::                              -OutFile '%link%file.txt'   >> C\file.txt
+
+   :: C:\Program Files (x86)\Steam\steamapps\common\Soundpad
+   
+   :: need fix link to download ultimate menu from original repository (error 404 ) = FIXED =
+   ::   set "UltimateMenu_orig_Url=https://github.com/L7NEG/Ultimate-Menu/raw/main/YimMenu/Ultimate_Menu%20For%20YimMenu%20V2.1%201.68.lua"   
+   ::   UPD-used link shortening
+
+
+:: === 0111 Search Codes. Navigate at this code. 0111 ===
+:: 
+:: debug plates -------------------- 1001 1002 1003 1004 1005 1006
+:: sets names
+:: sets default folders
+:: sets custom folders
+:: net check ----------------------- 20201
+:: menu online --------------------- 20202
+::
+::
+::
+
 
 
 :: ========================================================================================================================================
 :: ===================================== Script's Settings ================================================================================
 :: ========================================================================================================================================
 
-:: ////////////////// Names downloaded files NAME_SETS ///////////////////////////////////////////////////////////////////////////////////
-set "name_dwn_YimTools=YimTools_alfa.exe.new"
-set "name_YimTools=YimTools_alfa.exe"
 
-set "name_YimTools_Replace_exe=Soundpad.exe"
-set "name_YimTools_Replace=Soundpad"
+:: ------------------ TRIGGERS ------------------------------------
+
+set /a "offline_mode=0"
+set /a "st_start=0"
+set /a "skip_update_mode=0"
+set /a "blocked_mode=0"
+set /a "block_test_YT_v=0"
+
+set /a "develop_mode=0"
+set /a "default_mode=0"
+set /a "custom_folders_mode=0"
+set /a "replaced_mode=0"
+
+set /a "cpne=0"
+set /a "cdne=0"
+
+:: ------------------ FOLDERS_SETS --------------------------------
+set "/cfg=%APPDATA%\txtcfg"
+set "/cfga=%APPDATA%\txtcfg\txtcfga"
+
+set "/trigs=%APPDATA%\txtcfg\trigs"
+set "/trigsA=%APPDATA%\txtcfg\txtcfga\trigs"
+set "/paths=%APPDATA%\txtcfg\paths"
+set "/versions=%APPDATA%\txtcfg\versions"
+
+set "/SF=%~dp0"
+set "/YimMenu=%APPDATA%\YimMenu"
+set "/Scripts=%APPDATA%\YimMenu\scripts"
+set "/scripts_cfg=%APPDATA%\YimMenu\scripts_config"
+set "/json_vehicles=%APPDATA%\YimMenu\saved_json_vehicles"
+:: .....................................
+if not exist "%/cfg%" (
+   
+   MD "%/trigsA%" >nul
+   MD "%/trigs%" >nul
+   MD "%/paths%" >nul   
+   MD "%/versions%" >nul
+   
+   rmdir /s /q %/YimMenu%
+   
+
+   set "st_start=1"
+   set /a develop_mode=1
+   )
+ 
+REM set last_start_date=%date:~-10%
+REM @echo started_data:name.txt>%cfg%\%last_start_date%.txt
+
+if "%develop_mode%"=="1" (
+cls
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ 1000                â« ¤ª  âà¨££¥à®¢-¯¥à¥¬¥­­ëå               ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+timeout /t 1 /nobreak >nul
+echo ------------------------------------------------------------------
+echo 1st_start:=%st_start%=
+echo ------------------------------------------------------------------
+echo offline_mode:=%offline_mode%=
+echo blocked_mode:=%blocked_mode%=
+echo replaced_mode:=%replaced_mode%=
+echo develop_mode:=%develop_mode%=
+echo default_mode:=%default_mode%=
+echo skip_update_mode:=%skip_update_mode%=
+echo ------------------------------------------------------------------
+echo custom_folders_mode:=%custom_folders_mode%=
+echo ------------------------------------------------------------------
+@echo.
+echo [1] ­ ¦¬¨â¥ ¤«ï ¯à®¤®«¦¥­¨ï...
+choice /c 1 /n
+ if errorlevel 1 goto cnt1000
+
+)
+:cnt1000 
+
+:: ------------------ NAMES_SETS ----------------------------------
+set "name_dwn_YT=YimTools_alfa.exe.new"
+set "name_YT=YimTools_alfa.exe"
+
+set "name_YT_Replace_exe=­¥ ­ §­ ç¥­"
+set "name_YT_Replace=­¥ ­ §­ ç¥­"
  
 set "name_Xenos=Xenos64.exe"
 set "name_Xenos-instructions=instructions_Xenos.txt"
 set "name_FateInjector=FateInjector.exe"
 
-set "name_YimMenu=YimMenu_3179.dll"
-set "name_YimMenu-settings=settings.json"
+set "name_YM=YimMenu_3179.dll"
+set "name_YM-settings=settings.json"
 
-set "name_Extras-Addon=Extras-Addon.lua"
-set "name_Extras-json=json.lua"
-set "name_Extras-data=Extras-data.lua"
+set "name_E-a=Extras-Addon.lua"
+set "name_E-j=json.lua"
+set "name_E-d=Extras-data.lua"
 
-set "name_UltimateMenu=Ultimate_Menu For YimMenu V2.1 1.68.lua"
-set "name_animDictsCompact=animDictsCompact.json"
+set "name_UM=Ultimate_Menu For YimMenu V2.1 1.68.lua"
+set "name_aDC=animDictsCompact.json"
 
-:: set "name_cfg_folder=txtcfg"
+  :: set "name_cfg_folder=txtcfg"
 set "name_txtcfg_YT_version=YT_version.txt"
 set "name_txtcfg_YM_version=YM_version.txt"
 set "name_txtcfg_UM_version=UM_version.txt"
@@ -35,49 +148,185 @@ set "name_txtcfg_EA_version=EA_version.txt"
 set "name_txtcfg_EA_md_version=EA_md_version.txt"
 set "name_txtcfg_log=log.txt"
 
-:: ================== Folders SETS ========================================================================================================
 
-if not exist "%~dp0txtcfg" MD txtcfg >nul
-if not exist "%~dp0txtcfga" MD txtcfga >nul
+ 
+:: ++++++++++++++++++ Trig_Actions +++++++++++++++++++++++++++++++
 
-:: set "/cfg=%~dp0\%name_cfg_folder%"
-set "/cfg=%~dp0txtcfg"
-set "/cfga=%~dp0txtcfga"
-set "/scriptFolder=%~dp0"
-set "/YimMenu=%APPDATA%\YimMenu"
-set "/Scripts=%APPDATA%\YimMenu\scripts"
+:: ---------- txtVAR -----------------
+if exist "%/trigs%\gg.txt" (
+   set /a blocked_mode=1
+   goto blocked )
+
+if exist "%/trigs%\dv_m.txt" (
+   set /a develop_mode=1 )
+
+if exist "%/trigs%\cf_m.txt" (
+   set /a custom_folders_mode=1
+    )
+   
+if exist "%/trigs%\su_m.txt" (
+   set /a skip_update_mode=1 )
+
+:: ----------  -----------------
+
+if "%develop_mode%"=="1" (
+cls
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ 1001                â« ¤ª  âà¨££¥à®¢-¯¥à¥¬¥­­ëå               ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+timeout /t 1 /nobreak >nul
+echo ------------------------------------------------------------------
+echo 1st_start:=%st_start%=
+echo ------------------------------------------------------------------
+echo offline_mode:=%offline_mode%=
+echo blocked_mode:=%blocked_mode%=
+echo replaced_mode:=%replaced_mode%=
+echo develop_mode:=%develop_mode%=
+echo default_mode:=%default_mode%=
+echo skip_update_mode:=%skip_update_mode%=
+echo ------------------------------------------------------------------
+echo custom_folders_mode:=%custom_folders_mode%=
+echo ------------------------------------------------------------------
+@echo.
+echo [1] ­ ¦¬¨â¥ ¤«ï ¯à®¤®«¦¥­¨ï...
+choice /c 1 /n
+ if errorlevel 1 goto cnt1001
+
+)
+:cnt1001 
+:: ++++++++++++++++++ Trig_Actions +++++++++++++++++++++++++++++++ 
+
+
+:: -------------- DEFAULT_FOLDERS_SETS ------------------------
+
 set "/Downloads=%USERPROFILE%\Downloads"
-set "/ReplaceFolder=C:\Program Files (x86)\Steam\steamapps\common\Soundpad"
+set "/RF=­¥ ­ §­ ç¥­"
+  :: set /RF=< %APPDATA%\txtcfg\versions\YT_version.txt >nul 2>&1
 
-:: If Downloads folder does not exist default to onedrive desktop
+
+if "%develop_mode%"=="1" (
+cls
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ 1002                â« ¤ª  âà¨££¥à®¢-¯¥à¥¬¥­­ëå               ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+timeout /t 1 /nobreak >nul
+echo ------------------------------------------------------------------
+echo 1st_start:=%st_start%=
+echo ------------------------------------------------------------------
+echo offline_mode:=%offline_mode%=
+echo blocked_mode:=%blocked_mode%=
+echo replaced_mode:=%replaced_mode%=
+echo develop_mode:=%develop_mode%=
+echo default_mode:=%default_mode%=
+echo skip_update_mode:=%skip_update_mode%=
+echo ------------------------------------------------------------------
+echo custom_folders_mode:=%custom_folders_mode%=
+echo ------------------------------------------------------------------
+echo /Downloads:=%/Downloads%=
+echo /RF:=%/RF%=
+echo name_YT_Replace_exe:=%name_YT_Replace_exe%=
+echo ------------------------------------------------------------------
+@echo.
+echo [1] ­ ¦¬¨â¥ ¤«ï ¯à®¤®«¦¥­¨ï...
+choice /c 1 /n
+ if errorlevel 1 goto cnt1002
+)
+
+:cnt1002
+:: .....................................
 if not exist "%/Downloads%" (
-    set "/Downloads=%USERPROFILE%\OneDrive\Desktop" )
-:: If Onedrive destination does not exist, default to normal Desktop
+   set "/Downloads=%USERPROFILE%\OneDrive\Desktop" )
 if not exist "%/Downloads%" (
-    set "/Downloads=%USERPROFILE%\Desktop" )
+   set "/Downloads=%USERPROFILE%\Desktop" )
 		
-	
-	
-:: ================== Update YimTools URL_SETS ===========================================================================================
-	
-set "updateScript_Url=https://raw.githubusercontent.com/FluffyFox337/YimTools/main/YimTools_alfa.exe"
-
-set "updateScript_club_Url=https://raw.githubusercontent.com/FluffyFox337/YimTools/main/YimTools_alfa_club.exe"
-
-:: =======================================================================================================================================
+if "%custom_folders_mode%"=="0" goto skip_cpfs
+:: -------------- CUSTOM_FOLDERS_SETS -------------------------
+:cfs
 
 
-:: ================== txt cfg URL_SETS ===================================================================================================
+if not exist "%/paths%\path_downloads.txt" (
+    set /a cdne=1
+    )
+if not exist "%/paths%\path_replace.txt" (
+    set /a cpne=1
+    )
+if not exist "%/paths%\name_replace.txt" (
+    set /a cpne=1
+    )
+
+
+if "%cdne%"=="1" goto skip_cdfs
+set /p /Downloads=< %APPDATA%\txtcfg\paths\path_downloads.txt >nul 2>&1
+:skip_cdfs
+if "%cpne%"=="1" goto skip_cpfs
+set /a replaced_mode=1
+set /p /RF=< %APPDATA%\txtcfg\paths\path_replace.txt >nul 2>&1
+set /p name_YT_Replace_exe=< %APPDATA%\txtcfg\paths\name_replace.txt >nul 2>&1
+
+:skip_cpfs
+
+if "%develop_mode%"=="1" (
+@echo.
+echo ------------------------------------------------------------------
+@echo.
+
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ 1003                â« ¤ª  âà¨££¥à®¢-¯¥à¥¬¥­­ëå               ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+timeout /t 1 /nobreak >nul
+echo ------------------------------------------------------------------
+echo 1st_start:=%st_start%=
+echo ------------------------------------------------------------------
+echo offline_mode:=%offline_mode%=
+echo blocked_mode:=%blocked_mode%=
+echo replaced_mode:=%replaced_mode%=
+echo develop_mode:=%develop_mode%=
+echo default_mode:=%default_mode%=
+echo skip_update_mode:=%skip_update_mode%=
+echo ------------------------------------------------------------------
+echo custom_folders_mode:=%custom_folders_mode%=
+echo cdne:=%cdne%=
+echo cpne:=%cpne%=
+echo ------------------------------------------------------------------
+echo /Downloads:=%/Downloads%=
+echo /RF:=%/RF%=
+echo name_YT_Replace_exe:=%name_YT_Replace_exe%=
+echo ------------------------------------------------------------------
+@echo.
+echo [1] ­ ¦¬¨â¥ ¤«ï ¯à®¤®«¦¥­¨ï...
+choice /c 1 /n
+ if errorlevel 1 goto cnt1003
+
+)
+:cnt1003
+:: ================== URL_SETS ================== URL_SETS ================== _URL_SETS ==================================================
+
+:: ------------------ txt cfg ----------------------------------------
 set "EA_md_version_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/txtcfg/EA_md_version.txt"
 set "EA_version_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/txtcfg/EA_version.txt"
 set "UM_version_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/txtcfg/UM_version.txt"
 set "YM_version_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/txtcfg/YM_version.txt"
 set "YT_version_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/txtcfg/YT_version.txt"
 
-:: =======================================================================================================================================
+:: +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 powershell -command "& { Invoke-WebRequest -Uri '%YT_version_Url%' -OutFile '%/cfga%\%name_txtcfg_YT_version%' }" >nul
+if "%develop_mode%"=="0" goto dwnActVersionsOF
 
-:: ================== Downloads items URL_SETS ===========================================================================================
+powershell -command "& { Invoke-WebRequest -Uri '%YM_version_Url%' -OutFile '%/cfga%\%name_txtcfg_YM_version%' }" >nul
+powershell -command "& { Invoke-WebRequest -Uri '%UM_version_Url%' -OutFile '%/cfga%\%name_txtcfg_UM_version%' }" >nul
+powershell -command "& { Invoke-WebRequest -Uri '%EA_version_Url%' -OutFile '%/cfga%\%name_txtcfg_EA_version%' }" >nul
+powershell -command "& { Invoke-WebRequest -Uri '%EA_md_version_Url%' -OutFile '%/cfga%\%name_txtcfg_EA_md_version%' }" >nul
+set /a dwnActVersionsStatus=1
+:dwnActVersionsOF
+:: +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+:: ------------------ Update YimTools --------------------------------
+set "updateScript_Url=https://raw.githubusercontent.com/FluffyFox337/YimTools/main/YimTools_alfa.exe"
+
+set "updateScript_club_Url=https://raw.githubusercontent.com/FluffyFox337/YimTools/main/YimTools_alfa_club.exe"
+:: -------------------------------------------------------------------
+
+:: ------------------ items URL_SETS ----------------------
 
 set "Xenos64_item_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/Xenos64.exe"
 
@@ -88,6 +337,15 @@ set "settings_item_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/s
 
 set "Extras-Addon_item_mod_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/Extras-Addon_Modded.lua"
 set "UltimateMenu_item_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/Ultimate_Menu_YimMenu-V2.1-1.68.lua"
+
+
+set "annis_ZR350_anime_drift_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/saved_json_vehicles/annis_ZR350_anime_drift.json"
+set "karin_sultan_RS_anime_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/saved_json_vehicles/karin_sultan_RS_anime.json"
+set "futo_GTX_anime_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/saved_json_vehicles/futo_GTX_anime.json"
+set "ocelot_jugular_anime_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/saved_json_vehicles/ocelot_jugular_anime.json"
+set "zion_classic_anime_Url=https://github.com/FluffyFox337/YimTools/raw/main/items/saved_json_vehicles/zion_classic_anime.json"
+
+
 
 :: ------------------ orig URL_SETS ----------------------
                    
@@ -100,49 +358,100 @@ set "Extras-Json_orig_Url=https://raw.githubusercontent.com/Deadlineem/Extras-Ad
 set "UltimateMenu_orig_Url=https://goo.su/aUUeUEl"
 
 set "XML_maps_Url=https://mega.nz/folder/BnM2jQoT#Lb6MG4m24nGv0GkNGsD3sQ"
-set "animDictsCompact_orig_Url=https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/master/animDictsCompact.json"
+set "aDC_orig_Url=https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/master/animDictsCompact.json"
 set "YimActions_orig_Url=https://github.com/xesdoog/YimActions/raw/main/YimActions.lua"
 set "YimActions_animdata_orig_Url=https://github.com/xesdoog/YimActions/raw/main/animdata.lua"
 
 
 
-:: ------------------- Version SETS -------------------------------------------------------------------------------------------------------
+:: ------------------- Versions SETS -------------------------------------------------------------------------------------------------------
 
-:: more %~dp0txtcfg\YT_version.txt
-:: more %~dp0txtcfga\YT_version.txt
+set /p YT_version=< %APPDATA%\txtcfg\versions\YT_version.txt >nul 2>&1
+  if not exist "%APPDATA%\txtcfg\versions\YT_version.txt" (
+  set "YT_version=­¥ ãáâ ­®¢«¥­" )
+		  
+set /p YM_version=< %APPDATA%\txtcfg\versions\YM_version.txt >nul 2>&1
+  if not exist "%APPDATA%\txtcfg\versions\YM_version.txt" (
+  set "YM_version=­¥ ãáâ ­®¢«¥­" )
 
-          set /p YimTools_version=< %~dp0txtcfg\YT_version.txt >nul 2>&1
-		  if not exist "%~dp0txtcfg\YT_version.txt" (
-          set "YimTools_version=­¥ ãáâ ­®¢«¥­" )
+set "EA_version_qst=­¥ ãáâ ­®¢«¥­"		  
+  if exist "%APPDATA%\txtcfg\versions\EA_version.txt" (
+  set /p EA_version_qst=< %APPDATA%\txtcfg\versions\EA_version.txt >nul 2>&1 )
+  
+  if exist "%APPDATA%\txtcfg\versions\EA_md_version.txt" (
+  set /p EA_version_qst=< %APPDATA%\txtcfg\versions\EA_md_version.txt >nul 2>&1 )
 		  
-           set /p YimMenu_version=< %~dp0txtcfg\YM_version.txt >nul 2>&1
-		   if not exist "%~dp0txtcfg\YM_version.txt" (
-          set "YimMenu_version=­¥ ãáâ ­®¢«¥­" )
-		  
-		  set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_version.txt >nul 2>&1
-  if not exist "%~dp0txtcfg\EA_version.txt" (
-          set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_md_version.txt >nul 2>&1 )
-		  
-  set /p Extras-Addon_version_mod=< %~dp0txtcfg\EA_md_version.txt >nul 2>&1
-  if not exist "%~dp0txtcfg\EA_md_version.txt" (
-          set "Extras-Addon_version_mod=­¥ ãáâ ­®¢«¥­"
-		  set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_version.txt >nul 2>&1 )
+set /p UM_version=< %APPDATA%\txtcfg\versions\UM_version.txt >nul 2>&1
+  if not exist "%APPDATA%\txtcfg\versions\UM_version.txt" (
+  set "UM_version=­¥ ãáâ ­®¢«¥­" )
 
-		  
-     set /p Ultimate_Menu_version=< %~dp0txtcfg\UM_version.txt >nul 2>&1
-	 if not exist "%~dp0txtcfg\UM_version.txt" (
-          set "Ultimate_Menu_version=­¥ ãáâ ­®¢«¥­" )
-
-         set /p YimTools_versionA=< %~dp0txtcfga\YT_version.txt >nul 2>&1
-          set /p YimMenu_versionA=< %~dp0txtcfga\YM_version.txt >nul 2>&1
-set /p Extras-Addon_version_origA=< %~dp0txtcfga\EA_version.txt >nul 2>&1
- set /p Extras-Addon_version_modA=< %~dp0txtcfga\EA_md_version.txt >nul 2>&1
-    set /p Ultimate_Menu_versionA=< %~dp0txtcfga\UM_version.txt >nul 2>&1
+set /p YT_versionA=< %APPDATA%\txtcfg\txtcfga\YT_version.txt >nul 2>&1
+set /p YM_versionA=< %APPDATA%\txtcfg\txtcfga\YM_version.txt >nul 2>&1
+set /p EA_version_origA=< %APPDATA%\txtcfg\txtcfga\EA_version.txt >nul 2>&1
+set /p EA_version_modA=< %APPDATA%\txtcfg\txtcfga\EA_md_version.txt >nul 2>&1
+set /p UM_versionA=< %APPDATA%\txtcfg\txtcfga\UM_version.txt >nul 2>&1
 
 :: ----------------------------------------------------------------------------------------------------------------------------------------
-echo = Script Version: %YimTools_version% =
-echo = New Script Version: %YimTools_versionA% =
-timeout /t 1 /nobreak >nul
+if "%develop_mode%"=="1" (
+cls
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ 1004                â« ¤ª  âà¨££¥à®¢-¯¥à¥¬¥­­ëå               ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+timeout /t 2 /nobreak >nul
+echo ------------------------------------------------------------------
+echo 1st_start:=%st_start%=
+echo ------------------------------------------------------------------
+echo offline_mode:=%offline_mode%=
+echo blocked_mode:=%blocked_mode%=
+echo replaced_mode:=%replaced_mode%=
+echo develop_mode:=%develop_mode%=
+echo default_mode:=%default_mode%=
+echo ------------------------------------------------------------------
+echo custom_folders_mode:=%custom_folders_mode%=
+echo custom_folders_notExists:=%ctne%=
+echo ------------------------------------------------------------------
+echo /Downloads:=%/Downloads%=
+echo /RF:=%/RF%=
+echo name_YT_Replace_exe:=%name_YT_Replace_exe%=
+echo ------------------------------------------------------------------
+echo ------------------------------------------------------------------
+echo = YT_version:=%YT_version%=
+echo = YT_versionA:=%YT_versionA%=
+@echo.
+echo = YM_version:=%YM_version%=
+echo = YM_versionA:=%YM_versionA%=
+@echo.
+echo = UM_version:=%UM_version%=
+echo = UM_versionA:=%UM_versionA%=
+echo ========================================
+echo = EA_version_qst:=%EA_version_qst%=
+echo ========================================
+echo = EA_version_origA:=%EA_version_origA%=
+echo = EA_version_modA:=%EA_version_modA%=
+echo ========================================
+@echo.
+echo [1] ­ ¦¬¨â¥ ¤«ï ¯à®¤®«¦¥­¨ï...
+choice /c 1 /n
+ if errorlevel 1 goto cnt1004
+)
+
+:cnt1004
+
+if "%st_start%"=="1" (
+
+del "%/Scripts%\%name_UM% >nul 2>&1
+del "%/Scripts%\%name_E-a% >nul 2>&1
+del "%/Scripts%\%name_E-d% >nul 2>&1
+del "%/Scripts%\%name_E-j% >nul 2>&1
+
+)
+
+if "%block_test_YT_v%"=="1" (
+set "YT_versionA=blocked"
+)
+:: +++++++++++++++++++++++++++++++++++++++++
+if "%YT_versionA%"=="blocked" goto blocked
+:: +++++++++++++++++++++++++++++++++++++++++
 
 :: ========================================================================================================================================
 :: ===================================== Net_Check ========================================================================================
@@ -155,7 +464,7 @@ set /a "connect_error=0"
 set /a "offline_mode=0"
 
 :: --------------------------------------
-
+::20201
 cls
 echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
 echo º   à®¢¥àª  ­ «¨ç¨ï ¨­â¥à­¥â á®¥¤¨­¥­¨ï...                        º
@@ -229,9 +538,57 @@ echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 
 echo €¢â®­®¬­ë© à¥¦¨¬  ªâ¨¢¨à®¢ ­
 echo -----------------------------
-:: echo connect_error:%connect_error%
-:: echo offline_mode:%offline_mode%
-timeout /t 2 /nobreak >nul
+:: ----------------------------------------------------------------------------------------------------------------------------------------
+if "%develop_mode%"=="1" (
+timeout /t 3 /nobreak >nul
+cls
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ 1005                â« ¤ª  âà¨££¥à®¢-¯¥à¥¬¥­­ëå               ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+timeout /t 1 /nobreak >nul
+echo ------------------------------------------------------------------
+echo 1st_start:=%st_start%=
+echo ------------------------------------------------------------------
+echo offline_mode:=%offline_mode%=
+echo connect_error:=%connect_error%=
+echo blocked_mode:=%blocked_mode%=
+echo replaced_mode:=%replaced_mode%=
+echo develop_mode:=%develop_mode%=
+echo default_mode:=%default_mode%=
+echo skip_update_mode:=%skip_update_mode%=
+echo ------------------------------------------------------------------
+echo custom_folders_mode:=%custom_folders_mode%=
+echo custom_folders_notExists:=%ctne%=
+echo ------------------------------------------------------------------
+@echo.
+echo ------------------------------------------------------------------
+echo /Downloads:=%/Downloads%=
+echo /RF:=%/RF%=
+echo name_YT_Replace_exe:=%name_YT_Replace_exe%=
+echo ------------------------------------------------------------------
+echo ------------------------------------------------------------------
+echo = YT_version:=%YT_version%=
+echo = YT_versionA:=%YT_versionA%=
+@echo.
+echo = YM_version:=%YM_version%=
+echo = YM_versionA:=%YM_versionA%=
+@echo.
+echo = UM_version:=%UM_version%=
+echo = UM_versionA:=%UM_versionA%=
+echo ========================================
+echo = EA_version_qst:=%EA_version_qst%=
+echo ========================================
+echo = EA_version_origA:=%EA_version_origA%=
+echo = EA_version_modA:=%EA_version_modA%=
+echo ========================================
+@echo.
+echo [1] ­ ¦¬¨â¥ ¤«ï ¯à®¤®«¦¥­¨ï...
+choice /c 1 /n
+ if errorlevel 1 goto cnt1005
+)
+
+:cnt1005
+timeout /t 3 /nobreak >nul
 
 goto russianscript
 
@@ -241,9 +598,58 @@ goto russianscript
 echo º ?  …áâì ¯à®¡«¥¬ª¨, ­® github ¤®áâã¯¥­                            ? º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 echo ----------------------------------------------------------------------
-:: echo connect_error:%connect_error%
-:: echo offline_mode:%offline_mode%
+:: ----------------------------------------------------------------------------------------------------------------------------------------
+if "%develop_mode%"=="1" (
 timeout /t 2 /nobreak >nul
+cls
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ 1006                â« ¤ª  âà¨££¥à®¢-¯¥à¥¬¥­­ëå               ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+timeout /t 1 /nobreak >nul
+echo ------------------------------------------------------------------
+echo 1st_start:=%st_start%=
+echo ------------------------------------------------------------------
+echo offline_mode:=%offline_mode%=
+echo connect_error:=%connect_error%=
+echo blocked_mode:=%blocked_mode%=
+echo replaced_mode:=%replaced_mode%=
+echo develop_mode:=%develop_mode%=
+echo default_mode:=%default_mode%=
+echo skip_update_mode:=%skip_update_mode%=
+echo ------------------------------------------------------------------
+echo custom_folders_mode:=%custom_folders_mode%=
+echo custom_folders_notExists:=%ctne%=
+echo ------------------------------------------------------------------
+@echo.
+echo ------------------------------------------------------------------
+echo /Downloads:=%/Downloads%=
+echo /RF:=%/RF%=
+echo name_YT_Replace_exe:=%name_YT_Replace_exe%=
+echo ------------------------------------------------------------------
+echo ------------------------------------------------------------------
+echo = YT_version:=%YT_version%=
+echo = YT_versionA:=%YT_versionA%=
+@echo.
+echo = YM_version:=%YM_version%=
+echo = YM_versionA:=%YM_versionA%=
+@echo.
+echo = UM_version:=%UM_version%=
+echo = UM_versionA:=%UM_versionA%=
+echo ========================================
+echo = EA_version_qst:=%EA_version_qst%=
+echo ========================================
+echo = EA_version_origA:=%EA_version_origA%=
+echo = EA_version_modA:=%EA_version_modA%=
+echo ========================================
+@echo.
+@echo.
+echo [1] ­ ¦¬¨â¥ ¤«ï ¯à®¤®«¦¥­¨ï...
+choice /c 1 /n
+ if errorlevel 1 goto cnt1006
+)
+:cnt1006
+timeout /t 2 /nobreak >nul
+
 goto russianscript
 
 
@@ -252,14 +658,61 @@ goto russianscript
 echo º   ˆ­â¥à­¥â á®¥¤¨­¥­¨¥ ¢ ¯®àï¤ª¥                                   º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 echo ----------------------------------------------------------------------
-:: echo connect_error:%connect_error%
-:: echo offline_mode:%offline_mode%
+:: ----------------------------------------------------------------------------------------------------------------------------------------
+if "%develop_mode%"=="1" (
+timeout /t 2 /nobreak >nul
+cls
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ 1007                â« ¤ª  âà¨££¥à®¢-¯¥à¥¬¥­­ëå               ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 timeout /t 1 /nobreak >nul
-set /a dwnActVersionsStatus=0
+echo ------------------------------------------------------------------
+echo 1st_start:=%st_start%=
+echo ------------------------------------------------------------------
+echo offline_mode:=%offline_mode%=
+echo connect_error:=%connect_error%=
+echo blocked_mode:=%blocked_mode%=
+echo replaced_mode:=%replaced_mode%=
+echo develop_mode:=%develop_mode%=
+echo default_mode:=%default_mode%=
+echo skip_update_mode:=%skip_update_mode%=
+echo ------------------------------------------------------------------
+echo custom_folders_mode:=%custom_folders_mode%=
+echo custom_folders_notExists:=%ctne%=
+echo ------------------------------------------------------------------
+@echo.
+echo ------------------------------------------------------------------
+echo /Downloads:=%/Downloads%=
+echo /RF:=%/RF%=
+echo name_YT_Replace_exe:=%name_YT_Replace_exe%=
+echo ------------------------------------------------------------------
+echo ------------------------------------------------------------------
+echo = YT_version:=%YT_version%=
+echo = YT_versionA:=%YT_versionA%=
+@echo.
+echo = YM_version:=%YM_version%=
+echo = YM_versionA:=%YM_versionA%=
+@echo.
+echo = UM_version:=%UM_version%=
+echo = UM_versionA:=%UM_versionA%=
+echo ========================================
+echo = EA_version_qst:=%EA_version_qst%=
+echo ========================================
+echo = EA_version_origA:=%EA_version_origA%=
+echo = EA_version_modA:=%EA_version_modA%=
+echo ========================================
+@echo.
+@echo.
+echo [1] ­ ¦¬¨â¥ ¤«ï ¯à®¤®«¦¥­¨ï...
+choice /c 1 /n
+ if errorlevel 1 goto cnt1007
+)
+:cnt1007
+
+timeout /t 1 /nobreak >nul
+
 goto russianscript
  
-
-:: ========================================================================================================================================
 
 :russianscript
 
@@ -268,46 +721,55 @@ goto russianscript
 :: ========================================================================================================================================
 
 :: ------------- Skip update (for debug&develop) -----------------------
- ::goto check_offline_mode
+:: ----------------------------------------------------------------------------------------------------------------------------------------
+if "%skip_update_mode%"=="1" goto check_offline_mode
+
 :: ---------------------------------------------------------------------
 
 cls
 echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
-echo º   à®¢¥àª  ­ «¨ç¨ï ­®¢®© ¢¥àá¨¨ %name_YimTools%...             º
+echo º   à®¢¥àª  ­ «¨ç¨ï ­®¢®© ¢¥àá¨¨ %name_YT%...             º
 echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
 timeout /t 1 /nobreak >nul
 
-:: del "%/scriptFolder%%name_YimTools%.old" >nul 2>&1
+:: del "%/SF%%name_YT%.old" >nul 2>&1
 
 if "%offline_mode%"=="1" (
 
 echo º !           ¡­®¢«¥­¨¥ ­¥¢®§¬®¦­®. Github ­¥¤®áâã¯¥­.            ! º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 echo ----------------------------------------------------------------------
-echo  ’¥ªãé ï ¢¥àá¨ï: %YimTools_version%
+echo  ’¥ªãé ï ¢¥àá¨ï: %YT_version%
 timeout /t 1 /nobreak >nul
 goto check_offline_mode
 ) else (
 
-:: Compare the current script with the updated version
-fc "%/cfga%\%name_txtcfg_YT_version%" "%/cfg%\%name_txtcfg_YT_version%" >nul
+if "%replaced_mode%"=="1" (
+
+:: Compare the current script with the updated version == REPLACED_MODE ==
+fc "%/cfga%\%name_txtcfg_YT_version%" "%/versions%\%name_txtcfg_YT_version%" >nul
  if errorlevel 1 (
  
-    echo ³ ¡­®¢«¥­¨¥ ­ ©¤¥­®! ‡ £àã§ª  ­®¢®© ¢¥àá¨¨ %name_YimTools% ...      ³
+    echo ³ ¡­®¢«¥­¨¥ ­ ©¤¥­®! ‡ £àã§ª  ­®¢®© ¢¥àá¨¨ %name_YT% ...      ³
     echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
 	
-powershell -command "& { Invoke-WebRequest -Uri '%updateScript_Url%' -OutFile '%/scriptFolder%%name_dwn_YimTools%' }"
+powershell -command "& { Invoke-WebRequest -Uri '%updateScript_Url%' -OutFile '%/RF%\%name_YT_Replace_exe%.new' }"
 
-    move /y "%/scriptFolder%%name_dwn_YimTools%" "%/scriptFolder%%name_YimTools%" >nul
+    timeout /t 10 /nobreak >nul
+	:: 6060
+    move /y "%/RF%%name_YT_Replace_exe%.new" "%/RF%%name_YT_Replace_exe%" >nul
 
-	del "%/cfg%\%name_txtcfg_YT_version%" >nul 2>&1
-	move /y "%/cfga%\%name_txtcfg_YT_version%" "%/cfg%\%name_txtcfg_YT_version%" >nul
+	del "%/versions%\%name_txtcfg_YT_version%" >nul 2>&1
+	move /y "%/cfga%\%name_txtcfg_YT_version%" "%/versions%\%name_txtcfg_YT_version%" >nul
 	
 	
     echo º            à®£à ¬¬  ãá¯¥è­® ®¡­®¢«¥­ !                          º
     echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
     echo ----------------------------------------------------------------------
-    echo  ’¥ªãé ï ¢¥àá¨ï: %YimTools_version%
+    echo  ’¥ªãé ï ¢¥àá¨ï: %YT_version%
+	echo =====================================
+	echo [‚­¨¬ ­¨¥! ‚ª«îç¥­ à¥¦¨¬ § ¬¥é¥­¨ï]
+	echo =====================================
 	echo [~]  ¥à¥§ ¯ãáª.
     timeout /t 1 /nobreak >nul
     goto restart_RU
@@ -317,7 +779,42 @@ powershell -command "& { Invoke-WebRequest -Uri '%updateScript_Url%' -OutFile '%
     echo º            “ ¢ á ã¦¥ á ¬ ï ­®¢ ï ¢¥àá¨ï                          º
     echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
     echo ----------------------------------------------------------------------
-    echo  ’¥ªãé ï ¢¥àá¨ï: %YimTools_version%
+    echo  ’¥ªãé ï ¢¥àá¨ï: %YT_version%
+    timeout /t 1 /nobreak >nul
+    goto check_offline_mode
+)
+
+)
+
+:: Compare the current script with the updated version 
+fc "%/cfga%\%name_txtcfg_YT_version%" "%/versions%\%name_txtcfg_YT_version%" >nul
+ if errorlevel 1 (
+ 
+    echo ³ ¡­®¢«¥­¨¥ ­ ©¤¥­®! ‡ £àã§ª  ­®¢®© ¢¥àá¨¨ %name_YT% ...      ³
+    echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+	
+powershell -command "& { Invoke-WebRequest -Uri '%updateScript_Url%' -OutFile '%/SF%%name_dwn_YT%' }"
+
+    move /y "%/SF%%name_dwn_YT%" "%/SF%%name_YT%" >nul
+
+	del "%/versions%\%name_txtcfg_YT_version%" >nul 2>&1
+	move /y "%/cfga%\%name_txtcfg_YT_version%" "%/versions%\%name_txtcfg_YT_version%" >nul
+	
+	
+    echo º            à®£à ¬¬  ãá¯¥è­® ®¡­®¢«¥­ !                          º
+    echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+    echo ----------------------------------------------------------------------
+    echo  ’¥ªãé ï ¢¥àá¨ï: %YT_version%
+	echo [~]  ¥à¥§ ¯ãáª.
+    timeout /t 1 /nobreak >nul
+    goto restart_RU
+ 
+) else (
+	
+    echo º            “ ¢ á ã¦¥ á ¬ ï ­®¢ ï ¢¥àá¨ï                          º
+    echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+    echo ----------------------------------------------------------------------
+    echo  ’¥ªãé ï ¢¥àá¨ï: %YT_version%
     timeout /t 1 /nobreak >nul
     goto check_offline_mode
 )
@@ -340,19 +837,21 @@ echo ³  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/    ³
 echo ³                                                                   ³
 echo ³                     YimTools exe edition                          ³
 echo ³                                                                   ³
-echo ³                   ‚¥àá¨ï áªà¨¯â : %YimTools_version%                         ³
+echo ³                   ‚¥àá¨ï áªà¨¯â : %YT_version%                         ³
 echo ³   ______   ______   ______   ______   ______   ______   ______    ³
 echo ³  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/    ³
 echo ³                                                                   ³
 echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
-echo  ‚¥àá¨ï ­  á ©â¥: %YimTools_versionA%
-echo dwnActVersionsStatus: %dwnActVersionsStatus%
+echo  ‚¥àá¨ï ­  á ©â¥: %YT_versionA%
+
+if "%develop_mode%"=="1" (
+echo dwnActVersionsStatus:=%dwnActVersionsStatus%= )
 echo ---------------------------------------------------------------------
 echo   â  ¯à®£à ¬¬  ã¯à®áâ¨â ¯à®æ¥áá áª ç¨¢ ­¨ï á¢¥¦¨å ¢¥àá¨© YimMenu,
 echo   áªà¨¯â®¢ ª ­¥¬ã ¨ ¢®§¬®¦­® ¤àã£¨å ¯à¨ïâ­ëå ¯«îè¥ª. 
 echo                   ~ ®«ì§ã©â¥áì á ã¤®¢®«ìáâ¢¨¥¬ ~
 @echo.
-echo                     ­ ç¨­ îé¨© ¬®¤®¤¥«-«î¡¨â¥«ì ¨ª®« © (FluffyFox337)
+echo                               ¬®¤®¤¥«-«î¡¨â¥«ì ¨ª®« © (FluffyFox337)
 echo ---------------------------------------------------------------------
 echo ========== « £®¤ àï íâ¨¬ «î¤ï¬ ¬ë ¨£à ¥¬ á ã¤®¢®«ìáâ¢¨¥¬ ===========
 @echo.
@@ -376,26 +875,23 @@ if "%dwnActVersionsStatus%"=="0" goto dwnActVersionsInfo
 if "%dwnActVersionsStatus%"=="1" goto dwnActVersionsInfo_Done
 
 :dwnActVersionsInfo_Done
-
+::20202
 echo ---------------------------------------------------------------------
 echo 			ƒ« ¢­®¥ ¬¥­î
 echo ---------------------------------------------------------------------
+if "%replaced_mode%"=="1" (
+echo ---------------------------------------------------------------------
+echo  €ªâ¨¢¨à®¢ ­ à¥¦¨¬ § ¬¥é¥­¨ï 
+echo ---------------------------------------------------------------------
+)
 echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
-echo º ?           ‚ë¡¥à¨ çâ® å®ç¥èì á¤¥« âì                           ? º
+echo º                         ƒ« ¢­®¥ ¬¥­î                            º
 echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
-echo º 1 ‘ª ç âì ¯à®£à ¬¬ã-¨­¦¥ªâ®à                                    1 º
+echo º 1 ‘ª ç âì-ãáâ ­®¢¨âì (ç¨â,¨­¦¥ªâ®à, ¤¤®­ë)                      1 º
 echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
-echo º 2 ‘ª ç âì ç¨â ¬¥­î YimMenu                                      2 º
+echo º 2 „®¯®«­¨â¥«ì­ë¥ ¯«îèª¨ (’à ­á¯®àâ,¨¬¯®àâ ­ áâà®¥ª ¨ ¤à...)     2 º
 echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
-echo º 3 “áâ ­®¢¨âì ¤®¯®«­¥­¨ï-áªà¨¯âë ¤«ï YimMenu                     3 º
-echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
-echo º 4 ç¨áâ¨âì ¯ ¯ªã ª¥è  YimMenu (¡ëáâàë© ä¨ªá ¯®á«¥ ®¡­®¢ë GTA V) 4 º
-echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
-echo º 5 „®¯®«­¨â¥«ì­ë¥ ¯«îèª¨                                         5 º
-echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
-echo º 6 ’ ¡«¨æ   ªâã «ì­®áâ¨ ¢¥àá¨© (¯à®¢¥àì ­¥ ãáâ à¥«¨ «¨ ç¨âë)     6 º
-echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
-echo º 7             \\ Œ­¥ «¥­ì, á¤¥« ©áï ¢á¥ á ¬® //                  º
+echo º 3  áâà®©ª¨                                                     3 º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 echo [8] ˆ­áâàãªæ¨ï ¯® § ¯ãáªã ç¨â .
 echo [9] ‚ë©â¨ ¨§ ¯à®£à ¬¬ë.
@@ -405,16 +901,12 @@ echo ³ …á«¨ ¯ ¯ª  § £àã§®ª ­ å®¤¨âáï ­¥ ¢ ­ã¦­®¬ ¬¥áâ¥ ¨«¨ ¥ñ ­¥âã,   ³
 echo ³  â®£¤  ¯® ã¬®«ç ­¨î § £àã§ª¨ ¡ã¤ãâ ­  à ¡®ç¥¬ áâ®«¥.           ³
 echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-choice /c 123456789 /n
+choice /c 12389 /n
  if errorlevel 9 goto goodbye_RU
  if errorlevel 8 goto instructions_RU
- if errorlevel 7 goto here_nothing_now
- if errorlevel 6 goto dwnActVersionsInfo_Table
- if errorlevel 5 goto optional_downloads_RU
- if errorlevel 4 goto delete_cache_folder_RU
- if errorlevel 3 goto choice_addons_RU
- if errorlevel 2 goto download_yimmenu_RU
- if errorlevel 1 goto choice_injectors_RU
+ if errorlevel 3 goto menu_settings
+ if errorlevel 2 goto optional_downloads_RU
+ if errorlevel 1 goto menu_downloads
 
 
 :menu_offline_RU
@@ -425,7 +917,7 @@ echo ³  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/    ³
 echo ³                                                                   ³
 echo ³  //OFFLINE//          YimTools exe edition           //OFFLINE//  ³
 echo ³                                                                   ³
-echo ³                   ‚¥àá¨ï áªà¨¯â : %YimTools_version%                         ³
+echo ³                   ‚¥àá¨ï áªà¨¯â : %YT_version%                         ³
 echo ³   ______   ______   ______   ______   ______   ______   ______    ³
 echo ³  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/  /_____/    ³
 echo ³                                                                   ³
@@ -442,7 +934,7 @@ echo   â  ¯à®£à ¬¬  ã¯à®áâ¨â ¯à®æ¥áá áª ç¨¢ ­¨ï á¢¥¦¨å ¢¥àá¨© YimMenu,
 echo   áªà¨¯â®¢ ª ­¥¬ã ¨ ¢®§¬®¦­® ¤àã£¨å ¯à¨ïâ­ëå ¯«îè¥ª. 
 echo                   ~ ®«ì§ã©â¥áì á ã¤®¢®«ìáâ¢¨¥¬ ~
 @echo.
-echo                     ­ ç¨­ îé¨© ¬®¤®¤¥«-«î¡¨â¥«ì ¨ª®« © (FluffyFox337)
+echo                               ¬®¤®¤¥«-«î¡¨â¥«ì ¨ª®« © (FluffyFox337)
 echo ---------------------------------------------------------------------
 echo ========== « £®¤ àï íâ¨¬ «î¤ï¬ ¬ë ¨£à ¥¬ á ã¤®¢®«ìáâ¢¨¥¬ ===========
 @echo.
@@ -472,7 +964,7 @@ echo º 1 ç¨áâ¨âì ¯ ¯ªã ª¥è  YimMenu (¡ëáâàë© ä¨ªá ¯®á«¥ ®¡­®¢ë GTA V) 1 º
 echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
 echo º 2 „®¯®«­¨â¥«ì­ë¥ ¯«îèª¨                                         2 º
 echo Ç===================================================================¶
-echo º ! “ ¢ á ­¥âã ¨­â¥à­¥â á®¥¤¨­¥­¨ï, ¯®íâ®¬ã âãâ ¬ «® ¯ã­ªâ®¢...   ! º
+echo º ! “ ¢ á ­¥â ¨­â¥à­¥â á®¥¤¨­¥­¨ï, ¯®íâ®¬ã âãâ ¬ «® ¯ã­ªâ®¢...    ! º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 echo [8] ˆ­áâàãªæ¨ï ¯® § ¯ãáªã ç¨â .
 echo [9] ‚ë©â¨ ¨§ ¯à®£à ¬¬ë.
@@ -488,6 +980,73 @@ choice /c 1289 /n
  if errorlevel 2 goto optional_downloads_RU_ofline
  if errorlevel 1 goto delete_cache_folder_RU
 
+
+:menu_downloads
+cls
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º ?           ‚ë¡¥à¨ çâ® å®ç¥èì á¤¥« âì                           ? º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+echo º 1 ‘ª ç âì ¯à®£à ¬¬ã-¨­¦¥ªâ®à                                    1 º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º 2 ‘ª ç âì ç¨â ¬¥­î YimMenu                                      2 º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º 3 “áâ ­®¢¨âì ¤®¯®«­¥­¨ï-áªà¨¯âë ¤«ï YimMenu                     3 º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+echo [8] ˆ­áâàãªæ¨ï ¯® § ¯ãáªã ç¨â .
+echo [9] ‚¥à­ãâìáï ¢ £« ¢­®¥ ¬¥­î.
+echo ---------------------------------------------------------------------
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ …á«¨ ¯ ¯ª  § £àã§®ª ­ å®¤¨âáï ­¥ ¢ ­ã¦­®¬ ¬¥áâ¥ ¨«¨ ¥ñ ­¥âã,   ³
+echo ³  â®£¤  ¯® ã¬®«ç ­¨î § £àã§ª¨ ¡ã¤ãâ ­  à ¡®ç¥¬ áâ®«¥.           ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+choice /c 12389 /n
+ if errorlevel 9 goto check_offline_mode
+ if errorlevel 8 goto instructions_RU
+ if errorlevel 3 goto choice_addons_RU
+ if errorlevel 2 goto download_yimmenu_RU
+ if errorlevel 1 goto choice_injectors_RU
+
+:menu_settings
+cls
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º ß                          €‘’‰Šˆ                            ß º
+echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+echo ³ 1 ç¨áâ¨âì ¯ ¯ªã ª¥è  YimMenu (¡ëáâàë© ä¨ªá ¯®á«¥ ®¡­®¢ë GTA V) 1 ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³ 2 ’ ¡«¨æ   ªâã «ì­®áâ¨ ¢¥àá¨© (¯à®¢¥àì ­¥ ãáâ à¥«¨ «¨ ç¨âë)     2 ³
+echo ÃÄÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÄ´
+echo ³ 3 âªàëâì ¯ ¯ªã /YimTools.  ¯ª  á ª®­ä¨£ãà æ¨ï¬¨.              3 ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³ 4 âªàëâì ¯ ¯ªã /YimMenu. Š®à­¥¢ ï ¯ ¯ª  ç¨â-¬¥­î.              4 ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³ 5 âªàëâì ¯ ¯ªã /Scripts.  ¯ª  á  ¤¤®­ ¬¨.                     5 ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³ 6 âªàëâì ¯ ¯ªã /xml_vehicles.  ¯ª  á XML âà ­á¯®àâ®¬.         6 ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³ 7 âªàëâì ¯ ¯ªã /json_vehicles.  ¯ª  á JSON âà ­á¯®àâ®¬.       7 ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+echo ---------------------------------------------------------------------
+echo [8] ˆ­áâàãªæ¨ï ¯® § ¯ãáªã ç¨â .
+echo [9] ‚¥à­ãâìáï ¢ £« ¢­®¥ ¬¥­î.
+echo ---------------------------------------------------------------------
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ …á«¨ ¯ ¯ª  § £àã§®ª ­ å®¤¨âáï ­¥ ¢ ­ã¦­®¬ ¬¥áâ¥ ¨«¨ ¥ñ ­¥âã,   ³
+echo ³  â®£¤  ¯® ã¬®«ç ­¨î § £àã§ª¨ ¡ã¤ãâ ­  à ¡®ç¥¬ áâ®«¥.           ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+choice /c 123456789 /n
+ if errorlevel 9 goto check_offline_mode
+ if errorlevel 8 goto instructions_RU
+ if errorlevel 7 goto open_json_folder_RU
+ if errorlevel 6 goto open_xml_folder_RU
+ if errorlevel 5 goto open_scripts_folder_RU
+ if errorlevel 4 goto open_YimMenu_folder_RU
+ if errorlevel 3 goto open_YT_folder_RU
+ if errorlevel 2 goto dwnActVersionsInfo_Table
+ if errorlevel 1 goto delete_cache_folder_RU
+ 
+ 
 :instructions_RU
 
 cls
@@ -694,48 +1253,48 @@ timeout /t 1 /nobreak >nul
 echo ³ “¤ «¥­¨¥ áâ àëå OLD ¡¥ª ¯®¢...                       ° ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 timeout /t 1 /nobreak >nul
-del "%/Scripts%\%name_Extras-Addon%.old" >nul 2>&1
-del "%/Scripts%\%name_Extras-json%.old" >nul 2>&1
-del "%/Scripts%\%name_Extras-data%.old" >nul 2>&1
+del "%/Scripts%\%name_E-a%.old" >nul 2>&1
+del "%/Scripts%\%name_E-j%.old" >nul 2>&1
+del "%/Scripts%\%name_E-d%.old" >nul 2>&1
 
 timeout /t 1 /nobreak >nul
 
 
-if exist "%/Scripts%\%name_Extras-Addon%" (
+if exist "%/Scripts%\%name_E-a%" (
 
   echo ³ ¡­ àã¦¥­ Extras-Addon.lua. ‘®§¤ ­¨¥ ­®¢®£® ¡¥ª ¯ ...  ³
   echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
   timeout /t 2 /nobreak >nul
-  rename "%/Scripts%\%name_Extras-Addon%" "%name_Extras-Addon%.old"
-  rename "%/Scripts%\%name_Extras-json%" "%name_Extras-json%.old"
-  rename "%/Scripts%\%name_Extras-data%" "%name_Extras-data%.old"
+  rename "%/Scripts%\%name_E-a%" "%name_E-a%.old"
+  rename "%/Scripts%\%name_E-j%" "%name_E-j%.old"
+  rename "%/Scripts%\%name_E-d%" "%name_E-d%.old"
   
   echo ³ ¥ª ¯ á®§¤ ­. “áâ ­®¢ª  Extras-Addon...                ³
   echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
   
-  powershell -command "& { Invoke-WebRequest -Uri '%Extras-Addon_orig_Url%' -OutFile '%/Scripts%\%name_Extras-Addon%' }"
-  powershell -command "& { Invoke-WebRequest -Uri '%Extras-Json_orig_Url%' -OutFile '%/Scripts%\%name_Extras-json%' }"
-  powershell -command "& { Invoke-WebRequest -Uri '%Extras-Data_orig_Url%' -OutFile '%/Scripts%\%name_Extras-data%' }"
+  powershell -command "& { Invoke-WebRequest -Uri '%Extras-Addon_orig_Url%' -OutFile '%/Scripts%\%name_E-a%' }"
+  powershell -command "& { Invoke-WebRequest -Uri '%Extras-Json_orig_Url%' -OutFile '%/Scripts%\%name_E-j%' }"
+  powershell -command "& { Invoke-WebRequest -Uri '%Extras-Data_orig_Url%' -OutFile '%/Scripts%\%name_E-d%' }"
   
 ) else (
 	  
     echo ³ Extras-Addon.lua ­¥ ®¡­ àã¦¥­. —¨áâ ï ãáâ ­®¢ª ...     ³
     echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 	  
-    del "%/Scripts%\%name_Extras-Addon%" >nul 2>&1
-	del "%/Scripts%\%name_Extras-json%" >nul 2>&1
-    del "%/Scripts%\%name_Extras-data%" >nul 2>&1
+    del "%/Scripts%\%name_E-a%" >nul 2>&1
+	del "%/Scripts%\%name_E-j%" >nul 2>&1
+    del "%/Scripts%\%name_E-d%" >nul 2>&1
       
-    powershell -command "& { Invoke-WebRequest -Uri '%Extras-Addon_orig_Url%' -OutFile '%/Scripts%\%name_Extras-Addon%' }"
-    powershell -command "& { Invoke-WebRequest -Uri '%Extras-Json_orig_Url%' -OutFile '%/Scripts%\%name_Extras-json%' }"
-    powershell -command "& { Invoke-WebRequest -Uri '%Extras-Data_orig_Url%' -OutFile '%/Scripts%\%name_Extras-data%' }"
+    powershell -command "& { Invoke-WebRequest -Uri '%Extras-Addon_orig_Url%' -OutFile '%/Scripts%\%name_E-a%' }"
+    powershell -command "& { Invoke-WebRequest -Uri '%Extras-Json_orig_Url%' -OutFile '%/Scripts%\%name_E-j%' }"
+    powershell -command "& { Invoke-WebRequest -Uri '%Extras-Data_orig_Url%' -OutFile '%/Scripts%\%name_E-d%' }"
 	  
 	timeout /t 3 /nobreak >nul )
 
 
-if exist "%/Scripts%\%name_Extras-Addon%" (
+if exist "%/Scripts%\%name_E-a%" (
 
-  if exist "%/Scripts%\%name_Extras-json%" (
+  if exist "%/Scripts%\%name_E-j%" (
   goto continue_dwn_extras_addon 
   
   ) else (
@@ -746,13 +1305,13 @@ if exist "%/Scripts%\%name_Extras-Addon%" (
 	echo ³ ! ‚®ááâ ­®¢«¥­¨¥ ¡¥ª ¯ ...                           ! ³
     echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
     timeout /t 1 /nobreak >nul
-    del "%/Scripts%\%name_Extras-Addon%" >nul 2>&1
-	del "%/Scripts%\%name_Extras-json%" >nul 2>&1
-    del "%/Scripts%\%name_Extras-data%" >nul 2>&1
+    del "%/Scripts%\%name_E-a%" >nul 2>&1
+	del "%/Scripts%\%name_E-j%" >nul 2>&1
+    del "%/Scripts%\%name_E-d%" >nul 2>&1
 	
-    rename "%/Scripts%\%name_Extras-Addon%.old" %name_Extras-Addon%
-    rename "%/Scripts%\%name_Extras-json%.old" %name_Extras-json%
-    rename "%/Scripts%\%name_Extras-data%.old" %name_Extras-data%
+    rename "%/Scripts%\%name_E-a%.old" %name_E-a%
+    rename "%/Scripts%\%name_E-j%.old" %name_E-j%
+    rename "%/Scripts%\%name_E-d%.old" %name_E-d%
     timeout /t 1 /nobreak >nul
     @echo.
     echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
@@ -779,13 +1338,13 @@ if exist "%/Scripts%\%name_Extras-Addon%" (
   echo ³ ! ‚®ááâ ­®¢«¥­¨¥ ¡¥ª ¯ ...                           ! ³
   echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
   timeout /t 1 /nobreak >nul
-  del "%/Scripts%\%name_Extras-Addon%" >nul 2>&1
-  del "%/Scripts%\%name_Extras-json%" >nul 2>&1
-  del "%/Scripts%\%name_Extras-data%" >nul 2>&1
+  del "%/Scripts%\%name_E-a%" >nul 2>&1
+  del "%/Scripts%\%name_E-j%" >nul 2>&1
+  del "%/Scripts%\%name_E-d%" >nul 2>&1
   
-  rename "%/Scripts%\%name_Extras-Addon%.old" %name_Extras-Addon%
-  rename "%/Scripts%\%name_Extras-json%.old" %name_Extras-json%
-  rename "%/Scripts%\%name_Extras-data%.old" %name_Extras-data%
+  rename "%/Scripts%\%name_E-a%.old" %name_E-a%
+  rename "%/Scripts%\%name_E-j%.old" %name_E-j%
+  rename "%/Scripts%\%name_E-d%.old" %name_E-d%
   timeout /t 1 /nobreak >nul
   @echo.
   @echo.
@@ -806,7 +1365,7 @@ if exist "%/Scripts%\%name_Extras-Addon%" (
 		
 :continue_dwn_extras_addon
 					   
-if exist "%/Scripts%\%name_Extras-data%" (
+if exist "%/Scripts%\%name_E-d%" (
   goto download_extras_addon_RU_Success 
   
   ) else (
@@ -814,10 +1373,10 @@ if exist "%/Scripts%\%name_Extras-data%" (
     echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 	timeout /t 1 /nobreak >nul
 						
-	echo ³ ! ‚®ááâ ­®¢«¥­¨¥ %name_Extras-data%...               ! ³
+	echo ³ ! ‚®ááâ ­®¢«¥­¨¥ %name_E-d%...               ! ³
     echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 	@echo.
-	rename "%/Scripts%\%name_Extras-data%.old" %name_Extras-data%
+	rename "%/Scripts%\%name_E-d%.old" %name_E-d%
     timeout /t 2 /nobreak >nul
 	goto download_extras_addon_RU_Success_Data_Notice )
 				  	  
@@ -839,27 +1398,27 @@ timeout /t 1 /nobreak >nul
 echo ³  “¤ «¥­¨¥ ¡¥ª ¯ ...                                    ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 timeout /t 1 /nobreak >nul
-del "%/Scripts%\%name_Extras-Addon%.old" >nul 2>&1
-del "%/Scripts%\%name_Extras-json%.old" >nul 2>&1
-del "%/Scripts%\%name_Extras-data%.old" >nul 2>&1
+del "%/Scripts%\%name_E-a%.old" >nul 2>&1
+del "%/Scripts%\%name_E-j%.old" >nul 2>&1
+del "%/Scripts%\%name_E-d%.old" >nul 2>&1
 				 
 				 
 echo º ‘ªà¨¯â Extras-addon ãá¯¥è­® ãáâ ­®¢«¥­.               º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 @echo.
-del "%/cfg%\%name_txtcfg_EA_md_version%" >nul 2>&1
-del "%/cfg%\%name_txtcfg_EA_version%" >nul 2>&1
-copy /y "%/cfga%\%name_txtcfg_EA_version%" "%/cfg%\%name_txtcfg_EA_version%" >nul
+del "%/versions%\%name_txtcfg_EA_md_version%" >nul 2>&1
+del "%/versions%\%name_txtcfg_EA_version%" >nul 2>&1
+copy /y "%/cfga%\%name_txtcfg_EA_version%" "%/versions%\%name_txtcfg_EA_version%" >nul
 timeout /t 1 /nobreak >nul
 
-set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_version.txt >nul 2>&1
+set /p Extras-Addon_version_qst=< %APPDATA%\txtcfg\versions\EA_version.txt >nul 2>&1
 
 echo ----------------------------------------------------------
 echo  ‚¥àá¨ï extras-addon : %Extras-Addon_version_qst%
 echo ----------------------------------------------------------
-echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_Extras-Addon%"
-echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_Extras-json%"
-echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_Extras-data%"
+echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_E-a%"
+echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_E-j%"
+echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_E-d%"
 echo ----------------------------------------------------------
 echo [1]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
 choice /c 1 /n
@@ -893,25 +1452,25 @@ timeout /t 1 /nobreak >nul
 echo ³ “¤ «¥­¨¥ ¡¥ª ¯ ...                                     ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 timeout /t 1 /nobreak >nul
-del "%/Scripts%\%name_Extras-Addon%.old" >nul 2>&1
-del "%/Scripts%\%name_Extras-json%.old" >nul 2>&1
-del "%/Scripts%\%name_Extras-data%.old" >nul 2>&1
+del "%/Scripts%\%name_E-a%.old" >nul 2>&1
+del "%/Scripts%\%name_E-j%.old" >nul 2>&1
+del "%/Scripts%\%name_E-d%.old" >nul 2>&1
 				 
 				 
 echo º! ‘ªà¨¯â Extras-addon “‘‹‚ ãá¯¥è­® ãáâ ­®¢«¥­.     ! º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 @echo.
-del "%/cfg%\%name_txtcfg_EA_md_version%" >nul 2>&1
-del "%/cfg%\%name_txtcfg_EA_version%" >nul 2>&1
-copy /y "%/cfga%\%name_txtcfg_EA_version%" "%/cfg%\%name_txtcfg_EA_version%" >nul
+del "%/versions%\%name_txtcfg_EA_md_version%" >nul 2>&1
+del "%/versions%\%name_txtcfg_EA_version%" >nul 2>&1
+copy /y "%/cfga%\%name_txtcfg_EA_version%" "%/versions%\%name_txtcfg_EA_version%" >nul
 timeout /t 1 /nobreak >nul
-set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_version.txt >nul 2>&1
+set /p Extras-Addon_version_qst=< %APPDATA%\txtcfg\versions\EA_version.txt >nul 2>&1
 echo ----------------------------------------------------------
 echo  ‚¥àá¨ï extras-addon : %Extras-Addon_version_qst%
 echo ----------------------------------------------------------
-echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_Extras-Addon%"
-echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_Extras-json%"
-echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_Extras-data%"
+echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_E-a%"
+echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_E-j%"
+echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_E-d%"
 echo ----------------------------------------------------------
 echo [1]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
 choice /c 1 /n
@@ -927,22 +1486,23 @@ timeout /t 1 /nobreak >nul
 echo ³ “¤ «¥­¨¥ ®à¨£¨­ «ì­®£® Extras Addon...               ° ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 timeout /t 1 /nobreak >nul
-del "%/Scripts%\%name_Extras-Addon%" >nul 2>&1
+del "%/Scripts%\%name_E-a%" >nul 2>&1
 
 echo ³ ‡ £àã§ª  ª áâ®¬­®£® Extras-Addon...                    ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 
-powershell -command "& { Invoke-WebRequest -Uri '%Extras-Addon_item_mod_Url%' -OutFile '%/Scripts%\%name_Extras-Addon%' }"
+powershell -command "& { Invoke-WebRequest -Uri '%Extras-Addon_item_mod_Url%' -OutFile '%/Scripts%\%name_E-a%' }"
 
-if exist "%/Scripts%\%name_Extras-Addon%" (
+if exist "%/Scripts%\%name_E-a%" (
 
 echo º Š áâ®¬­ë© Extras-addon ãá¯¥è­® ãáâ ­®¢«¥­.            º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 @echo.
-set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_md_version.txt >nul 2>&1
-del "%/cfg%\%name_txtcfg_EA_version%" >nul 2>&1
-del "%/cfg%\%name_txtcfg_EA_md_version%" >nul 2>&1
-copy /y "%/cfga%\%name_txtcfg_EA_md_version%" "%/cfg%\%name_txtcfg_EA_md_version%" >nul
+
+del "%/versions%\%name_txtcfg_EA_version%" >nul 2>&1
+del "%/versions%\%name_txtcfg_EA_md_version%" >nul 2>&1
+copy /y "%/cfga%\%name_txtcfg_EA_md_version%" "%/versions%\%name_txtcfg_EA_md_version%" >nul
+set /p Extras-Addon_version_qst=< %APPDATA%\txtcfg\versions\EA_md_version.txt >nul 2>&1
 
 timeout /t 1 /nobreak >nul
 
@@ -950,7 +1510,7 @@ echo ----------------------------------------------------------
 echo  ‚¥àá¨ï ª áâ®¬­®£® extras-addon : %Extras-Addon_version_qst%
 echo  ‚¥àá¨ï ®à¨£¨­ «ì­ extras-addon : %Extras-Addon_version_origA%
 echo ----------------------------------------------------------
-echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_Extras-Addon%"
+echo "ƒ¤¥ ä ©«?   ’ãâ: %/Scripts%\%name_E-a%"
 echo ----------------------------------------------------------
 echo [1]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
 choice /c 1 /n
@@ -976,34 +1536,34 @@ timeout /t 1 /nobreak >nul
 echo ³ “¤ «¥­¨¥ áâ àëå OLD ¡¥ª ¯®¢...                       ° ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 timeout /t 1 /nobreak >nul
-del "%/Scripts%\%name_UltimateMenu%.old" >nul 2>&1
+del "%/Scripts%\%name_UM%.old" >nul 2>&1
 
 
-if exist "%/Scripts%\%name_UltimateMenu%" (
+if exist "%/Scripts%\%name_UM%" (
 
   echo ³ ¡­ àã¦¥­ UltimateMenu.lua. ‘®§¤ ­¨¥ ­®¢®£® ¡¥ª ¯ ...  ³
   echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
   timeout /t 2 /nobreak >nul
-  rename "%/Scripts%\%name_UltimateMenu%" "%name_UltimateMenu%.old"
+  rename "%/Scripts%\%name_UM%" "%name_UM%.old"
 
   echo ³ ¥ª ¯ á®§¤ ­. ‡ £àã§ª  UltimateMenu...                 ³
   echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
   
-  powershell -command "& { Invoke-WebRequest -Uri '%UltimateMenu_orig_Url%' -OutFile '%/Scripts%\%name_UltimateMenu%' } "
+  powershell -command "& { Invoke-WebRequest -Uri '%UltimateMenu_orig_Url%' -OutFile '%/Scripts%\%name_UM%' } "
   
 ) else (
 
 echo ³ UltimateMenu.lua ­¥ ®¡­ àã¦¥­. —¨áâ ï ãáâ ­®¢ª ...    ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 	  
-del "%/Scripts%\%name_UltimateMenu%" >nul 2>&1
+del "%/Scripts%\%name_UM%" >nul 2>&1
 
-powershell -command "& { Invoke-WebRequest -Uri '%UltimateMenu_orig_Url%' -OutFile '%/Scripts%\%name_UltimateMenu%' } "
+powershell -command "& { Invoke-WebRequest -Uri '%UltimateMenu_orig_Url%' -OutFile '%/Scripts%\%name_UM%' } "
 
 timeout /t 3 /nobreak >nul )
 
 
-if exist "%/Scripts%\%name_UltimateMenu%" (
+if exist "%/Scripts%\%name_UM%" (
 
 timeout /t 1 /nobreak >nul
 echo ³ UltimateMenu.lua ãá¯¥è­® § £àã¦¥­.                    ³
@@ -1014,19 +1574,19 @@ echo ³  “¤ «¥­¨¥ ¡¥ª ¯ ...                                    ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 
 timeout /t 1 /nobreak >nul
-del "%/Scripts%\%name_UltimateMenu%.old" >nul 2>&1
+del "%/Scripts%\%name_UM%.old" >nul 2>&1
 				 
 				 
 echo º ‘ªà¨¯â UltimateMenu ãá¯¥è­® ãáâ ­®¢«¥­.               º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 @echo.
-del "%/cfg%\%name_txtcfg_UM_version%" >nul 2>&1
-copy /y "%/cfga%\%name_txtcfg_UM_version%" "%/cfg%\%name_txtcfg_UM_version%" >nul
+del "%/versions%\%name_txtcfg_UM_version%" >nul 2>&1
+copy /y "%/cfga%\%name_txtcfg_UM_version%" "%/versions%\%name_txtcfg_UM_version%" >nul
 timeout /t 1 /nobreak >nul
 echo ----------------------------------------------------------
 echo  ‚¥àá¨ï YimMenu : %Ultimate_Menu_version%
 echo ----------------------------------------------------------
-echo "ƒ¤¥ ä ©«?  ’ãâ: %/Scripts%\%name_UltimateMenu%"
+echo "ƒ¤¥ ä ©«?  ’ãâ: %/Scripts%\%name_UM%"
 echo ----------------------------------------------------------
 echo [1]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
 choice /c 1 /n
@@ -1041,8 +1601,8 @@ choice /c 1 /n
 	echo ³ ! ‚®ááâ ­®¢«¥­¨¥ ¡¥ª ¯ ...                           ! ³
     echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
     timeout /t 1 /nobreak >nul
-    del "%/Scripts%\%name_UltimateMenu%" >nul 2>&1
-    rename "%/Scripts%\%name_UltimateMenu%.old" %name_UltimateMenu%
+    del "%/Scripts%\%name_UM%" >nul 2>&1
+    rename "%/Scripts%\%name_UM%.old" %name_UM%
 
     @echo.
     echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
@@ -1070,32 +1630,32 @@ timeout /t 1 /nobreak >nul
 echo ³ “¤ «¥­¨¥ áâ àëå OLD ¡¥ª ¯®¢...                       ° ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 timeout /t 1 /nobreak >nul
-del "%/Downloads%\%name_YimMenu%.old" >nul 2>&1
+del "%/Downloads%\%name_YM%.old" >nul 2>&1
 
-if exist "%/Downloads%\%name_YimMenu%" (
+if exist "%/Downloads%\%name_YM%" (
 
-  echo ³ ¡­ àã¦¥­ %name_YimMenu%. ‘®§¤ ­¨¥ ­®¢®£® ¡¥ª ¯ ...  ³
+  echo ³ ¡­ àã¦¥­ %name_YM%. ‘®§¤ ­¨¥ ­®¢®£® ¡¥ª ¯ ...  ³
   echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
   timeout /t 2 /nobreak >nul
-  rename "%/Downloads%\%name_YimMenu%" "%name_YimMenu%.old"
+  rename "%/Downloads%\%name_YM%" "%name_YM%.old"
 
   echo ³ ¥ª ¯ á®§¤ ­. ‡ £àã§ª  YimMenu...                      ³
   echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 
-  powershell -command "& { Invoke-WebRequest -Uri '%YimMenu_item_Url%' -OutFile '%/Downloads%\%name_YimMenu%' }"
+  powershell -command "& { Invoke-WebRequest -Uri '%YimMenu_item_Url%' -OutFile '%/Downloads%\%name_YM%' }"
 	
 ) else (
 
 echo ³ YimMenu.dll ­¥ ®¡­ àã¦¥­.      —¨áâ ï ãáâ ­®¢ª ...    ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 	  
-del "%/Downloads%\%name_YimMenu%" >nul 2>&1
+del "%/Downloads%\%name_YM%" >nul 2>&1
 
-powershell -command "& { Invoke-WebRequest -Uri '%YimMenu_item_Url%' -OutFile '%/Downloads%\%name_YimMenu%' }"
+powershell -command "& { Invoke-WebRequest -Uri '%YimMenu_item_Url%' -OutFile '%/Downloads%\%name_YM%' }"
 
 timeout /t 3 /nobreak >nul )
 
-if exist "%/Downloads%\%name_YimMenu%" (
+if exist "%/Downloads%\%name_YM%" (
 
 timeout /t 1 /nobreak >nul
 echo ³ YimMenu.dll ãá¯¥è­® § £àã¦¥­.                         ³
@@ -1106,19 +1666,19 @@ echo ³  “¤ «¥­¨¥ ¡¥ª ¯ ...                                    ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 
 timeout /t 1 /nobreak >nul
-del "%/Downloads%\%name_YimMenu%.old" >nul 2>&1
+del "%/Downloads%\%name_YM%.old" >nul 2>&1
 				 
 				 
 echo º —¨â-¬¥­î  YimMenu ãá¯¥è­® ãáâ ­®¢«¥­.                 º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 @echo.
-del "%/cfg%\%name_txtcfg_YM_version%" >nul 2>&1
-copy /y "%/cfga%\%name_txtcfg_YM_version%" "%/cfg%\%name_txtcfg_YM_version%" >nul
+del "%/versions%\%name_txtcfg_YM_version%" >nul 2>&1
+copy /y "%/cfga%\%name_txtcfg_YM_version%" "%/versions%\%name_txtcfg_YM_version%" >nul
 timeout /t 1 /nobreak >nul
 echo ----------------------------------------------------------
-echo  ‚¥àá¨ï YimMenu : %YimMenu_version%
+echo  ‚¥àá¨ï YimMenu : %YM_version%
 echo ----------------------------------------------------------
-echo "ƒ¤¥ ä ©«?  ’ãâ: %/Downloads%\%name_YimMenu%"
+echo "ƒ¤¥ ä ©«?  ’ãâ: %/Downloads%\%name_YM%"
 echo ----------------------------------------------------------
 echo [1]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
 choice /c 1 /n
@@ -1133,8 +1693,8 @@ choice /c 1 /n
 	echo ³ ! ‚®ááâ ­®¢«¥­¨¥ ¡¥ª ¯ ...                           ! ³
     echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
     timeout /t 1 /nobreak >nul
-    del "%/Downloads%\%name_YimMenu%" >nul 2>&1
-    rename "%/Downloads%\%name_YimMenu%.old" %name_YimMenu%
+    del "%/Downloads%\%name_YM%" >nul 2>&1
+    rename "%/Downloads%\%name_YM%.old" %name_YM%
 
     @echo.
     echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
@@ -1266,13 +1826,15 @@ echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 echo [5]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
 echo ----------------------------------------------------------
 echo [6] ß âªàëâì ¯ ¯ªã /YimMenu. Š®à­¥¢ ï ¯ ¯ª  ç¨â-¬¥­î.
+echo [7] ß âªàëâì ¯ ¯ªã /YimTools.  ¯ª  á ª®­ä¨£ãà æ¨ï¬¨.
 @echo.
-echo [7] ß ‘ª ç âì YimTools ¢ /Steam/%name_YimTools_Replace%.
-echo [8] ß ‘ª ç âì Xenos64 ¢ /Steam/%name_YimTools_Replace%.
+echo [8] ß ‘ª ç âì YimTools ¢ %RF%/%name_YT_Replace_exe%
+echo [9] ß ‘ª ç âì Xenos64 ¢ %RF%/%name_YT_Replace_exe%
 
-choice /c 12345678 /n
- if errorlevel 8 goto put_Xenos_steam
- if errorlevel 7 goto put_YimTools_steam
+choice /c 123456789 /n
+ if errorlevel 9 goto put_Xenos_R
+ if errorlevel 8 goto put_YimTools_R
+ if errorlevel 7 goto open_YT_folder_RU
  if errorlevel 6 goto open_YimMenu_folder_RU
  if errorlevel 5 goto check_offline_mode
  if errorlevel 4 goto choice_settings_RU
@@ -1285,72 +1847,89 @@ cls
 echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
 echo º          §«¨ç­ë¥ ¯«îèª¨ (Offline)                        º
 echo ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
-echo ³ 1 ß âªàëâì ¯ ¯ªã /YimMenu. Š®à­¥¢ ï ¯ ¯ª  ç¨â-¬¥­î.      ß ³
+echo ³ 1 ß âªàëâì ¯ ¯ªã /YimTools.  ¯ª  á ª®­ä¨£ãà æ¨ï¬¨.      ß ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
-echo ³ 2 ß âªàëâì ¯ ¯ªã /Scripts.  ¯ª  á  ¤¤®­ ¬¨.             ß ³
+echo ³ 2 ß âªàëâì ¯ ¯ªã /YimMenu. Š®à­¥¢ ï ¯ ¯ª  ç¨â-¬¥­î.      ß ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
-echo ³ 3 ß âªàëâì ¯ ¯ªã /xml_vehicles.  ¯ª  á XML âà ­á¯®àâ®¬. ß ³
+echo ³ 3 ß âªàëâì ¯ ¯ªã /Scripts.  ¯ª  á  ¤¤®­ ¬¨.             ß ³
+echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+echo ³ 4 ß âªàëâì ¯ ¯ªã /xml_vehicles.  ¯ª  á XML âà ­á¯®àâ®¬. ß ³
 echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 echo [5]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
 echo ----------------------------------------------------------
 
 choice /c 1235 /n
  if errorlevel 5 goto check_offline_mode
- if errorlevel 3 goto open_xml_folder_RU
- if errorlevel 2 goto open_scripts_folder_RU
- if errorlevel 1 goto open_YimMenu_folder_RU
+ if errorlevel 4 goto open_xml_folder_RU
+ if errorlevel 3 goto open_scripts_folder_RU
+ if errorlevel 2 goto open_YimMenu_folder_RU
+ if errorlevel 1 goto open_YT_folder_RU
 
 
 :dwnActVersionsInfo_Table
 cls
 
-:: ------------------- Version SETS -------------------------------------------------------------------------------------------------------
+:: ------------------- Versions SETS -------------------------------------------------------------------------------------------------------
 
-          set /p YimTools_version=< %~dp0txtcfg\YT_version.txt >nul 2>&1
-		  if not exist "%~dp0txtcfg\YT_version.txt" (
-          set "YimTools_version=­¥ ãáâ ­®¢«¥­" )
+set /p YT_version=< %APPDATA%\txtcfg\versions\YT_version.txt >nul 2>&1
+  if not exist "%APPDATA%\txtcfg\versions\YT_version.txt" (
+  set "YT_version=­¥ ãáâ ­®¢«¥­" )
 		  
-           set /p YimMenu_version=< %~dp0txtcfg\YM_version.txt >nul 2>&1
-		   if not exist "%~dp0txtcfg\YM_version.txt" (
-          set "YimMenu_version=­¥ ãáâ ­®¢«¥­" )
+set /p YM_version=< %APPDATA%\txtcfg\versions\YM_version.txt >nul 2>&1
+  if not exist "%APPDATA%\txtcfg\versions\YM_version.txt" (
+  set "YM_version=­¥ ãáâ ­®¢«¥­" )
 		  
-		  set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_version.txt >nul 2>&1
-  if not exist "%~dp0txtcfg\EA_version.txt" (
-          set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_md_version.txt >nul 2>&1 )
+set /p EA_version_qst=< %APPDATA%\txtcfg\versions\EA_version.txt >nul 2>&1
+  if not exist "%APPDATA%\txtcfg\versions\EA_version.txt" (
+  set /p EA_version_qst=< %APPDATA%\txtcfg\versions\EA_md_version.txt >nul 2>&1 )
+		   
+  if not exist "%APPDATA%\txtcfg\versions\EA_md_version.txt" (
+  set "EA_version_qst=­¥ ãáâ ­®¢«¥­" )
 		  
-  set /p Extras-Addon_version_mod=< %~dp0txtcfg\EA_md_version.txt >nul 2>&1
-  if not exist "%~dp0txtcfg\EA_md_version.txt" (
-          set "Extras-Addon_version_mod=­¥ ãáâ ­®¢«¥­"
-		  set /p Extras-Addon_version_qst=< %~dp0txtcfg\EA_version.txt >nul 2>&1 )
+set /p UM_version=< %APPDATA%\txtcfg\versions\UM_version.txt >nul 2>&1
+  if not exist "%APPDATA%\txtcfg\versions\UM_version.txt" (
+  set "UM_version=­¥ ãáâ ­®¢«¥­" )
 
-		  
-     set /p Ultimate_Menu_version=< %~dp0txtcfg\UM_version.txt >nul 2>&1
-	 if not exist "%~dp0txtcfg\UM_version.txt" (
-          set "Ultimate_Menu_version=­¥ ãáâ ­®¢«¥­" )
+set /p YT_versionA=< %APPDATA%\txtcfg\txtcfga\YT_version.txt >nul 2>&1
+set /p YM_versionA=< %APPDATA%\txtcfg\txtcfga\YM_version.txt >nul 2>&1
+set /p EA_version_origA=< %APPDATA%\txtcfg\txtcfga\EA_version.txt >nul 2>&1
+set /p EA_version_modA=< %APPDATA%\txtcfg\txtcfga\EA_md_version.txt >nul 2>&1
+set /p UM_versionA=< %APPDATA%\txtcfg\txtcfga\UM_version.txt >nul 2>&1
 
 :: ----------------------------------------------------------------------------------------------------------------------------------------
 	
 cls
 echo =====================================================================
-echo ---------- ’¥ªãé¨¥ ãáâ ­®¢«¥­­ë¥ ¢¥àá¨¨ -----------------------------
-echo ---------- ¨  ªâã «ì­ë¥ ¢¥àá¨¨ ­  á ©â¥: ----------------------------
+echo ----           ’¥ªãé¨¥ ãáâ ­®¢«¥­­ë¥ ¢¥àá¨¨                      ----
+echo ----           ¨  ªâã «ì­ë¥ ¢¥àá¨¨ ­  á ©â¥:                     ----
+echo ---------------------------------------------------------------------
 timeout /t 1 /nobreak >nul
+@echo.
+@echo.
 echo =====================================================================
-echo  “áâ ­®¢«¥­­ ï ¢¥àá¨ï YimTools : %YimTools_version%
+echo  “áâ ­®¢«¥­­ ï ¢¥àá¨ï YimTools : %YT_version%
 echo ---------------------------------------------------------------------
-echo  €ªâã «ì­ ï ¢¥àá¨ï YimTools : %YimTools_versionA%
+echo  €ªâã «ì­ ï ¢¥àá¨ï YimTools : %YT_versionA%
 echo =====================================================================
-echo  “áâ ­®¢«¥­­ ï ¢¥àá¨ï YimMenu : %YimMenu_version%
-echo ---------------------------------------------------------------------
-echo  €ªâã «ì­ ï ¢¥àá¨ï YimMenu : %YimMenu_versionA%
+@echo.
 echo =====================================================================
-echo  “áâ ­®¢«¥­­ ï ¢¥àá¨ï Extras-Addon : %Extras-Addon_version_qst%
+echo  “áâ ­®¢«¥­­ ï ¢¥àá¨ï YimMenu : %YM_version%
 echo ---------------------------------------------------------------------
-echo  €ªâã «ì­ ï ¢¥àá¨ï Extras-Addon : %Extras-Addon_version_origA%
+echo  €ªâã «ì­ ï ¢¥àá¨ï YimMenu : %YM_versionA%
 echo =====================================================================
-echo  “áâ ­®¢«¥­­ ï ¢¥àá¨ï UltimateMenu : %Ultimate_Menu_version%
+@echo.
+echo =====================================================================
+echo  “áâ ­®¢«¥­­ ï ¢¥àá¨ï Extras-Addon : %EA_version_qst%
 echo ---------------------------------------------------------------------
-echo  €ªâã «ì­ ï ¢¥àá¨ï UltimateMenu : %Ultimate_Menu_versionA%
+echo  €ªâã «ì­ ï ¢¥àá¨ï Extras-Addon : %EA_version_origA%
+echo =====================================================================
+@echo.
+echo =====================================================================
+@echo.
+echo =====================================================================
+echo  “áâ ­®¢«¥­­ ï ¢¥àá¨ï UltimateMenu : %UM_version%
+echo ---------------------------------------------------------------------
+echo  €ªâã «ì­ ï ¢¥àá¨ï UltimateMenu : %UM_versionA%
 echo =====================================================================
 
 echo [1]  ‚ë©â¨ ¢ £« ¢­®¥ ¬¥­î.
@@ -1394,32 +1973,32 @@ timeout /t 1 /nobreak >nul
 echo ³ “¤ «¥­¨¥ áâ àëå OLD ¡¥ª ¯®¢...                       ° ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 timeout /t 1 /nobreak >nul
-del "%/YimMenu%\%name_animDictsCompact%.old" >nul 2>&1
+del "%/YimMenu%\%name_aDC%.old" >nul 2>&1
 
-if exist "%/YimMenu%\%name_animDictsCompact%" (
+if exist "%/YimMenu%\%name_aDC%" (
 
   echo ³ ¡­ àã¦¥­ animDictsCompact. ‘®§¤ ­¨¥ ­®¢®£® ¡¥ª ¯ ...  ³
   echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
   timeout /t 2 /nobreak >nul
-  rename "%/YimMenu%\%name_animDictsCompact%" "%name_animDictsCompact%.old"
+  rename "%/YimMenu%\%name_aDC%" "%name_aDC%.old"
 
   echo ³ ¥ª ¯ á®§¤ ­. ‡ £àã§ª  animDictsCompact...             ³
   echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
   
-powershell -command "& { Invoke-WebRequest -Uri '%animDictsCompact_orig_Url%' -OutFile '%/YimMenu%/%name_animDictsCompact%' }"
+powershell -command "& { Invoke-WebRequest -Uri '%aDC_orig_Url%' -OutFile '%/YimMenu%/%name_aDC%' }"
 
 ) else (
 
 echo ³ animDictsCompact ­¥ ®¡­ àã¦¥­.   —¨áâ ï ãáâ ­®¢ª ...  ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 	  
-del "%/YimMenu%\%name_animDictsCompact%" >nul 2>&1
+del "%/YimMenu%\%name_aDC%" >nul 2>&1
 
-powershell -command "& { Invoke-WebRequest -Uri '%animDictsCompact_orig_Url%' -OutFile '%/YimMenu%/%name_animDictsCompact%' }"
+powershell -command "& { Invoke-WebRequest -Uri '%aDC_orig_Url%' -OutFile '%/YimMenu%/%name_aDC%' }"
 
 timeout /t 3 /nobreak >nul )
 
-if exist "%/YimMenu%\%name_animDictsCompact%" (
+if exist "%/YimMenu%\%name_aDC%" (
 
 timeout /t 1 /nobreak >nul
 echo ³ animDictsCompact ãá¯¥è­® § £àã¦¥­.                    ³
@@ -1430,7 +2009,7 @@ echo ³  “¤ «¥­¨¥ ¡¥ª ¯ ...                                    ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
 
 timeout /t 1 /nobreak >nul
-del "%/YimMenu%\%name_animDictsCompact%.old" >nul 2>&1
+del "%/YimMenu%\%name_aDC%.old" >nul 2>&1
 				 
 				 
 echo º  §  ¤ ­­ëå  ­¨¬ æ¨© ãá¯¥è­® ãáâ ­®¢«¥­ .             º
@@ -1438,7 +2017,7 @@ echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 @echo.
 timeout /t 1 /nobreak >nul
 echo ----------------------------------------------------------
-echo "ƒ¤¥ ä ©«?  ’ãâ: %/YimMenu%/%name_animDictsCompact%"
+echo "ƒ¤¥ ä ©«?  ’ãâ: %/YimMenu%/%name_aDC%"
 echo ----------------------------------------------------------
 echo  ‚ëå®¤ ¢ ¬¥­î ¤®¯ ¯«îè¥ª ç¥à¥§ 5 á¥ª...
 timeout /t 5 /nobreak >nul
@@ -1454,8 +2033,8 @@ goto optional_downloads_RU
 	echo ³ ! ‚®ááâ ­®¢«¥­¨¥ ¡¥ª ¯ ...                           ! ³
     echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
     timeout /t 1 /nobreak >nul
-    del "%/YimMenu%\%name_animDictsCompact%" >nul 2>&1
-    rename "%/YimMenu%\%name_animDictsCompact%.old" %name_animDictsCompact%
+    del "%/YimMenu%\%name_aDC%" >nul 2>&1
+    rename "%/YimMenu%\%name_aDC%.old" %name_aDC%
 
     @echo.
     echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
@@ -1499,27 +2078,27 @@ echo 	Š áâ®¬­ë¥ ­ áâà®©ª¨ settings.json ¤«ï ç¨â ¬¥­î YimMenu
 echo ------------------------------------------------------------------
 echo " à®¢¥àª  ­ «¨ç¨ï ã¦¥ áãé¥áâ¢ãîé¥£® ä ©«  ­ áâà®¥ª... "
 
-if exist "%/YimMenu%/%name_YimMenu-settings%" (
+if exist "%/YimMenu%/%name_YM-settings%" (
 
 echo "¥ª ¯ ã¦¥ áãé¥áâ¢ãîé¨å ­ áâà®¥ª settings.json ..."
 timeout /t 2 /nobreak >nul
-rename "%/YimMenu%\%name_YimMenu-settings%" "%name_YimMenu-settings%.old"
+rename "%/YimMenu%\%name_YM-settings%" "%name_YM-settings%.old"
 timeout /t 1 /nobreak >nul
 goto dwn_settings_noexist
 ) else (
 :dwn_settings_noexist
 echo "“áâ ­®¢ª  ª áâ®¬­®£® settings.json ®â  ¢â®à  YimTools..."
 timeout /t 1 /nobreak >nul
-del "%/YimMenu%\%name_YimMenu-settings%" >nul 2>&1
+del "%/YimMenu%\%name_YM-settings%" >nul 2>&1
 
-powershell -command "& { Invoke-WebRequest -Uri '%settings_item_Url%' -OutFile '%/YimMenu%/%name_YimMenu-settings%' }"
+powershell -command "& { Invoke-WebRequest -Uri '%settings_item_Url%' -OutFile '%/YimMenu%/%name_YM-settings%' }"
 
-if not exist "%/YimMenu%/%name_YimMenu-settings%" (
-		echo "Error: ¥ ã¤ «®áì áª ç âì ä ©« %name_YimMenu-settings%. à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì ááë«ª¨ ­  ä ©« ¢ ª®¤¥."
+if not exist "%/YimMenu%/%name_YM-settings%" (
+		echo "Error: ¥ ã¤ «®áì áª ç âì ä ©« %name_YM-settings%. à®¢¥àìâ¥ ­ «¨ç¨¥ ¨­â¥à­¥â á®¥¤¨­¥­¨ï ¨«¨  ªâã «ì­®áâì ááë«ª¨ ­  ä ©« ¢ ª®¤¥."
 	) else (
 	    cls
 		echo "Š áâ®¬­ë¥ ­ áâà®©ª¨ ãá¯¥è­® ãáâ ­®¢«¥­ë. "
-		echo "ƒ¤¥ ä ©«? ’ãâ: %/YimMenu%/%name_YimMenu-settings%"
+		echo "ƒ¤¥ ä ©«? ’ãâ: %/YimMenu%/%name_YM-settings%"
 		echo "Returning to the main menu in 5 seconds." )
 timeout /t 5 /nobreak >nul
 cls
@@ -1532,17 +2111,20 @@ echo 	‚®áâ ­®¢«¥­¨¥ ­ áâà®¥ª settings.json ¤«ï ç¨â ¬¥­î YimMenu
 echo ------------------------------------------------------------------
 echo " à®¢¥àª  ­ «¨ç¨ï ¡¥ª ¯  ä ©«  settigs.json... "
 timeout /t 2 /nobreak >nul
-if exist "%/YimMenu%/%name_YimMenu-settings%.old" (
+if exist "%/YimMenu%/%name_YM-settings%.old" (
 echo " ‚ë¯®«­ï¥âáï ¢®ááâ ­®¢«¥­¨¥ ä ©«  settigs.json... "
 timeout /t 1 /nobreak >nul
-del "%/YimMenu%\%name_YimMenu-settings%" >nul 2>&1
-rename "%/YimMenu%\%name_YimMenu-settings%.old" %name_YimMenu-settings%
-echo " ‚®ááâ ­®¢«¥­¨¥ ä ©«  %name_YimMenu-settings% ¯à®è«® “‘…˜ "
+del "%/YimMenu%\%name_YM-settings%" >nul 2>&1
+rename "%/YimMenu%\%name_YM-settings%.old" %name_YM-settings%
+if exist "%/YimMenu%/%name_YM-settings%" (
+echo " ‚®ááâ ­®¢«¥­¨¥ ä ©«  %name_YM-settings% ¯à®è«® “‘…˜ "
+) else (
+echo " ‚®ááâ ­®¢«¥­¨¥ ä ©«  %name_YM-settings% … “„€‹‘œ " )
 timeout /t 2 /nobreak >nul
 goto check_offline_mode
 ) else (
 cls
-echo " íª ¯ ä ©«  %name_YimMenu-settings% … €‰„… "
+echo " íª ¯ ä ©«  %name_YM-settings% … €‰„… "
 timeout /t 3 /nobreak >nul
 goto check_offline_mode )
 
@@ -1550,24 +2132,33 @@ goto check_offline_mode )
 :: \\\\\\\\\\\\\ \\\\\\\\\\\ astions link \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 :: /////////////////////////////////////////////////////////////////////
 
+:open_YT_folder_RU
+start %/cfg%
+goto menu_settings
+
 :open_scripts_folder_RU
 start %/Scripts%
-goto choice_addons_RU
+goto menu_settings
 
 :open_YimMenu_folder_RU
 start %/YimMenu%
-goto check_offline_mode
+goto menu_settings
 
 :open_xml_folder_RU
 start %/YimMenu%\xml_maps
 start %/YimMenu%\xml_vehicles
 cls
-goto xml_info
+goto menu_settings
+
+:open_json_folder_RU
+start %/json_vehicles%
+cls
+goto menu_settings
 
 :restart_RU
 echo "‡ ¯ãáª ­®¢®© ¢¥àá¨¨ YimTools ..."
 timeout /t 2 /nobreak >nul
-start %name_YimTools%
+start %name_YT%
 exit
 
 :start_Xenos_RU
@@ -1594,26 +2185,72 @@ start "" %/Downloads%\%name_FateInjector%
 :: FateInjector.exe
 exit
 
-:put_YimTools_steam
+:put_YimTools_R
 cls
+if "%/RF%"=="­¥ ­ §­ ç¥­" (
 echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
 echo º !                     ‚ˆŒ€ˆ…                          ! º
 echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
-echo º YimTools ¡ã¤¥â áª ç ­ ¢ ¯ ¯ªã ¯à®£à ¬¬ë %name_YimTools_Replace% (Steam)  º
+echo º ¯ãâì § ¬¥­ë ­¥ ­ §­ ç¥­. à®¢¥àìâ¥ txt ª®­ä¨£ãà æ¨î       º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+echo ----------------------------------------------------------------------------
+echo ” ©« âãâ:  %/paths%\path_replace.txt
+echo ----------------------------------------------------------------------------
+@echo.
+echo ============================================================================
+echo [1]  ¦¬¨â¥ 1 ¤«ï ¢ëå®¤  ¢ £« ¢­®¥ ¬¥­î ...
+echo [2]  ¦¬¨â¥ 2 ¤«ï ®âªàëâ¨ï ä ©«  ª®­ä¨£ãà æ¨¨ ...
+
+choice /c 12 /n
+ if errorlevel 2 start %/paths%\path_replace.txt
+ if errorlevel 1 goto check_offline_mode
+ 
+)
+
+if "%name_YT_Replace_exe%"=="­¥ ­ §­ ç¥­" (
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º !                     ‚ˆŒ€ˆ…                          ! º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º ˆ¬ï § ¬¥­ë ­¥ ­ §­ ç¥­®. à®¢¥àìâ¥ txt ª®­ä¨£ãà æ¨î       º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+echo ----------------------------------------------------------------------------
+echo ” ©« âãâ:  %/paths%\name_replace.txt
+echo ----------------------------------------------------------------------------
+@echo.
+echo ============================================================================
+echo [1]  ¦¬¨â¥ 1 ¤«ï ¢ëå®¤  ¢ £« ¢­®¥ ¬¥­î ...
+echo [2]  ¦¬¨â¥ 2 ¤«ï ®âªàëâ¨ï ä ©«  ª®­ä¨£ãà æ¨¨ ...
+
+choice /c 12 /n
+ if errorlevel 2 start %/paths%\name_replace.txt exit
+ if errorlevel 1 goto check_offline_mode
+)
+
+
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º !                     ‚ˆŒ€ˆ…                          ! º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º YimTools § ¬¥­¨â á®¡®© ãª § ­­ãî ¢ ª®­ä¨£ãà æ¨¨ ¯à®£à ¬¬ã º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 echo ----------------------------------------------------------------------------
 echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
-echo º ‚ë ã¢¥à¥­ë çâ® å®â¨â¥ § ¬¥­¨âì %name_YimTools_Replace% áªà¨¯â®¬?         º
+echo º ‚ë ã¢¥à¥­ë çâ® å®â¨â¥ § ¬¥­¨âì %name_YT_Replace_exe% áªà¨¯â®¬?         º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 echo ----------------------------------------------------------------------------
-echo "” ©« ¡ã¤¥â âãâ:  %/ReplaceFolder%\%name_YimTools_Replace_exe%"
+echo ” ©« ¡ã¤¥â âãâ:  %/RF%\%name_YT_Replace_exe%
 echo ----------------------------------------------------------------------------
 
 set /p yn= ¦¬¨â¥ Y ¢ á«ãç ¥ ¯®«®¦¨â¥«ì­®£® ®â¢¥â :
 if /i "%yn%"=="y" (
 
-powershell -command "& { Invoke-WebRequest -Uri '%updateScript_club_Url%' -OutFile '%/ReplaceFolder%\%name_YimTools_Replace_exe%' }"
+powershell -command "& { Invoke-WebRequest -Uri '%updateScript_Url%' -OutFile '%/RF%\%name_YT_Replace_exe%' }"
 
+timeout /t 1 /nobreak >nul
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º    “á¯¥è­® § £àã¦¥­®        º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+timeout /t 1 /nobreak >nul
+exit
 ) else (
 
 cls
@@ -1624,25 +2261,32 @@ timeout /t 1 /nobreak >nul
 exit
 )
 
-:put_Xenos_steam
+:put_Xenos_R
 cls
 echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
 echo º !                     ‚ˆŒ€ˆ…                          ! º
 echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
-echo º Xenos ¡ã¤¥â áª ç ­ ¢ ¯ ¯ªã ¯à®£à ¬¬ë %name_YimTools_Replace% (Steam)     º
+echo º Xenos ¡ã¤¥â áª ç ­ ¢ ¯ ¯ªã ¯à®£à ¬¬ë %name_YT_Replace_exe% º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 echo ----------------------------------------------------------------------------
 echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
-echo º ‚ë ã¢¥à¥­ë çâ® å®â¨â¥ § ¬¥­¨âì %name_YimTools_Replace% áªà¨¯â®¬?         º
+echo º ‚ë ã¢¥à¥­ë çâ® å®â¨â¥ § ¬¥­¨âì %name_YT_Replace_exe% áªà¨¯â®¬?         º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 echo ----------------------------------------------------------------------------
-echo "” ©« ¡ã¤¥â âãâ:  %/ReplaceFolder%\%name_YimTools_Replace_exe%"
+echo "” ©« ¡ã¤¥â âãâ:  %/RF%\%name_YT_Replace_exe%"
 echo ----------------------------------------------------------------------------
 
 set /p yn= ¦¬¨â¥ Y ¢ á«ãç ¥ ¯®«®¦¨â¥«ì­®£® ®â¢¥â :
 if /i "%yn%"=="y" (
 
-powershell -command "& { Invoke-WebRequest -Uri '%Xenos64_item_Url%' -OutFile '%/ReplaceFolder%\%name_YimTools_Replace_exe%' }"
+powershell -command "& { Invoke-WebRequest -Uri '%Xenos64_item_Url%' -OutFile '%/RF%\%name_YT_Replace_exe%' }"
+
+timeout /t 1 /nobreak >nul
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º    “á¯¥è­® § £àã¦¥­®        º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+timeout /t 1 /nobreak >nul
+exit
 
 ) else (
 
@@ -1683,6 +2327,22 @@ exit
 echo ‚ëå®¤ ...
 exit /b
 
+:blocked
+cls
+
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º !                     ‚ˆŒ€ˆ…                          ! º
+echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+echo º ‘¥©ç á ¯®«ì§®¢ âìáï ç¨â ¬¥­î ­¥¡¥§®¯ á­®.                 º
+echo º à®£à ¬¬  § ¡«®ª¨à®¢ ­  ¤® ¯®ï¢«¥­¨¥ ¡¥§®¯ á­®© ®¡­®¢ë.   º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+@echo.
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³ ~        ‘¯ á¨¡® §  ¨á¯®«ì§®¢ ­¨¥ YimTools,       ~ ³
+echo ³ ~                à¨ïâ­®© ¨£àë!                   ~ ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+timeout /t 5 /nobreak >nul
+exit
 
 :auto_mode_RU
 cls
