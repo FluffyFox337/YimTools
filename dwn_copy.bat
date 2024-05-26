@@ -44,15 +44,14 @@ set "updateScript_bat_Url=https://goo.su/wultdz"
 :: -------------------------------------------------------------------
 
 cls 
-echo ╔═══════════════════════════════════════════════════════════════════╗
-echo ║                      Choice what download                       ║
-echo ╟───────────────────────────────────────────────────────────────────╢
-echo ║ 1 YimTools_alfa.exe                                             1 ║
-echo ╟───────────────────────────────────────────────────────────────────╢
-echo ║ 2 YimTools_alfa(exe)_RU.bat                                     2 ║
-echo ╟───────────────────────────────────────────────────────────────────╢
-echo ║ 3 Exit                                                          3 ║
-echo ╚═══════════════════════════════════════════════════════════════════╝
+echo                     Choice what download                     
+echo 
+echo 1 YimTools_alfa.exe
+echo 
+echo 2 YimTools_alfa(exe)_RU.bat 
+echo 
+echo 3 Exit                                            
+echo 
 echo ---------------------------------------------------------------------
 choice /c 123 /n
  if errorlevel 3 exit
