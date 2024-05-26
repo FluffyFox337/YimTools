@@ -53,7 +53,7 @@ echo:
 echo 3 Exit                                             
 echo ---------------------------------------------------------------------
 echo name EXE file: =%name_YT%=
-echo name EXE file: =%name_YT_bat%=
+echo name BAT file: =%name_YT_bat%=
 choice /c 123 /n
  if errorlevel 3 exit
  if errorlevel 2 goto dwnbat
