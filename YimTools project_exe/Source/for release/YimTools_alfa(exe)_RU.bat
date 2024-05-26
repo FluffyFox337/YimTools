@@ -7,7 +7,7 @@
    :: ===== File info =====
    :: encoding OEM866 
    :: syntaxis Batch CMD BAT
-   :: last edit:25.05.24 / 22:22 msk
+   :: last edit:26.05.24 / 16:37 msk
    :: last compile:13.05.24 / 16:42 msk
    :: =====================
 
@@ -60,8 +60,9 @@ set /a "replaced_mode=0"
 
 set /a "cpne=0"
 set /a "cdne=0"
+set /a "ymne=0"
 
-:: ------------------ FOLDERS_SETS --------------------------------
+:: ------------------ PATHS_SETS --------------------------------
 set "/cfg=%APPDATA%\txtcfg"
 set "/cfga=%APPDATA%\txtcfg\txtcfga"
 
@@ -87,7 +88,7 @@ if not exist "%/cfg%" (
    
 
    set "st_start=1"
-   set /a develop_mode=1
+   :: set /a develop_mode=1
    )
  
 REM set last_start_date=%date:~-10%
@@ -186,6 +187,10 @@ echo default_mode:=%default_mode%=
 echo skip_update_mode:=%skip_update_mode%=
 echo ------------------------------------------------------------------
 echo custom_folders_mode:=%custom_folders_mode%=
+echo                                             ----------------------
+echo cdne:=%cdne%=
+echo cpne:=%cpne%=
+echo ymne:=%ymne%=
 echo ------------------------------------------------------------------
 @echo.
 echo [1] ­ ¦¬¨â¥ ¤«ï ¯à®¤®«¦¥­¨ï...
@@ -197,7 +202,7 @@ choice /c 1 /n
 :: ++++++++++++++++++ Trig_Actions +++++++++++++++++++++++++++++++ 
 
 
-:: -------------- DEFAULT_FOLDERS_SETS ------------------------
+:: -------------- DEFAULT_PATHS_SETS ------------------------
 
 set "/Downloads=%USERPROFILE%\Downloads"
 set "/RF=­¥ ­ §­ ç¥­"
@@ -221,6 +226,10 @@ echo default_mode:=%default_mode%=
 echo skip_update_mode:=%skip_update_mode%=
 echo ------------------------------------------------------------------
 echo custom_folders_mode:=%custom_folders_mode%=
+echo                                             ----------------------
+echo cdne:=%cdne%=
+echo cpne:=%cpne%=
+echo ymne:=%ymne%=
 echo ------------------------------------------------------------------
 echo /Downloads:=%/Downloads%=
 echo /RF:=%/RF%=
@@ -238,12 +247,13 @@ if not exist "%/Downloads%" (
    set "/Downloads=%USERPROFILE%\OneDrive\Desktop" )
 if not exist "%/Downloads%" (
    set "/Downloads=%USERPROFILE%\Desktop" )
+
+if not exist "%/YimMenu%" set /a ymne=1
 		
 if "%custom_folders_mode%"=="0" goto skip_cpfs
-:: -------------- CUSTOM_FOLDERS_SETS -------------------------
+:: -------------- CUSTOM_PATHS_SETS -------------------------
 :cfs
-
-
+  
 if not exist "%/paths%\path_downloads.txt" (
     set /a cdne=1
     )
@@ -253,6 +263,7 @@ if not exist "%/paths%\path_replace.txt" (
 if not exist "%/paths%\name_replace.txt" (
     set /a cpne=1
     )
+
 
 
 if "%cdne%"=="1" goto skip_cdfs
@@ -287,6 +298,7 @@ echo ------------------------------------------------------------------
 echo custom_folders_mode:=%custom_folders_mode%=
 echo cdne:=%cdne%=
 echo cpne:=%cpne%=
+echo ymne:=%ymne%=
 echo ------------------------------------------------------------------
 echo /Downloads:=%/Downloads%=
 echo /RF:=%/RF%=
@@ -755,7 +767,7 @@ fc "%/cfga%\%name_txtcfg_YT_version%" "%/versions%\%name_txtcfg_YT_version%" >nu
 	
 powershell -command "& { Invoke-WebRequest -Uri '%updateScript_Url%' -OutFile '%/RF%\%name_YT_Replace_exe%.new' }"
 
-    timeout /t 10 /nobreak >nul
+    
 	:: 6060
     move /y "%/RF%%name_YT_Replace_exe%.new" "%/RF%%name_YT_Replace_exe%" >nul
 
@@ -884,6 +896,18 @@ echo ---------------------------------------------------------------------
 echo  €ªâ¨¢¨à®¢ ­ à¥¦¨¬ § ¬¥é¥­¨ï 
 echo ---------------------------------------------------------------------
 )
+if "%ymne%"=="1" (
+echo ---------------------------------------------------------------------
+echo   ¯ª  YimMenu ­¥ ®¡­ àã¦¥­ , § ¯ãáâ¨â¥ ç¨â ¨ ¯¥à¥§ ¯ãáâ¨â¥ YimTools.  
+@echo.
+echo ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+echo ³             ‘¥©ç á ãáâ ­®¢ª   ¤¤®­®¢ ­¥¢®§¬®¦­ !               ³
+echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+@echo.
+start %/YimMenu%
+echo ---------------------------------------------------------------------
+)
+
 echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
 echo º                         ƒ« ¢­®¥ ¬¥­î                            º
 echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
@@ -907,6 +931,7 @@ choice /c 12389 /n
  if errorlevel 3 goto menu_settings
  if errorlevel 2 goto optional_downloads_RU
  if errorlevel 1 goto menu_downloads
+
 
 
 :menu_offline_RU
@@ -960,9 +985,7 @@ echo ---------------------------------------------------------------------
 echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
 echo º ?           ‚ë¡¥à¨ çâ® å®ç¥èì á¤¥« âì                           ? º
 echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
-echo º 1 Žç¨áâ¨âì ¯ ¯ªã ª¥è  YimMenu (¡ëáâàë© ä¨ªá ¯®á«¥ ®¡­®¢ë GTA V) 1 º
-echo ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
-echo º 2 „®¯®«­¨â¥«ì­ë¥ ¯«îèª¨                                         2 º
+echo º 1 €‘’Ž‰Šˆ                                                     1 º
 echo Ç===================================================================¶
 echo º ! “ ¢ á ­¥â ¨­â¥à­¥â á®¥¤¨­¥­¨ï, ¯®íâ®¬ã âãâ ¬ «® ¯ã­ªâ®¢...    ! º
 echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
@@ -974,11 +997,10 @@ echo ³ …á«¨ ¯ ¯ª  § £àã§®ª ­ å®¤¨âáï ­¥ ¢ ­ã¦­®¬ ¬¥áâ¥ ¨«¨ ¥ñ ­¥âã,   ³
 echo ³  â®£¤  ¯® ã¬®«ç ­¨î § £àã§ª¨ ¡ã¤ãâ ­  à ¡®ç¥¬ áâ®«¥.           ³
 echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-choice /c 1289 /n
+choice /c 189 /n
  if errorlevel 9 goto goodbye_RU
  if errorlevel 8 goto instructions_RU
- if errorlevel 2 goto optional_downloads_RU_ofline
- if errorlevel 1 goto delete_cache_folder_RU
+ if errorlevel 1 goto menu_settings
 
 
 :menu_downloads
@@ -1018,13 +1040,13 @@ echo ³ 2 ’ ¡«¨æ   ªâã «ì­®áâ¨ ¢¥àá¨© (¯à®¢¥àì ­¥ ãáâ à¥«¨ «¨ ç¨âë)     2 ³
 echo ÃÄÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÄ´
 echo ³ 3 Žâªàëâì ¯ ¯ªã /YimTools.  ¯ª  á ª®­ä¨£ãà æ¨ï¬¨.              3 ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
-echo ³ 4 Žâªàëâì ¯ ¯ªã /YimMenu. Š®à­¥¢ ï ¯ ¯ª  ç¨â-¬¥­î.              4 ³
+echo ³ 4 Žâªàëâì ¯ ¯ªã /Scripts.  ¯ª  á  ¤¤®­ ¬¨.                     4 ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
-echo ³ 5 Žâªàëâì ¯ ¯ªã /Scripts.  ¯ª  á  ¤¤®­ ¬¨.                     5 ³
+echo ³ 5 Žâªàëâì ¯ ¯ª¨ /xml_vehicles-maps.  ¯ª  á XML ª®­â¥­â®¬.      5 ³
 echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
-echo ³ 6 Žâªàëâì ¯ ¯ªã /xml_vehicles.  ¯ª  á XML âà ­á¯®àâ®¬.         6 ³
-echo ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
-echo ³ 7 Žâªàëâì ¯ ¯ªã /json_vehicles.  ¯ª  á JSON âà ­á¯®àâ®¬.       7 ³
+echo ³ 6 Žâªàëâì ¯ ¯ªã /json_vehicles.  ¯ª  á JSON âà ­á¯®àâ®¬.       6 ³
+echo ÃÄÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÄ´
+echo ³ 7 ß ‘¡à®á ­ áâà®¥ª ¨ ã¤ «¥­¨¥ ¢á¥å ä ©«®¢ YM ¨ YM.            ß 7 ³
 echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 echo ---------------------------------------------------------------------
 echo [8] ˆ­áâàãªæ¨ï ¯® § ¯ãáªã ç¨â .
@@ -1038,10 +1060,10 @@ echo ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 choice /c 123456789 /n
  if errorlevel 9 goto check_offline_mode
  if errorlevel 8 goto instructions_RU
- if errorlevel 7 goto open_json_folder_RU
- if errorlevel 6 goto open_xml_folder_RU
- if errorlevel 5 goto open_scripts_folder_RU
- if errorlevel 4 goto open_YimMenu_folder_RU
+ if errorlevel 7 goto reset
+ if errorlevel 6 goto open_json_folder_RU
+ if errorlevel 5 goto open_xml_folder_RU
+ if errorlevel 4 goto open_scripts_folder_RU
  if errorlevel 3 goto open_YT_folder_RU
  if errorlevel 2 goto dwnActVersionsInfo_Table
  if errorlevel 1 goto delete_cache_folder_RU
@@ -2313,6 +2335,18 @@ echo ’ãâ ¯®ª  çâ® ­¨ç¥£® ­¥âã, ¢®§¬®¦­® ¢ ¡ã¤ãé¥¬
 echo ¯®ï¢¨âáï ª ª ï-­¨¡ã¤ì ­®¢ ï äã­ªæ¨ï...
 timeout /t 2 /nobreak >nul
 goto check_offline_mode
+
+:reset
+cls
+rmdir /s /q %/YimMenu%
+rmdir /s /q %/cfg%
+timeout /t 1 /nobreak >nul
+echo ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+echo º   ‘¡à®á ­ áâà®¥ª ¢ë¯®«­¥­   º
+echo ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+timeout /t 1 /nobreak >nul
+echo ===============================
+goto goodbye_RU
 
 :goodbye_RU
 cls
