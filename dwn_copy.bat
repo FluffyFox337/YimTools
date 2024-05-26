@@ -52,6 +52,8 @@ echo 2 YimTools_alfa(exe)_RU.bat
 echo: 
 echo 3 Exit                                             
 echo ---------------------------------------------------------------------
+echo name EXE file: =%name_YT%=
+echo name EXE file: =%name_YT_bat%=
 choice /c 123 /n
  if errorlevel 3 exit
  if errorlevel 2 goto dwnbat
@@ -62,7 +64,7 @@ choice /c 123 /n
 :dwnexe
 cls
 echo ======================================================================
-echo =   Downloading full EXE file...                                     =
+echo =   Downloading full EXE file...                                     =
 echo ======================================================================
 timeout /t 1 /nobreak >nul
 powershell -command "& { Invoke-WebRequest -Uri '%updateScript_Url%' -OutFile '%/SF%%name_YT%' }"
@@ -80,7 +82,7 @@ exit
 :dwnbat
 cls
 echo ======================================================================
-echo =   Downloading full BAT file...                                     =
+echo =   Downloading full BAT file...                                     =
 echo ======================================================================
 timeout /t 1 /nobreak >nul
 powershell -command "& { Invoke-WebRequest -Uri '%updateScript_bat_Url%' -OutFile '%/SF%%name_YT_bat%' }"
@@ -88,9 +90,8 @@ powershell -command "& { Invoke-WebRequest -Uri '%updateScript_bat_Url%' -OutFil
 echo =            Downloaded!                                             =
 echo ======================================================================
 echo ----------------------------------------------------------------------
-echo start full file...
+echo exit...
 
 timeout /t 1 /nobreak >nul
 
-start %name_YT_bat%
 exit
