@@ -45,13 +45,12 @@ set "updateScript_bat_Url=https://goo.su/wultdz"
 
 cls 
 echo                     Choice what download                     
-echo 
+echo ---------------------------------------------------------------------
 echo 1 YimTools_alfa.exe
-echo 
+echo: 
 echo 2 YimTools_alfa(exe)_RU.bat 
-echo 
-echo 3 Exit                                            
-echo 
+echo: 
+echo 3 Exit                                             
 echo ---------------------------------------------------------------------
 choice /c 123 /n
  if errorlevel 3 exit
@@ -62,14 +61,14 @@ choice /c 123 /n
 
 :dwnexe
 cls
-echo ╔════════════════════════════════════════════════════════════════════╗
-echo ║   Downloading full EXE file...                                       ║
-echo ╠════════════════════════════════════════════════════════════════════╣
+echo ======================================================================
+echo =   Downloading full EXE file...                                     =
+echo ======================================================================
 timeout /t 1 /nobreak >nul
 powershell -command "& { Invoke-WebRequest -Uri '%updateScript_Url%' -OutFile '%/SF%%name_YT%' }"
 
-echo ║            Downloaded!                                           ║
-echo ╚════════════════════════════════════════════════════════════════════╝
+echo =                        Downloaded!                                 =
+echo ======================================================================
 echo ----------------------------------------------------------------------
 echo start full file...
 
@@ -80,14 +79,14 @@ exit
 
 :dwnbat
 cls
-echo ╔════════════════════════════════════════════════════════════════════╗
-echo ║   Downloading full BAT file...                                       ║
-echo ╠════════════════════════════════════════════════════════════════════╣
+echo ======================================================================
+echo =   Downloading full BAT file...                                     =
+echo ======================================================================
 timeout /t 1 /nobreak >nul
 powershell -command "& { Invoke-WebRequest -Uri '%updateScript_bat_Url%' -OutFile '%/SF%%name_YT_bat%' }"
 
-echo ║            Downloaded!                                           ║
-echo ╚════════════════════════════════════════════════════════════════════╝
+echo =            Downloaded!                                             =
+echo ======================================================================
 echo ----------------------------------------------------------------------
 echo start full file...
 
