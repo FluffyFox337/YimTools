@@ -35,3 +35,29 @@ This is a simple bat script that I convert to exe before release.
 
 ### Latest release:
 | [Windows 10+ (x64)](https://github.com/FluffyFox337/YimTools/releases/download/latest/YimTools_alfa.exe) |
+
+## Notice
+
+Everything that will be available in this program is downloaded from outside projects, first of all, you should thank those developers whose works you download and use. 
+
+<p align="center">
+  ========== Thanks to these people we play with pleasure: ==========
+</p>
+
+<p align="center">
+Yimura, L7Neg, Loled69, Alestarov, Gir489returns, TheKuter,
+</p>
+
+<p align="center">
+  USBMenus, Ezeholz, Razethion, Deadlineem, Xesdoog, Silent-Night,
+</p>
+
+<p align="center">
+  RazorGamerX
+</p>
+
+<p align="center">
+------------ and other respected developers! --------------------
+</p>
+
+Respect to everyone involved in YimMenu, addons and other GTA V-themed projects.
