@@ -30,6 +30,7 @@ This is a simple bat script that I convert to exe before release.
 * downloading and installing XML and JSON content like cars, maps, etc.
 * downloading and installing custom ready-made settings for YimMenu from the author of YimTools (settings.json)
 * full localization in English
+* automatic update of all installed components (addons, YimMenu, etc.)
 * 
 
 ### Latest release:
