@@ -93,5 +93,33 @@ Yimura, L7Neg, Loled69, Alestarov, Gir489returns, TheKuter,
 </p>
 
 <p align="right">
-Respect to everyone involved in YimMenu, addons and other GTA V-themed projects.
+Respect to everyone involved in YimMenu, addons and other GTA V-themed projects!
+</p>
+
+Все, что будет доступно в этой программе, скачано из сторонних проектов, в первую очередь следует поблагодарить тех разработчиков, чьи произведения вы скачиваете и используете.
+
+<p align="center">
+  ========== Благодаря этим людям мы играем с удовольствием: ==========
+</p>
+
+<p align="center">
+Yimura, L7Neg, Loled69, Alestarov, Gir489returns, TheKuter,
+</p>
+
+<p align="center">
+  USBMenus, Ezeholz, Razethion, Deadlineem, Xesdoog, Silent-Night,
+</p>
+
+<p align="center">
+  RazorGamerX
+</p>
+
+
+
+<p align="center">
+------------ и другие уважаемые разработчики! --------------------
+</p>
+
+<p align="right">
+Уважение всем, кто участвует в YimMenu, аддонах и других проектах на тему GTA V!
 </p>
