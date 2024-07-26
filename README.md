@@ -24,7 +24,7 @@ This is a simple bat script that I convert to exe before release.
 * complete reset of all YimMenu settings and files
 * opening YimMenu folders
 * Internet availability check
-* automatic notification about the availability of an update for downloaded addons and YimMenu
+* notification about the availability of an update for installed by YT addons and YimMenu
 
 ## What is planned to be added in the future?
 * downloading and installing XML and JSON content like cars, maps, etc.
