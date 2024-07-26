@@ -16,6 +16,20 @@ This script makes it easy to update and download Yim Menu and add-ons for comfor
 
 This project is under constant development, but we do our best to keep things in a stable state. Players are encouraged to install from a release alongside their stable *osu!* client. This project will continue to evolve until we eventually reach the point where most users prefer it over the previous "osu!stable" release.
 
+## What can this program do?
+* download and run the injector
+* download the latest YimMenu
+* download and install lua addons
+* complete reset of all YimMenu settings and files
+* opening YimMenu folders
+* Internet availability check
+* automatic notification about the availability of an update for downloaded addons and YimMenu
+
+## What is planned to be added in the future?
+* downloading and installing XML and JSON content like cars, maps, etc.
+* downloading and installing custom ready-made settings for YimMenu from the author of YimTools (settings.json)
+* full localization in English
+* 
 
 ### Latest release:
 | [Windows 10+ (x64)](https://github.com/FluffyFox337/YimTools/releases/download/latest/YimTools_alfa.exe) |
