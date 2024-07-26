@@ -36,7 +36,7 @@ This is a simple bat script that I convert to exe before release.
 * complete reset of all YimMenu settings and files
 * opening YimMenu folders
 * Internet availability check
-* notification about the availability of an update for installed by YT addons and YimMenu
+* notification about the availability of an update for installed by YT, addons and YimMenu
 
  Что может эта программа?
 * скачать и запустить инжектор
@@ -45,7 +45,7 @@ This is a simple bat script that I convert to exe before release.
 * полный сброс всех настроек и файлов YimMenu
 * открытие папок YimMenu
 * Проверка наличия Интернета
-* уведомление о наличии обновления для установленных YT аддонов и YimMenu
+* уведомление о наличии обновления для установленных этой программой аддонов и YimMenu
 
 ## What is planned to be added in the future?
 * downloading and installing XML and JSON content like cars, maps, etc.
