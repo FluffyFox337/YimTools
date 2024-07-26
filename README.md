@@ -5,7 +5,6 @@
 # YimTools
 
 [![GitHub release](https://img.shields.io/github/v/release/FluffyFox337/YimTools?display_name=release)](https://github.com/FluffyFox337/YimTools/releases/latest)
-[![Crowdin](https://d322cqt584bo4o.cloudfront.net/osu-web/localized.svg)](https://crowdin.com/project/osu-web)
 
 In this simple tool I have collected the products of respected developers and mods, primarily thanks to them you can use all the features built in here.
 This script makes it easy to update and download Yim Menu and add-ons for comfortable use.
