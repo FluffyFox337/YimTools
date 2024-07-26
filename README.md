@@ -13,7 +13,7 @@ In this simple tool I have collected the products of respected developers and mo
 This script makes it easy to update and download Yim Menu and add-ons for comfortable use.
 
 ## Status
-
+This program will be further developed and improved as the developer has free time. If you want to help, write to telegram: @Yelsoon
 
 ## What can this program do?
 * download and run the injector
