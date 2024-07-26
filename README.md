@@ -27,7 +27,6 @@ If you are just looking to give the game a whirl, you can grab the latest releas
 ### Latest release:
 
 | [Windows 10+ (x64)](https://github.com/ppy/osu/releases/latest/download/install.exe) |
-|--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ------------- | ------------- | ------------- |
 
 You can also generally download a version for your current device from the [osu! site](https://osu.ppy.sh/home/download).
 
