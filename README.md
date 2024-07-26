@@ -14,7 +14,6 @@ This script makes it easy to update and download Yim Menu and add-ons for comfor
 
 ## Status
 
-This project is under constant development, but we do our best to keep things in a stable state. Players are encouraged to install from a release alongside their stable *osu!* client. This project will continue to evolve until we eventually reach the point where most users prefer it over the previous "osu!stable" release.
 
 ## What can this program do?
 * download and run the injector
