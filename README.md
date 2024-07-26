@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="500" alt="YimTools logo" src="Assets/logo.png">
+  <img width="500" alt="YimTools logo" src="assets/logo.png">
 </p>
 
 # YimTools
