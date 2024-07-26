@@ -24,7 +24,6 @@ A few resources are available as starting points to getting involved and underst
 If you are just looking to give the game a whirl, you can grab the latest release for your platform:
 
 ### Latest release:
-[![GitHub release](https://img.shields.io/github/v/release/FluffyFox337/YimTools?display_name=release)](https://github.com/FluffyFox337/YimTools/releases/latest)
 | [Windows 10+ (x64)](https://github.com/FluffyFox337/YimTools/releases/download/latest/YimTools_alfa.exe) |
 
 You can also generally download a version for your current device from the [osu! site](https://osu.ppy.sh/home/download).
