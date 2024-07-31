@@ -22,33 +22,27 @@ set /a "blocked_mode=0"
 :: ------------------ PATHS_SETS --------------------------------
 set "/SF=%~dp0"
 
-:: ------------------ NAMES_SETS ----------------------------------
-set "name_YT=YimTools_alfa.exe"
-set "name_YT_bat=YimTools_alfa(exe)_RU.bat"
-
-:: -------------- DEFAULT_PATHS_SETS ------------------------
 set "/Downloads=%USERPROFILE%\Downloads"
 
-:: .....................................
 if not exist "%/Downloads%" (
    set "/Downloads=%USERPROFILE%\OneDrive\Desktop" )
 if not exist "%/Downloads%" (
    set "/Downloads=%USERPROFILE%\Desktop" )
 
+:: ------------------ NAMES_SETS ----------------------------------
+set "name_YT=YimTools_alfa.exe"
+set "name_YT_bat=YimTools_alfa(exe)_RU.bat"
 
-:: ------------------ Update YimTools --------------------------------
+:: ------------------ Link YimTools --------------------------------
 set "updateScript_Url=https://raw.githubusercontent.com/FluffyFox337/YimTools/main/YimTools_alfa.exe"
-
-:: set "updateScript_bat_Url=https://github.com/FluffyFox337/YimTools/raw/main/YimTools%20project_exe/Source/for%20release/YimTools_alfa(exe)_RU.bat"
-set "updateScript_bat_Url=https://goo.su/wultdz"
 :: -------------------------------------------------------------------
 
 cls 
 echo                     Choice what download                     
 echo ---------------------------------------------------------------------
-echo 1 YimTools_alfa.exe
+echo 1 YimTools.exe
 echo: 
-echo 2 YimTools_alfa(exe)_RU.bat 
+echo 2 YimTools.bat
 echo: 
 echo 3 Exit                                             
 echo ---------------------------------------------------------------------
