@@ -1,2 +1,0 @@
-start instruction.txt
-exit
